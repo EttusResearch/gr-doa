@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<block>
+  <name>Find Local Max.</name>
+  <key>doa_find_local_max</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.find_local_max($num_max_vals, $vector_len, $x_min, $x_max)</make>
+
+  <param>
+	<name>Num. Max. Values</name>
+	<key>num_max_vals</key>
+	<value>1</value>
+	<type>int</type>
+  </param>
+  <param>
+	<name>Vector Len.</name>
+	<key>vector_len</key>
+	<value>2**9</value>
+	<type>int</type>
+  </param>
+  <param>
+	<name>X min</name>
+	<key>x_min</key>
+	<value>0.0</value>
+	<type>float</type>
+  </param>
+  <param>
+	<name>X max</name>
+	<key>x_max</key>
+	<value>180.0</value>
+	<type>float</type>
+  </param>
+  <check>$num_max_vals &gt; 0</check>
+  <check>$vector_len &gt; 0</check>
+  <check>$x_max &gt; $x_min</check>
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+    <vlen>$vector_len</vlen>
+  </sink>
+
+  <source>
+    <name>max</name>
+    <type>float</type>
+    <vlen>$num_max_vals</vlen>
+  </source>
+
+  <source>
+    <name>arg-max</name>
+    <type>float</type>
+    <vlen>$num_max_vals</vlen>
+  </source>
+  <doc>
+This block locates a single or a set of maxima and outputs a sorted set of found value(s).  If the number of maxima is not met, a found maximum is repeated to meet the this requirement.
+Args:
+num_max_vals: Number of indexes to output.
+vector_len: Length of input vector.
+x_min: Minimum value for x-axis.
+x_max: Maximum value for x-axis.
+  </doc>
+</block>

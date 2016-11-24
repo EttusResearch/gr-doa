@@ -1,0 +1,108 @@
+/*
+ * Authors: Srikanth Pagadarai <srikanth.pagadarai@gmail.com>
+ *          Travis F. Collins <travisfcollins@gmail.com>
+ */
+
+/*! \page page_doa Subspace Methods for DoA Estimation
+\section doa_introduction Antenna Arrays as Spatial Filters
+An antenna array can be thought of as a spatial filter. Much like conventional frequency-domain filters which let a certain set of 
+frequencies from the input signal to pass through and eliminate the remaining frequencies, spatial-domain filters reject signals 
+which impinge upon the antenna array from a set of angles while preserving the remaining signals. This spatial dependence of the 
+array behavior is achieved by complex weightings of the data at each sensor output such that signals are either constructively or 
+destructively combined. A fundamental system parameter that establishes constraints on the achievable performance is the array 
+geometry, due to the fact that frequently, it is set in advance.
+
+\section sample_correlation Sample Correlation Matrix
+First, we look at a brief theoretical overview of signal and noise subspaces. Suppose that an antenna array is composed 
+of \f$N\f$ isotropic sensors which are located at positions, \f$p_n\f$ for \f$n\in\{0,\,1,\,...,N-1\}\f$. Suppose that 
+\f$x(t)\f$ is the signal received by the antenna array and it consists of \f$D\f$ directional plane-wave processes 
+plus white sensor noise. That is, 
+\f[
+x(t) = \sum_{d=1}^{D}\tilde{f}_d(t)\,\mathbf{v}(\mathbf{k}_d)+w(t). 
+\f]
+where, \f$\mathbf{v}(\mathbf{k})\f$ is the <em>array manifold vector</em>, evaluated for the specific 
+<em>wave number</em>, \f$\mathbf{k}_d\f$ associated with the \f$d\f$th target. 
+
+We then construct a <em>sample</em> correlation matrix as an estimate for the true autocorrelation matrix of the 
+input. The method chosen for constructing the sample correlation matrix influences the performance of the DoA 
+estimators. One approach to constructing a sample correlation matrix is to collect a sample during each time 
+snapshot, across \f$N\f$ array elements into a \f$N\times 1\f$ vector \f$\mathbf{x}(k)\f$, and perform the following operation:
+\f[
+\mathbf{C_x} = \frac{1}{K}\sum_{k=1}^{K}\mathbf{x}(k)\,\mathbf{x}^H(k).
+\f]
+where, \f$K\f$ is the number of snapshots. An alternative way of computing this sample correlation matrix is to collect 
+samples across several time snapshots, into a \f$N\times K\f$ matrix \f$\mathbf{X_k}\f$, and perform the following operation:
+\f[
+\mathbf{C_x} = \frac{1}{K}\mathbf{X_K}\,\mathbf{X_K}^H.
+\f]
+It has been argued that performing an additional Forward-Backward Averaging step in determining the sample correlation matrix 
+will result in superior DoA estimator performance. It can be written as, 
+\f[
+\mathbf{C_x} = \frac{1}{2K}\sum_{k=1}^{K}\mathbf{x}(k)\,\mathbf{x}^H(k)+\frac{1}{2K}\sum_{k=1}^{K}\mathbf{x}^*(k)\,\mathbf{x}^T(k) 
+\f]
+or, 
+\f[
+\mathbf{C_x} = \frac{1}{2K}\mathbf{X_K}\,\mathbf{X_K}^H+\frac{1}{2K}\mathbf{X_K}^*\,\mathbf{X_K}^T.
+\f]
+We can write the sample correlation matrix as follows: 
+\f[
+\mathbf{C_x} = \mathbf{V}\mathbf{R_f}\mathbf{V}^H+\sigma_w^2\,\mathbf{I}. 
+\f]
+An important assumption implicit in the subspace methods for DoA estimation is that no two of the \f$D\f$ signals are coherent, 
+<em>i.e.,</em> \f$\mathbf{R_f}\f$ is positive definite. 
+
+\section music_alg MUSIC Algorithm
+The discussion we have seen so far is the basis for several subspace-based methods. One of the earliest algorithms within the 
+family of subspace methods for DoA estimation is Multiple Signal Classification (MUSIC). MUSIC requires that the following 
+assumptions are satisfied: (1) the received waveform is narrowband, (2) the received waveform consists of \f$D\f$ plane-wave 
+signals plus <em>uncorrelated</em> noise, (3) the <em>number</em> of plane-wave signals, \f$D\f$ is known (4) the number of 
+antenna elements, \f$N\f$ is at least equal to \f$D+1\f$. A summary of MUSIC is as follows:
+     - Construct the <em>sample</em> correlation matrix, \f$\mathbf{C_x}\f$.
+     - Determine \f$\mathbf{U_N}\f$, the noise subspace from \f$\mathbf{C_x}\f$ using Eigen-Value Decomposition (EVD).
+     - \b For \f$0\leq\theta\leq \pi\f$ (alternatively, \f$-2\pi d/\lambda \leq\psi\leq 2\pi d/\lambda\f$) \b do:
+          -# Generate the corresponding array manifold vector, \f$\mathbf{v}(\psi)\f$.  
+          -# Compute the <em>null-spectrum</em>, \f$Q(\psi) := ||\mathbf{v}^H(\psi)\mathbf{U_N}||^2 = \mathbf{v}^H(\psi)\mathbf{U_N}\mathbf{U}^H_\mathbf{N}\mathbf{v}(\psi)\f$.
+     - Choose the \f$D\f$ minima of \f$Q(\psi)\f$. The corresponding values of \f$\psi\f$ are the \f$D\f$ angles of arrival.
+
+It can be noticed from the null-spectrum equation of the above algorithm that whenever \f$\psi\f$ equals the true angle of arrival, 
+\f$Q(\psi)\f$ equals zero since \f$\mathbf{v}(\psi)\f$ will be a basis vector of the signal subspace and is therefore, orthogonal 
+to the noise subspace. This is the underlying principle behind MUSIC algorithm. For visualization purposes, it is a common 
+practice to plot \f$1/Q(\psi)\f$, termed <em>pseudo-spectrum</em>.  
+
+\section root_music_alg Root-MUSIC Algorithm
+Root-MUSIC is a straight-forward variant of MUSIC algorithm which involves finding the roots of a polynomial instead of 
+plotting the pseudospectrum across all values of the polar angle, \f$\theta\f$ and searching for the peaks. Consider 
+a Uniform Linear Array whose array manifold vector is written as,
+\f[
+\mathbf{v}(\psi)=e^{-j\left(\frac{N-1}{2}\right)\psi}\left[1\;\;\;e^{j\psi}\;\;\;...\;\;\;e^{j(N-1)\psi}\right]^T.
+\f]
+An equivalent phase-shifted representation is,
+\f[
+\mathbf{v}(z)=\left[1\;\;\;z\;\;\;...\;\;\;z^{N-1}\right]^T.
+\f]
+It is easy to verify that, \f$\mathbf{v}(z)|_{z = e^{j\psi}}=e^{j\left(\frac{N-1}{2}\right)\psi}\mathbf{v}(\psi)\f$. 
+Now, a polynomial representation of the null-spectrum is, 
+\f{eqnarray*}{
+Q(z) &=& \mathbf{v}^T(1/z)\mathbf{U_N}\mathbf{U}^H_\mathbf{N}\mathbf{v}(z) \\
+&=& \sum_{m=0}^{N-1}\sum_{n=0}^{N-1}z^{-m}\,\mathbf{U}^2_\mathbf{N}(m, n)\,z^{n}  \\
+&=& \sum_{-N+1}^{N-1}u_l\,z^l.
+\f}
+In the second equality of the above equation, we defined the "square" of \f$\mathbf{U_N}\f$ as 
+\f$\mathbf{U}^2_\mathbf{N}:=\mathbf{U_N}\mathbf{U}^H_\mathbf{N}\f$. In the third equality of the above equation, 
+for \f$l>0\f$, \f$u_l\f$ is the sum of elements along the \f$l\f$th super-diagonal and for \f$l<0\f$,  \f$u_l\f$ 
+is the sum of elements along the \f$l\f$th sub-diagonal. Clearly, \f$\mathbf{U}^2_\mathbf{N}\f$ is a Hermitian 
+non-negative definite matrix and the relation, \f$u_l = u^*_{-l}\f$ holds true. Due to this result, we need to 
+compute only \f$N-1\f$ polynomial coefficients. Notice that plotting the null-spectrum, \f$Q(\psi)\f$ and 
+choosing \f$D\f$ minima is equivalent to finding \f$D\f$ out of \f$2(N-1)\f$ roots of \f$Q(z)\f$ that lie on 
+the unit circle. In practice, due to the presence of noise, the roots will not necessarily be on the unit 
+circle. So, we choose the \f$D\f$ roots that are inside the unit circle and closest to the unit circle. 
+We can now summarize Root-MUSIC as follows:
+     - Construct the <em>sample</em> correlation matrix, \f$\mathbf{C_x}\f$.
+     - Determine \f$\mathbf{U_N}^2\f$, the "square" of noise subspace from \f$\mathbf{C_x}\f$ using Eigen-Value Decomposition (EVD).
+     - Determine the roots of the polynomial, \f$Q(z)=\sum_{-N+1}^{N-1}u_lz^l\f$. For \f$l>0\f$, \f$u_l\f$ is the 
+     sum of elements of \f$\mathbf{U_N}^2\f$ along the \f$l\f$th super-diagonal and for \f$l<0\f$,  \f$u_l\f$ is the sum of 
+     elements of \f$\mathbf{U_N}^2\f$ along the \f$l\f$th sub-diagonal. 
+     - Choose \f$D\f$ roots, \f$\{z_d\}\f$ for \f$d=1,2,...,D\f$ that are inside the unit circle and closest to the unit circle.
+     - Obtain \f$\{\theta_d\}\f$ for \f$d=1,2,...,D\f$ using the relation, \f$\theta_d=\mathrm{acos}\left(\,\mathrm{arg}(z_d)\times\lambda/(2\pi d)\,\right)\f$.
+
+*/

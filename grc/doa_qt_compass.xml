@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+###################################################
+##QT GUI DoA Compass Sink
+###################################################
+ -->
+<block>
+  <name>QT GUI DoA Compass</name>
+  <key>doa_qt_compass</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>#set $win2 = 'self.%s.this_layout'%$id
+doa.compass($name, $min_val, $max_val, $step, $arc_bias)
+$(gui_hint()($win2))</make>
+
+  <param>
+    <name>Name</name>
+    <key>name</key>
+    <value>""</value>
+    <type>string</type>
+    <hide>#if len($name()) > 0 then 'none' else 'part'#</hide>
+  </param>
+
+  <param>
+    <name>Update Period</name>
+    <key>update_time</key>
+    <value>0.10</value>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>Min Value</name>
+    <key>min_val</key>
+    <value>-90</value>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Max Value</name>
+    <key>max_val</key>
+    <value>90</value>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Tick Step</name>
+    <key>step</key>
+    <value>10</value>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Arc Bias</name>
+    <key>arc_bias</key>
+    <value>0</value>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>GUI Hint</name>
+    <key>gui_hint</key>
+    <value></value>
+    <type>gui_hint</type>
+    <hide>part</hide>
+  </param>
+
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+
+  <doc>
+This block takes angle in degrees as input and displays it on a compass.
+Args:
+update_time: Time-interval between GUI update.
+min_val: Min. value displayed on the compass.
+max_val: Max. value displayed on the compass.
+step: Step-size.
+arc_bias: Clockwise rotation applied to dial.
+  </doc>
+</block>

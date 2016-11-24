@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<block>
+  <name>Autocorrelate</name>
+  <key>doa_autocorrelate</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.autocorrelate($inputs, $snapshot_size, $overlap_size, $avg_method)</make> 
+
+  <param>
+      <name>Snapshot Size</name>
+      <key>snapshot_size</key>
+      <value>2048</value>
+      <type>int</type>
+  </param>
+  <param>
+      <name>Overlap Size</name>
+      <key>overlap_size</key>
+      <value>512</value>
+      <type>int</type>
+  </param>
+  <param>
+      <name>Num Inputs</name>
+      <key>inputs</key>
+      <value>1</value>
+      <type>int</type>
+      </param>
+  <param>
+      <name>Averaging Method</name>
+      <key>avg_method</key>
+      <value>0</value>
+      <type>enum</type>
+      <option>
+        <name>Forward</name>
+        <key>0</key>
+      </option>
+      <option>
+        <name>Forward-Backward</name>
+        <key>1</key>
+      </option>
+  </param> 
+  <check>$inputs &gt; 0</check>
+  <check>$snapshot_size &gt; 0</check>
+  <check>$overlap_size &lt; $snapshot_size</check>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <nports>$inputs</nports>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>$inputs*$inputs</vlen>
+  </source>
+  <doc>
+This block generates a sample correlation matrix for the input vector comprised of values drawn from the receive channels. 
+Args:
+inputs: Number of inputs to the block
+snapshot_size: Determines num. of samples used to compute the sample correlation matrix
+overlap_size: Overlap size between snapshots
+avg_method: Use either standard forward-averaging method or a forward-backward averaging method to compute the sample correlation matrix.
+  </doc>
+</block>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<block>
+  <name>Save Antenna Calibration</name>
+  <key>doa_save_antenna_calib</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.save_antenna_calib($num_inputs, $config_filename, $samples_to_average)</make>
+  <param>
+    <name>Num Inputs</name>
+    <key>num_inputs</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Samples To Average</name>
+    <key>samples_to_average</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Config Filename</name>
+    <key>config_filename</key>
+    <value>/tmp/antenna.cfg</value>
+    <type>file_save</type>
+  </param>
+
+  <sink>
+    <name>GainEst</name>
+    <type>float</type>
+    <vlen>$num_inputs</vlen>
+  </sink>
+  <sink>
+    <name>PhaseEst</name>
+    <type>float</type>
+    <vlen>$num_inputs</vlen>
+  </sink>
+  <doc>
+This block saves the antenna gain and phase values estimated by an antenna calibration block in a config-file. The values stored are averaged over a certain number of samples.
+Args:
+num_inputs: Number of inputs to the block.
+config_filename: Config file which stores the result. 
+samples_to_average: Number of samples used from each stream to compute the average value.
+  </doc>
+</block>

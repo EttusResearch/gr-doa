@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<block>
+  <name>Find Max. and Save</name>
+  <key>doa_findmax_and_save</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.findmax_and_save($samples_to_findmax, $num_inputs, $config_filename)</make>
+
+  <param>
+    <name>Num Inputs</name>
+    <key>num_inputs</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Samples To Find Max.</name>
+    <key>samples_to_findmax</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Config File</name>
+    <key>config_filename</key>
+    <value>/tmp/phases.cfg</value>
+    <type>file_save</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+    <nports>$num_inputs</nports>
+  </sink>
+      <doc>
+This block uses a certain number of samples from each input stream and stores the maximum among those samples in a config file. 
+Args:
+num_inputs: Number of inputs to the block.
+samples_to_findmax: Number of samples used from each stream to compute the maximum value.
+config_filename: Config file which stores the result. 
+  </doc>
+</block>

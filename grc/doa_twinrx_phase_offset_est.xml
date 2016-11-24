@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<block>
+  <name>TwinRx Phase Offset 
+         Estimate</name>
+  <key>doa_twinrx_phase_offset_est</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.twinrx_phase_offset_est($num_inputs, $n_skip_ahead)</make>
+
+  <param>
+    <name>Num. Inputs</name>
+    <key>num_inputs</key>
+    <value>4</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Skip Ahead</name>
+    <key>n_skip_ahead</key>
+    <value>8192</value>
+    <type>raw</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <nports>$num_inputs</nports>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <nports>$num_inputs-1</nports>
+  </source>
+  <doc>
+  This block computes (num_inputs-1) phase offsets between num_inputs input streams.
+  Args:
+  num_inputs: Number of input streams
+  n_skip_ahead: Num. items to skip in the beginning of each stream. 
+  </doc>
+</block>

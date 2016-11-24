@@ -1,0 +1,67 @@
+<block>
+  <name>TwinRX USRP Source</name>
+  <key>twinrx_usrp_source</key>
+  <category>DoA</category>
+  <flags>throttle</flags>
+  <import>import doa</import>
+  <make>doa.twinrx_usrp_source(
+    samp_rate=$samp_rate,
+    center_freq=$center_freq,
+    gain=$gain,
+    sources=$sources,
+    addresses=$addresses
+)</make>
+  <callback>set_samp_rate($samp_rate)</callback>
+  <callback>set_center_freq($center_freq)</callback>
+  <callback>set_gain($gain)</callback>
+  <callback>set_sources($sources)</callback>
+  <param>
+    <name>Samp Rate</name>
+    <key>samp_rate</key>
+    <value>1000000</value>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Center Freq (Hz)</name>
+    <key>center_freq</key>
+    <value>2400000000</value>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Gain Value</name>
+    <key>gain</key>
+    <value>40</value>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Num Channels</name>
+    <key>sources</key>
+    <value>4</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Device Address</name>
+    <key>addresses</key>
+    <value>"addr=192.168.40.2"</value>
+    <type>string</type>
+  </param>  
+  <check>$sources &gt; 1</check>
+  <check>$sources != 3</check>
+  <check>$sources &lt; 5</check>
+
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+    <nports>$sources</nports>
+  </source>
+    <doc>
+This block is a wrapper to the USRP source block when using an X310 with 1 or 2 TwinRXs. 
+Args:
+$samp_rate: Sample rate
+$center_freq: Center frequency
+$gain: Gain to be applied
+$sources: Number of input streams
+$addresses: Device address
+</doc>
+</block>

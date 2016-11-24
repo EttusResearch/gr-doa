@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<block>
+  <name>Calibrate Linear Array</name>
+  <key>doa_calibrate_lin_array</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.calibrate_lin_array($norm_spacing, $num_ant_ele, $pilot_angle)</make>
+  
+  <param>
+	<name>Normalized Spacing</name>
+	<key>norm_spacing</key>
+	<value>0.5</value>
+	<type>float</type>
+  </param>
+  <param>
+	<name>Num Ant Elements</name>
+	<key>num_ant_ele</key>
+	<value>4</value>
+	<type>int</type>
+  </param>
+  <param>
+	<name>Pilot Angle (Deg.)</name>
+	<key>pilot_angle</key>
+	<value>45.0</value>
+	<type>float</type>
+  </param>
+  <check>$num_ant_ele &gt; 1</check>
+  <check>$norm_spacing &lt;= 0.5</check>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <vlen>$num_ant_ele*$num_ant_ele</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>$num_ant_ele</vlen>
+  </source>
+      <doc>
+This block calibrates a uniform linear antenna array. The input stream to this block is the sample correlation matrix generated using the signals received across the array elements. 
+Args:
+norm_spacing: Normalized spacing between antenna elements. That is, the shortest distance between antenna elements divided by wavelength of the carrier signal.
+num_ant_ele: Number of antenna array elements.
+pilot_angle: The known angle at which a pilot transmitter is located. 
+  </doc>
+</block>

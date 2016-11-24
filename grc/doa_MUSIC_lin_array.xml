@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<block>
+  <name>MUSIC Linear Array</name>
+  <key>doa_MUSIC_lin_array</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.MUSIC_lin_array($norm_spacing, $num_targets, $inputs, $pspectrum_len)</make>
+
+  <param>
+	<name>Normalized Spacing</name>
+	<key>norm_spacing</key>
+	<value>0.5</value>
+	<type>float</type>
+  </param>
+  <param>
+	<name>Num Targets</name>
+	<key>num_targets</key>
+	<value>1</value>
+	<type>int</type>
+  </param>
+  <param>
+	<name>Num Ant Elements</name>
+	<key>inputs</key>
+	<value>4</value>
+	<type>int</type>
+  </param>
+  <param>
+	<name>P-Spectrum Length</name>
+	<key>pspectrum_len</key>
+	<value>20</value>
+	<type>int</type>
+  </param>
+  <check>$inputs &gt; 0</check>
+  <check>$inputs &gt; $num_targets</check>
+  <check>$norm_spacing &lt;= 0.5</check>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <vlen>$inputs*$inputs</vlen>
+  </sink>
+  <source>
+    <name>PSpectrum</name>
+    <type>float</type>
+    <vlen>$pspectrum_len</vlen>
+  </source>
+
+  <doc>
+This block uses MUSIC algorithm to determine the AoAs of each of the num_targets tones. The output is a pseudo-spectrum vector. 
+Args:
+norm_spacing: Normalized spacing between antennas elements. That is, distance between antenna elements divided by wavelength of the carrier signal. For example, suppose that you have an antenna array whose elements are spaced roughly, d = 6.25 cm apart (equal to half-wavelength of a 2.4 GHz carrier signal). When using such an array to receive a signal over a carrier frequency of 950 MHz, whose wavelength is lambda = 31.58 cm, set norm_spacing = d/lambda = 6.25/31.58 = 0.1979. 
+num_targets: Num. of targets to estimate
+inputs: Num. of elements in the antenna array
+pspectrum_len: Pseudo-spectrum length
+  </doc>
+</block>

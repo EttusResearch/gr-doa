@@ -1,0 +1,43 @@
+<block>
+  <name>Phase Correct</name>
+  <key>phase_correct_hier</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.phase_correct_hier(
+    num_ports=$num_ports,
+    config_filename=$config_filename,
+)</make>
+
+  <param>
+    <name>Num Ports</name>
+    <key>num_ports</key>
+    <value>2</value>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Config File</name>
+    <key>config_filename</key>
+    <value>/tmp/phases.cfg</value>
+    <type>file_open</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <nports>$num_ports</nports>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <nports>$num_ports</nports>
+  </source>
+
+  <doc>
+Correct phase offsets of N complex input channels, provided
+in a specified configuration file.
+Args:
+num_ports: Number of inputs to the block.
+config_filename: Config file which stores the result. 
+</doc>
+
+</block>

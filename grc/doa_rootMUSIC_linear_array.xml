@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<block>
+  <name>Root-MUSIC</name>
+  <key>doa_rootMUSIC_linear_array</key>
+  <category>DoA</category>
+  <import>import doa</import>
+  <make>doa.rootMUSIC_linear_array($norm_spacing, $num_targets, $inputs)</make>
+  <param>
+	<name>Normalized Spacing</name>
+	<key>norm_spacing</key>
+	<value>0.5</value>
+	<type>float</type>
+  </param>
+  <param>
+	<name>Num Targets</name>
+	<key>num_targets</key>
+	<value>1</value>
+	<type>int</type>
+  </param>
+  <param>
+	<name>Num Inputs</name>
+	<key>inputs</key>
+	<value>1</value>
+	<type>int</type>
+  </param>
+  <check>$inputs &gt; 0</check>
+  <check>$inputs &gt; $num_targets</check>
+  <check>$norm_spacing &lt;= 0.5</check>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+    <vlen>$inputs*$inputs</vlen>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>$num_targets</vlen>
+  </source>
+  <doc>
+This block uses Root-MUSIC algorithm to determine the AoAs of each of the num_targets tones. The output is a AoA vector of length num_targets. AoA vector contains AoAs in a sorted arrangement. 
+Args:
+norm_spacing: Normalized spacing between antennas elements. That is, distance between antenna elements divided by wavelength of the carrier signal. For example, suppose that you have an antenna array whose elements are spaced roughly, d = 6.25 cm apart (equal to half-wavelength of a 2.4 GHz carrier signal). When using such an array to receive a signal over a carrier frequency of 950 MHz, whose wavelength is lambda = 31.58 cm, set norm_spacing = d/lambda = 6.25/31.58 = 0.1979. 
+num_targets: Num. of sources to estimate
+inputs: Num. of elements in the antenna array
+  </doc>
+
+</block>

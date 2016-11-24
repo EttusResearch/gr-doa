@@ -1,0 +1,9 @@
+/*! \mainpage
+
+Welcome to the GNU Radio DoA project. 
+
+This project provides implementations for several direction of arrival (DoA) algorithms for use with 
+Ettus Research USRP Software-Defined Radios. Mathematical background on associated algorithms is 
+available under Subspace Methods for DoA Estimation.
+
+*/
