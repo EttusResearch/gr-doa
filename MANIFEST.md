@@ -13,7 +13,7 @@ copyright_owner:
   - Srikanth Pagadarai
   - Travis Collins
 repo: https://github.com/EttusResearch/gr-doa
-website: https://kb.ettus.com/gr-doa
+website: https://kb.ettus.com/Direction_Finding_with_the_USRP%E2%84%A2_X-Series_and_TwinRX%E2%84%A2
 ---
 GNURadio blocks for direction of arrival (DoA) estimation
 
