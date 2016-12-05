@@ -1,5 +1,5 @@
 title: gr-doa 
-brief: GNURadio blocks for direction of arrival (DoA) estimation
+brief: Direction Finding with the USRP X-Series and TwinRX
 tags:
   - doa
   - twinrx
