@@ -1,16 +1,24 @@
-title: The DOA OOT Module
-brief: Short description of gr-doa
-tags: # Tags are arbitrary, but look at CGRAN what other authors are using
+title: gr-doa 
+brief: GNURadio blocks for direction of arrival (DoA) estimation
+tags:
+  - doa
+  - twinrx
   - sdr
+  - array
 author:
-  - Author Name <authors@email.address>
+  - Srikanth Pagadarai <srikanth.pagadarai@gmail.com>
+  - Travis Collins <travisfcollins@gmail.com>
+  - Alexander Wyglinski <alexw@wpi.edu>
 copyright_owner:
-  - Copyright Owner 1
-license:
-#repo: # Put the URL of the repository here, or leave blank for default
-#website: <module_website> # If you have a separate project website, put it here
-#icon: <icon_url> # Put a URL to a square image here that will be used as an icon on CGRAN
+  - Srikanth Pagadarai
+  - Travis Collins
+repo: https://github.com/EttusResearch/gr-doa
+website: https://kb.ettus.com/gr-doa
 ---
-A longer, multi-line description of gr-doa.
-You may use some *basic* Markdown here.
-If left empty, it will try to find a README file instead.
+GNURadio blocks for direction of arrival (DoA) estimation
+
+This work was implemented through a collaboration of [Ettus Research](http://ettus.com) and the [Wireless Innovation Laboratory](http://www.wireless.wpi.edu) at [Worcester Polytechnic Institute](http://wpi.edu).
+
+<img src="https://s15.postimg.org/xssq9s0ej/wilab_logo.jpg" height="100"><img src="https://kb.ettus.com/images/ettus_research_transparent.png" height="100">
+
+Please address support and inquries to <a href= "mailto:support@ettus.com">support@ettus.com</a>.
