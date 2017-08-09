@@ -10,7 +10,7 @@
   <category>DoA</category>
   <import>import doa</import>
   <make>#set $win2 = 'self.%s.this_layout'%$id
-doa.compass($name, $min_val, $max_val, $step, $arc_bias)
+doa.compass($name, $min_val, $max_val, $step, $arc_bias, $needle_N)
 $(gui_hint()($win2))</make>
 
   <param>
@@ -52,7 +52,12 @@ $(gui_hint()($win2))</make>
     <value>0</value>
     <type>float</type>
   </param>
-
+  <param>
+    <name>Number of Needles</name>
+    <key>needle_N</key>
+    <value>1</value>
+    <type>int</type>
+  </param>
   <param>
     <name>GUI Hint</name>
     <key>gui_hint</key>
@@ -65,6 +70,7 @@ $(gui_hint()($win2))</make>
   <sink>
     <name>in</name>
     <type>float</type>
+    <nports>$needle_N</nports>
   </sink>
 
   <doc>
@@ -75,5 +81,6 @@ min_val: Min. value displayed on the compass.
 max_val: Max. value displayed on the compass.
 step: Step-size.
 arc_bias: Clockwise rotation applied to dial.
+needle_N: Number of needles displayed on the compass.
   </doc>
 </block>
