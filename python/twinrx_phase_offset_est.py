@@ -51,44 +51,22 @@ class twinrx_phase_offset_est(gr.hier_block2):
         self.n_skip_ahead = n_skip_ahead
         self.num_ports = num_ports
 
-        ##################################################
-        # Reference Connection
-        ##################################################
-        # Blocks
-        self.blocks_skiphead_0 = blocks.skiphead(gr.sizeof_gr_complex*1, n_skip_ahead)
-        self.blocks_complex_to_arg_0 = blocks.complex_to_arg(1)
-
-        # Connections
-        self.connect((self, 0), (self.blocks_skiphead_0, 0))
-        self.connect((self.blocks_skiphead_0, 0), (self.blocks_complex_to_arg_0, 0))
-
-        ##################################################
-        # All Other Connections
-        ##################################################
-        for p in range(1, num_ports):
-            ##################
-            # Blocks
-            ##################
-
-            # Skip Ahead Block
+        # Create skip head blocks and connect them to the inputs
+        self.skiphead = []
+        for p in range(0, num_ports):
             object_name_skiphead = 'blocks_skiphead_'+str(p)
-            setattr(self, object_name_skiphead, blocks.skiphead(gr.sizeof_gr_complex*1, n_skip_ahead))
+            self.skiphead.append(blocks.skiphead(gr.sizeof_gr_complex*1, n_skip_ahead))
+            self.connect((self, p), (self.skiphead[p], 0))
 
-            # Complex-to-Arg Block
-            object_name_complex_to_arg = 'blocks_complex_to_arg_'+str(p)
-            setattr(self, object_name_complex_to_arg, blocks.complex_to_arg(1))
+        #Create blocks computing subtracted phases and connect the results to the outputs
+        self.multiply_conjugate = []
+        self.complex_to_arg = []
+        for p in range(0, num_ports-1):
+            self.multiply_conjugate.append(blocks.multiply_conjugate_cc(1))
+            self.complex_to_arg.append(blocks.complex_to_arg(1))
 
-            # Subtract Block
-            object_name_sub = 'blocks_sub_ff_'+str(p)
-            setattr(self, object_name_sub, blocks.sub_ff(1))
+            self.connect((self.skiphead[0], 0), (self.multiply_conjugate[p], 0))
+            self.connect((self.skiphead[p+1], 0), (self.multiply_conjugate[p], 1))
+            self.connect((self.multiply_conjugate[p], 0), (self.complex_to_arg[p], 0))
+            self.connect((self.complex_to_arg[p], 0), (self, p))
 
-
-            ##################
-            # Connections
-            ##################
-
-            self.connect((self, p), (getattr(self,object_name_skiphead), 0))
-            self.connect((getattr(self,object_name_skiphead), 0), (getattr(self,object_name_complex_to_arg), 0))
-            self.connect((getattr(self,object_name_complex_to_arg), 0), (getattr(self,object_name_sub), 1))
-            self.connect((self.blocks_complex_to_arg_0, 0), (getattr(self,object_name_sub), 0))
-            self.connect((getattr(self,object_name_sub), 0), (self, p-1))
