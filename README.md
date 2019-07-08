@@ -1,14 +1,15 @@
 # About gr-doa
-gr-doa is a demonstration on the phase synchronization capability of Ettus Research's TwinRX daughtercards. 
-TwinRX daughtercards can achieve a high degree of accurate phase synchronization except for constant 
-repeatable relative phase offsets. We provide apps to determine the accuracy of phase synchronization achieved 
-and to estimate DoA which fundamentally requires accurate phase synchronization 
+gr-doa is a demonstration on the phase synchronization capability of Ettus Research's TwinRX daughtercards.
+TwinRX daughtercards can achieve a high degree of accurate phase synchronization except for constant
+repeatable relative phase offsets. We provide apps to determine the accuracy of phase synchronization achieved
+and to estimate DoA which fundamentally requires accurate phase synchronization
 across the receive streams.
 
 ### Basic Dependencies
  - UHD >= 3.10.1.0
  - gnuradio >= 3.7.10.1
  - armadillo >= 7.300
+ - SWIG >= 3.0.8
 
 ### Dependencies Needed for QA Testing
  - octave (Tested 4.0.2)
@@ -24,11 +25,11 @@ across the receive streams.
  - Relative phase offset measurement and correction
  - Antenna element calibration for linear arrays
  - MUSIC algorithm for linear arrays
- - Root-MUSIC algorithm for linear arrays 
+ - Root-MUSIC algorithm for linear arrays
 
-### OSs Tested 
- - Ubuntu 14.04, Ubuntu 16.04 
- 
+### OSs Tested
+ - Ubuntu 14.04, Ubuntu 16.04
+
 ### Installation
 `$ git clone https://github.com/EttusResearch/gr-doa` <br />
 `$ cd gr-doa` <br />
