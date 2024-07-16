@@ -56,7 +56,7 @@ class qa_calibrate_lin_array (gr_unittest.TestCase):
 		# Generate auto-correlation vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples'))
-		S_x, S_x_uncalibrated, ant_pert_vec = oc.doa_testbench_create('music_test_input_gen', len_ss, overlap_size, num_ant_ele, FB, 'linear', num_ant_ele, norm_spacing, PERTURB, pilot_doa)
+		S_x, S_x_uncalibrated, ant_pert_vec = oc.doa_testbench_create('music_test_input_gen', len_ss, overlap_size, num_ant_ele, FB, 'linear', num_ant_ele, norm_spacing, PERTURB, pilot_doa, nout=3)
 		S_x_uncalibrated = S_x_uncalibrated.flatten().tolist()
 		ant_pert_vec = list(itertools.chain.from_iterable(ant_pert_vec))
 
@@ -80,7 +80,7 @@ class qa_calibrate_lin_array (gr_unittest.TestCase):
 		ant_pert_vec_est = self.vec_sink.data()
 		ant_pert_vec_est = numpy.asarray(ant_pert_vec_est, 'F')
 		# num of snapshots
-		n_ss = len(ant_pert_vec_est)/num_ant_ele
+		n_ss = len(ant_pert_vec_est)//num_ant_ele
 
 		# check data
 		ant_ele_range = range(0, num_ant_ele)
@@ -111,7 +111,7 @@ class qa_calibrate_lin_array (gr_unittest.TestCase):
 		# Generate auto-correlation vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples'))
-		S_x, S_x_uncalibrated, ant_pert_vec = oc.doa_testbench_create('music_test_input_gen', len_ss, overlap_size, num_ant_ele, FB, 'linear', num_ant_ele, norm_spacing, PERTURB, pilot_doa)
+		S_x, S_x_uncalibrated, ant_pert_vec = oc.doa_testbench_create('music_test_input_gen', len_ss, overlap_size, num_ant_ele, FB, 'linear', num_ant_ele, norm_spacing, PERTURB, pilot_doa, nout=3)
 		S_x_uncalibrated = S_x_uncalibrated.flatten().tolist()
 		ant_pert_vec = list(itertools.chain.from_iterable(ant_pert_vec))
 
@@ -135,7 +135,7 @@ class qa_calibrate_lin_array (gr_unittest.TestCase):
 		ant_pert_vec_est = self.vec_sink.data()
 		ant_pert_vec_est = numpy.asarray(ant_pert_vec_est, 'F')
 		# num of snapshots
-		n_ss = len(ant_pert_vec_est)/num_ant_ele
+		n_ss = len(ant_pert_vec_est)//num_ant_ele
 
 		# check data
 		ant_ele_range = range(0, num_ant_ele)
@@ -166,7 +166,7 @@ class qa_calibrate_lin_array (gr_unittest.TestCase):
 		# Generate auto-correlation vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples'))
-		S_x, S_x_uncalibrated, ant_pert_vec = oc.doa_testbench_create('music_test_input_gen', len_ss, overlap_size, num_ant_ele, FB, 'linear', num_ant_ele, norm_spacing, PERTURB, pilot_doa)
+		S_x, S_x_uncalibrated, ant_pert_vec = oc.doa_testbench_create('music_test_input_gen', len_ss, overlap_size, num_ant_ele, FB, 'linear', num_ant_ele, norm_spacing, PERTURB, pilot_doa, nout=3)
 		S_x_uncalibrated = S_x_uncalibrated.flatten().tolist()
 		ant_pert_vec = list(itertools.chain.from_iterable(ant_pert_vec))
 
@@ -190,7 +190,7 @@ class qa_calibrate_lin_array (gr_unittest.TestCase):
 		ant_pert_vec_est = self.vec_sink.data()
 		ant_pert_vec_est = numpy.asarray(ant_pert_vec_est, 'F')
 		# num of snapshots
-		n_ss = len(ant_pert_vec_est)/num_ant_ele
+		n_ss = len(ant_pert_vec_est)//num_ant_ele
 
 		# check data
 		ant_ele_range = range(0, num_ant_ele)
