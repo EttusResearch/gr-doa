@@ -1,0 +1,47 @@
+id: doa_calibrate_lin_array
+label: calibrate_lin_array
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.calibrate_lin_array(${norm_spacing}, ${num_ant_ele}, ${pilot_angle})
+
+parameters:
+- id: norm_spacing
+  label: Normalized Spacing
+  dtype: float
+  default: 0.5
+- id: num_ant_ele
+  label: Num Ant Elements
+  dtype: int
+  default: 4
+- id: pilot_angle
+  label: Pilot Angle (Deg.)
+  dtype: float
+  default: 45.0
+
+asserts:
+- ${ num_ant_ele > 1 }
+- ${ norm_spacing <= 0.5 }
+
+inputs:
+- label: in
+  dtype: complex
+  vlen: ${ num_ant_ele*num_ant_ele }
+
+outputs:
+- label: out
+  dtype: complex
+  vlen: ${ num_ant_ele }
+
+documentation: |-
+  This block calibrates a uniform linear antenna array. The input stream to this block is the sample correlation matrix generated using the signals received across the array elements.
+  
+  Args:
+  norm_spacing: Normalized spacing between antenna elements. That is, the shortest distance between antenna elements divided by wavelength of the carrier signal.
+  num_ant_ele: Number of antenna array elements.
+  pilot_angle: The known angle at which a pilot transmitter is located.
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1

@@ -24,7 +24,8 @@ include(GrPybind)
 # Python Bindings
 ########################################################################
 
-list(APPEND doa_python_files python_bindings.cc)
+list(APPEND doa_python_files
+    calibrate_lin_array_python.cc python_bindings.cc)
 
 gr_pybind_make_oot(doa ../../.. gr::doa "${doa_python_files}")
 
