@@ -1,0 +1,54 @@
+id: doa_autocorrelate
+label: autocorrelate
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.autocorrelate(${inputs}, ${snapshot_size}, ${overlap_size}, ${avg_method})
+
+parameters:
+- id: inputs
+  label: Num Inputs
+  dtype: int
+  default: 1
+- id: snapshot_size
+  label: Snapshot Size
+  dtype: int
+  default: 2048
+- id: overlap_size
+  label: Overlap Size
+  dtype: int
+  default: 512
+- id: avg_method
+  label: Averaging Method
+  dtype: enum
+  default: 0
+  options: [0, 1]
+  option_labels: [Forward, Forward-Backward]
+
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+  multiplicity: ${inputs}
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+  vlen: ${inputs*inputs}
+ 
+asserts:
+- ${ inputs > 0 }
+- ${ snapshot_size > 0 }
+- ${ overlap_size < snapshot_size }
+
+documentation: |-
+  This block generates a sample correlation matrix for the input vector comprised of values drawn from the receive channels. 
+  Args:
+  inputs: Number of inputs to the block
+  snapshot_size: Determines num. of samples used to compute the sample correlation matrix
+  overlap_size: Overlap size between snapshots
+  avg_method: Use either standard forward-averaging method or a forward-backward averaging method to compute the sample correlation matrix.
+
+file_format: 1

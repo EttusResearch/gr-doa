@@ -26,11 +26,13 @@ asserts:
 
 inputs:
 - label: in
+  domain: stream
   dtype: complex
   vlen: ${ num_ant_ele*num_ant_ele }
 
 outputs:
 - label: out
+  domain: stream
   dtype: complex
   vlen: ${ num_ant_ele }
 

@@ -7,4 +7,5 @@
 #
 
 install(FILES
-    doa_calibrate_lin_array.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_calibrate_lin_array.block.yml
+    doa_autocorrelate.block.yml DESTINATION share/gnuradio/grc/blocks)

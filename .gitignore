@@ -1,0 +1,6 @@
+# Ignoriere das build Verzeichnis
+build/
+
+# Ignoriere spezielle __pycache__ Verzeichnisse
+docs/doxygen/doxyxml/__pycache__/
+docs/doxygen/doxyxml/generated/__pycache__/

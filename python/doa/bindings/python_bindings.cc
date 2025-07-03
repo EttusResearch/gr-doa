@@ -22,6 +22,7 @@ namespace py = pybind11;
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
     void bind_calibrate_lin_array(py::module& m);
+    void bind_autocorrelate(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -51,5 +52,6 @@ PYBIND11_MODULE(doa_python, m)
     /**************************************/
     // BINDING_FUNCTION_CALLS(
     bind_calibrate_lin_array(m);
+    bind_autocorrelate(m);
     // ) END BINDING_FUNCTION_CALLS
 }

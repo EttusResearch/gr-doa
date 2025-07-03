@@ -10,4 +10,5 @@
 # Install public header files
 ########################################################################
 install(FILES api.h
-    calibrate_lin_array.h DESTINATION include/gnuradio/doa)
+    calibrate_lin_array.h
+    autocorrelate.h DESTINATION include/gnuradio/doa)
