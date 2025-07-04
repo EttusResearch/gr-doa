@@ -4,7 +4,7 @@ category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
-  make: doa.autocorrelate(${inputs}, ${snapshot_size}, ${overlap_size}, ${avg_method})
+  make: doa.autocorrelate(${inputs}, ${snapshot_size}, ${overlap_size}, ${avg_method.val})
 
 parameters:
 - id: inputs
@@ -22,9 +22,10 @@ parameters:
 - id: avg_method
   label: Averaging Method
   dtype: enum
-  default: 0
-  options: [0, 1]
-  option_labels: [Forward, Forward-Backward]
+  default: 'Forward'
+  options: ['Forward', 'Forward-Backward']
+  option_attributes:
+    val: [0, 1]
 
 inputs:
 - label: in

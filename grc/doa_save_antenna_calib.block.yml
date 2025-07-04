@@ -1,0 +1,38 @@
+id: doa_save_antenna_calib
+label: save_antenna_calib
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.save_antenna_calib(${num_inputs}, ${config_filename}, ${samples_to_average})
+
+parameters:
+- id: num_inputs
+  label: Num Inputs
+  dtype: int
+- id: samples_to_average
+  label: Samples To Average
+  dtype: int
+- id: config_filename
+  label: Config Filename
+  dtype: file_save
+  default: /tmp/antenna.cfg
+
+inputs:
+- label: GainEst
+  domain: stream
+  dtype: float
+  vlen: ${num_inputs}
+- label: PhaseEst
+  domain: stream
+  dtype: float
+  vlen: ${num_inputs}
+
+documentation: |-
+  This block saves the antenna gain and phase values estimated by an antenna calibration block in a config-file. The values stored are averaged over a certain number of samples.
+  Args:
+  num_inputs: Number of inputs to the block.
+  config_filename: Config file which stores the result. 
+  samples_to_average: Number of samples used from each stream to compute the average value.
+
+file_format: 1

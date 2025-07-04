@@ -23,12 +23,21 @@ if(NOT doa_sources)
     return()
 endif(NOT doa_sources)
 
+find_package(LAPACK REQUIRED)
+find_package(BLAS REQUIRED)
+find_package(Armadillo REQUIRED)
+
 add_library(gnuradio-doa SHARED ${doa_sources})
-target_link_libraries(gnuradio-doa gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-doa 
+                     gnuradio::gnuradio-runtime
+                     ${ARMADILLO_LIBRARIES}
+                     ${LAPACK_LIBRARIES}
+                     ${BLAS_LIBRARIES})
 target_include_directories(
     gnuradio-doa
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
-    PUBLIC $<INSTALL_INTERFACE:include>)
+    PUBLIC $<INSTALL_INTERFACE:include>
+    PUBLIC ${ARMADILLO_INCLUDE_DIRS})
 set_target_properties(gnuradio-doa PROPERTIES DEFINE_SYMBOL "gnuradio_doa_EXPORTS")
 
 if(APPLE)
