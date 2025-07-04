@@ -38,3 +38,4 @@ add_custom_target(
 GR_ADD_TEST(qa_calibrate_lin_array ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_calibrate_lin_array.py)
 GR_ADD_TEST(qa_autocorrelate ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_autocorrelate.py)
 GR_ADD_TEST(qa_MUSIC_lin_array ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_MUSIC_lin_array.py)
+GR_ADD_TEST(qa_find_local_max ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_local_max.py)

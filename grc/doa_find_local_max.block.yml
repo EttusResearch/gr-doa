@@ -1,0 +1,55 @@
+id: doa_find_local_max
+label: find_local_max
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.find_local_max(${num_max_vals}, ${vector_len}, ${x_min}, ${x_max})
+
+parameters:
+- id: num_max_vals
+  label: Num. Max. Values
+  dtype: int
+  default: 1
+- id: vector_len
+  label: Vector Len.
+  dtype: int
+  default: 512  # 2**9
+- id: x_min
+  label: X min
+  dtype: float
+  default: 0.0
+- id: x_max
+  label: X max
+  dtype: float
+  default: 180.0
+
+asserts:
+- ${ num_max_vals > 0 }
+- ${ vector_len > 0 }
+- ${ x_max > x_min }
+
+inputs:
+- label: in
+  dtype: float
+  vlen: ${ vector_len }
+
+outputs:
+- label: max
+  dtype: float
+  vlen: ${ num_max_vals }
+- label: arg-max
+  dtype: float
+  vlen: ${ num_max_vals }
+
+documentation: |-
+  This block locates a single or a set of maxima and outputs a sorted set of found value(s).
+  If the number of maxima is not met, a found maximum is repeated to meet this requirement.
+  
+  Parameters:
+  * num_max_vals: Number of indexes to output
+  * vector_len: Length of input vector
+  * x_min: Minimum value for x-axis
+  * x_max: Maximum value for x-axis
+
+file_format: 1
