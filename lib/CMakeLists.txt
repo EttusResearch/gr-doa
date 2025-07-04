@@ -15,7 +15,8 @@ list(APPEND doa_sources
     calibrate_lin_array_impl.cc
     autocorrelate_impl.cc
     MUSIC_lin_array_impl.cc
-    find_local_max_impl.cc)
+    find_local_max_impl.cc
+    antenna_correction_impl.cc)
 
 set(doa_sources
     "${doa_sources}"

@@ -25,6 +25,7 @@ namespace py = pybind11;
     void bind_autocorrelate(py::module& m);
     void bind_MUSIC_lin_array(py::module& m);
     void bind_find_local_max(py::module& m);
+    void bind_antenna_correction(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -57,5 +58,6 @@ PYBIND11_MODULE(doa_python, m)
     bind_autocorrelate(m);
     bind_MUSIC_lin_array(m);
     bind_find_local_max(m);
+    bind_antenna_correction(m);
     // ) END BINDING_FUNCTION_CALLS
 }

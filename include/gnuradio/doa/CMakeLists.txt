@@ -13,4 +13,5 @@ install(FILES api.h
     calibrate_lin_array.h
     autocorrelate.h
     MUSIC_lin_array.h
-    find_local_max.h DESTINATION include/gnuradio/doa)
+    find_local_max.h
+    antenna_correction.h DESTINATION include/gnuradio/doa)
