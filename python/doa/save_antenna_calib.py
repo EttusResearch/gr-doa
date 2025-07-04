@@ -63,8 +63,6 @@ class save_antenna_calib(gr.sync_block):
                 sys.stderr.write("Writing file failed\n")
                 print(sys.stderr)
                 sys.exit(1)
-        else:
-            print("No antenna config values \n")
 
         file.close()
         return -1  # Stop flowgraph

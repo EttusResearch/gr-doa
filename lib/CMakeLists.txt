@@ -13,7 +13,8 @@ include(GrPlatform) #define LIB_SUFFIX
 
 list(APPEND doa_sources
     calibrate_lin_array_impl.cc
-    autocorrelate_impl.cc)
+    autocorrelate_impl.cc
+    MUSIC_lin_array_impl.cc)
 
 set(doa_sources
     "${doa_sources}"

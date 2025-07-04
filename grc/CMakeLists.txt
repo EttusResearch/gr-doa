@@ -9,4 +9,5 @@
 install(FILES
     doa_calibrate_lin_array.block.yml
     doa_autocorrelate.block.yml
-    doa_save_antenna_calib.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_save_antenna_calib.block.yml
+    doa_MUSIC_lin_array.block.yml DESTINATION share/gnuradio/grc/blocks)

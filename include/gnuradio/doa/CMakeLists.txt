@@ -11,4 +11,5 @@
 ########################################################################
 install(FILES api.h
     calibrate_lin_array.h
-    autocorrelate.h DESTINATION include/gnuradio/doa)
+    autocorrelate.h
+    MUSIC_lin_array.h DESTINATION include/gnuradio/doa)
