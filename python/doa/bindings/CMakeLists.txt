@@ -29,7 +29,8 @@ list(APPEND doa_python_files
     autocorrelate_python.cc
     MUSIC_lin_array_python.cc
     find_local_max_python.cc
-    antenna_correction_python.cc python_bindings.cc)
+    antenna_correction_python.cc
+    rootMUSIC_linear_array_python.cc python_bindings.cc)
 
 gr_pybind_make_oot(doa ../../.. gr::doa "${doa_python_files}")
 
