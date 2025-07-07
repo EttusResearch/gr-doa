@@ -20,7 +20,8 @@ add_subdirectory(bindings)
 # Install python sources
 ########################################################################
 gr_python_install(FILES __init__.py
-    save_antenna_calib.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/doa)
+    save_antenna_calib.py
+    phase_correct_hier.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/doa)
 
 ########################################################################
 # Handle the unit tests

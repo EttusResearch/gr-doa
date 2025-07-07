@@ -1,0 +1,43 @@
+id: doa_phase_correct_hier
+label: phase_correct_hier
+category: '[doa]'
+
+templates:
+  imports: import doa
+  make: doa.phase_correct_hier(num_ports=${num_ports}, config_filename=${config_filename})
+
+parameters:
+- id: num_ports
+  label: Num Ports
+  dtype: int
+  default: 2
+- id: config_filename
+  label: Config File
+  dtype: file_open
+  default: /tmp/phases.cfg
+
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+  multiplicity: ${ num_ports }
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+  multiplicity: ${ num_ports }
+
+documentation: |-
+  Correct phase offsets of N complex input channels, provided
+  in a specified configuration file.
+  
+  Args:
+  num_ports: Number of inputs to the block.
+  config_filename: Config file which stores the result.
+
+file_format: 1
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1

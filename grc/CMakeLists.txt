@@ -13,4 +13,5 @@ install(FILES
     doa_MUSIC_lin_array.block.yml
     doa_find_local_max.block.yml
     doa_antenna_correction.block.yml
-    doa_rootMUSIC_linear_array.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_rootMUSIC_linear_array.block.yml
+    doa_phase_correct_hier.block.yml DESTINATION share/gnuradio/grc/blocks)
