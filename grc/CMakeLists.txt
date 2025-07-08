@@ -16,4 +16,5 @@ install(FILES
     doa_rootMUSIC_linear_array.block.yml
     doa_phase_correct_hier.block.yml
     doa_average_and_save.block.yml
-    doa_phase_offset_est.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_phase_offset_est.block.yml
+    doa_findmax_and_save.block.yml DESTINATION share/gnuradio/grc/blocks)

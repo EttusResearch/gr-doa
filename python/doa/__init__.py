@@ -24,4 +24,5 @@ from .save_antenna_calib import save_antenna_calib
 from .phase_correct_hier import phase_correct_hier
 from .average_and_save import average_and_save
 from .phase_offset_est import phase_offset_est
+from .findmax_and_save import findmax_and_save
 #

@@ -1,0 +1,34 @@
+id: doa_findmax_and_save
+label: Find Max. and Save
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.findmax_and_save(${samples_to_findmax}, ${num_inputs}, ${config_filename})
+
+parameters:
+- id: num_inputs
+  label: Num Inputs
+  dtype: int
+- id: samples_to_findmax
+  label: Samples To Find Max.
+  dtype: int
+- id: config_filename
+  label: Config File
+  dtype: file_save
+  default: /tmp/phases.cfg
+
+inputs:
+- label: in
+  dtype: float
+  multiplicity: ${num_inputs}
+
+documentation: |-
+  This block uses a certain number of samples from each input stream and stores the maximum among those samples in a config file.
+  
+  Args:
+  num_inputs: Number of inputs to the block.
+  samples_to_findmax: Number of samples used from each stream to compute the maximum value.
+  config_filename: Config file which stores the result.
+
+file_format: 1
