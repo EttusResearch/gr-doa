@@ -22,7 +22,8 @@ add_subdirectory(bindings)
 gr_python_install(FILES __init__.py
     save_antenna_calib.py
     phase_correct_hier.py
-    average_and_save.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/doa)
+    average_and_save.py
+    phase_offset_est.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/doa)
 
 ########################################################################
 # Handle the unit tests

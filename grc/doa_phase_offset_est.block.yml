@@ -1,0 +1,38 @@
+id: doa_phase_offset_est
+label: phase_offset_est
+category: '[doa]'
+
+templates:
+  imports: import gnuradio.doa as doa
+  make: doa.phase_offset_est(${num_inputs}, ${n_skip_ahead})
+
+parameters:
+- id: num_inputs
+  label: Num. Inputs
+  dtype: int
+  default: 4
+- id: n_skip_ahead
+  label: Skip Ahead
+  dtype: int
+  default: 8192
+
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+  multiplicity: ${num_inputs}
+
+outputs:
+- label: out
+  domain: stream
+  dtype: float
+  multiplicity: ${num_inputs-1}
+
+documentation: |-
+  This block computes (num_inputs-1) phase offsets between num_inputs input streams.
+  
+  Args:
+    num_inputs: Number of input streams
+    n_skip_ahead: Num. items to skip in the beginning of each stream.
+
+file_format: 1
