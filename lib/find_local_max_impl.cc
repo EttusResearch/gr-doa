@@ -159,7 +159,8 @@ namespace gr {
 
                 find_local_peak_indxs(pk_indxs, in_vec, d_num_max_vals);
                 max_val_vec = in_vec(pk_indxs);
-                arg_max_vec = sort(d_x_axis(pk_indxs), "descend");
+                //arg_max_vec = sort(d_x_axis(pk_indxs), "descend");
+                arg_max_vec = d_x_axis(pk_indxs);
             }
 
             // Tell runtime system how many output items we produced.
