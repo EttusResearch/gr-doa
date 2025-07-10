@@ -66,20 +66,19 @@ namespace gr {
             // sign of first-order difference
             fvec sign_fod_in_vec = sign(diff(in_vec));
 
-
             // find flats
             uvec indx_flat = find(sign_fod_in_vec == 0);
             for (int ii=indx_flat.size()-1; ii >=0 ; ii--)
             {
-                // back-propagate sign_fod_in_vec for flats
+            // back-propagate sign_fod_in_vec for flats
                 if ( sign_fod_in_vec( std::min(indx_flat(ii)+1, sign_fod_in_vec.size()-1) ) >= 0 )
-                {
+	            {
                     // not a flat peak
                     sign_fod_in_vec(indx_flat(ii)) = 1.0;
                 }
                 else
                 {
-                    // flat peak
+                        // flat peak
                     sign_fod_in_vec(indx_flat(ii)) = -1.0;
                 }
             }
@@ -102,59 +101,41 @@ namespace gr {
                 hist_indx3 = hist(indx3, indx3_unique);
                 all_pk_indxs = indx1(find(hist_indx3 == 2));
             }
-            else
-            {
-                // If no peaks found through the second-order difference,
-                // initialize all_pk_indxs as empty to avoid undefined behavior
-                all_pk_indxs.reset();
-            }
 
             // peak locations
-            fvec all_pks;
-            fvec all_pks_sorted;
-            uvec all_pks_sorted_indx;
-            unsigned num_valid_peaks = 0;
-            
-            // Make sure we have peaks to process
-            if (!all_pk_indxs.is_empty()) {
-                all_pks = in_vec(all_pk_indxs);
-                all_pks_sorted = sort(all_pks, "descend");
-                all_pks_sorted_indx = sort_index(all_pks, "descend");
-                num_valid_peaks = all_pks_sorted_indx.size();
-            }
+            fvec all_pks = in_vec(all_pk_indxs);
+            fvec all_pks_sorted = sort(all_pks, "descend");
+            uvec all_pks_sorted_indx = sort_index(all_pks, "descend");
+            unsigned num_valid_peaks = all_pks_sorted_indx.size();
             // Output only peaks we need
-            if (num_valid_peaks >= static_cast<unsigned>(d_num_max_vals))
+            if (num_valid_peaks>=d_num_max_vals){
                 pk_indxs = all_pk_indxs(all_pks_sorted_indx.rows(0, d_num_max_vals-1));
+            }
             else // Not enough found
-            {   unsigned ind = 0;
+            {   
+                unsigned ind = 0;
                 uvec max_peak_ind;
                 // Grab overall max index if necessary
-                if (num_valid_peaks==0) {
-                    find_one_local_peak_indx(max_peak_ind, in_vec, 1); // Only need one peak
-                }
-                else {
-                    max_peak_ind = uvec(1);
-                    max_peak_ind(0) = all_pk_indxs(all_pks_sorted_indx(0));
-                }
-                
-                // Make sure max_peak_ind is properly initialized
-                if (max_peak_ind.is_empty()) {
-                    // Fallback to absolute maximum if all else fails
-                    max_peak_ind = uvec(1);
-                    max_peak_ind(0) = index_max(in_vec);
-                }
-                
+                if (num_valid_peaks==0)
+                    find_one_local_peak_indx(max_peak_ind, in_vec, d_num_max_vals);
+                else
+                    max_peak_ind = all_pks_sorted_indx(0);
                 // Assign indexes
-                while(ind < static_cast<unsigned>(d_num_max_vals))
+                while(ind<d_num_max_vals)
                 {
                     // Use what we have first
-                    if (ind<num_valid_peaks)
+                    if (ind<num_valid_peaks){
                         pk_indxs(ind) = all_pk_indxs(all_pks_sorted_indx(ind));
-                    else // Set to first max for unfound peaks
-                        pk_indxs(ind) = max_peak_ind(0);
+                    }
+                    else
+                    {
+                        // Set to first max for unfound peaks
+                        pk_indxs(ind) = max_peak_ind(0,0);
+                    } 
                     ind++;
                 }
             }
+
         }
 
         int find_local_max_impl::work(int noutput_items,
