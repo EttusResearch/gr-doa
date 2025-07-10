@@ -1,7 +1,7 @@
-classdef wpi_twinrx_doa_testbench 
-% wpi_twinrx_doa_testbench contains the class definition 
+classdef doa_testbench 
+% doa_testbench contains the class definition 
 % for GNU Octave based simulation of the modules developed 
-% for wpi-twinrx-doa project.
+% for wpi-doa project.
 % 
 % Authors:              Srikanth Pagadarai <srikanth.pagadarai@gmail.com>
 %                       Travis F. Collins <travisfcollins@gmail.com>
@@ -19,7 +19,7 @@ classdef wpi_twinrx_doa_testbench
         	%                       the input's autocorrelation matrix
 	        % len_ss                length of each snapshot
         	% overlap_size          length of overlap between successive snapshots
-		% num_inputs            number of input streams
+			% num_inputs            number of input streams
 	        % FB                    apply Forward-Backward averaging?
         	autocorrelate_params;  
         
@@ -43,8 +43,8 @@ classdef wpi_twinrx_doa_testbench
 	end
     
 	methods
-        	%% constructor for wpi_twinrx_doa_testbench
-	        function doa_obj = wpi_twinrx_doa_testbench(autocorrelate_params, array_params, target_params)                   
+        	%% constructor for doa_testbench
+	        function doa_obj = doa_testbench(autocorrelate_params, array_params, target_params)                   
             
 			% autocorrelate_params structure 
 			doa_obj.autocorrelate_params = autocorrelate_params;
@@ -65,6 +65,5 @@ classdef wpi_twinrx_doa_testbench
 	
 			end	
 		end
-            
-        end        
+    end        
 end

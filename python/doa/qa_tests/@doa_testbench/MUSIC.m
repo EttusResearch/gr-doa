@@ -1,5 +1,5 @@
 function [Q_music, theta] = MUSIC(doa_obj, S_x)
-% MUSIC is a method belonging to wpi_twinrx_doa_testbench 
+% MUSIC is a method belonging to doa_testbench 
 % class that implements MUSIC algorithm for DoA estimation. 
 % 
 % Arguments:

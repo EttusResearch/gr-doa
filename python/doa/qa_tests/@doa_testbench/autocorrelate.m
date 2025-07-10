@@ -1,5 +1,5 @@
 function [S_x, xx] = autocorrelate(doa_obj, varargin)
-% autocorrelate is a method belonging to wpi_twinrx_doa_testbench 
+% autocorrelate is a method belonging to doa_testbench 
 % class that generates the autocorrelation matrix needed for 
 % subspace-based DoA estimation. If no input signal is provided, 
 % a standard normal random complex matrix is used as input data. 

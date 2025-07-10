@@ -1,5 +1,5 @@
 function DoA = rMUSIC(doa_obj, S_x)
-% rMUSIC is a method belonging to wpi_twinrx_doa_testbench 
+% rMUSIC is a method belonging to doa_testbench 
 % class that implements Root-MUSIC algorithm for DoA estimation. 
 % 
 % Arguments:

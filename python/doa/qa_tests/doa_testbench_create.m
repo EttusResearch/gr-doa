@@ -1,6 +1,6 @@
 function [varargout] = doa_testbench_create(operation_to_test, varargin)
 % doa_testbench_create instantiates an object of 
-% wpi_twinrx_doa_testbench class for DoA estimation 
+% doa_testbench class for DoA estimation 
 % based on input parameters passed to it.
 % 
 % Arguments:
@@ -34,7 +34,7 @@ function [varargout] = doa_testbench_create(operation_to_test, varargin)
 	end
 
 	if ~( strcmpi(operation_to_test, 'autocorrelate_test_input_gen') || strcmpi(operation_to_test, 'music_test_input_gen') || strcmpi(operation_to_test, 'estimate_doa_music') || strcmpi(operation_to_test, 'estimate_doa_rootmusic'))
-		error('Unknown method of wpi_twinrx_doa_testbench class provided!');
+		error('Unknown method of doa_testbench class provided!');
 	end
 
 	% parameters are:
@@ -97,8 +97,8 @@ function [varargout] = doa_testbench_create(operation_to_test, varargin)
 	target_params.num_targets = length(optargs{9});
 	target_params.doas = optargs{9};
 
-	% create wpi_twinrx_doa_testbench object
-	doa_obj = wpi_twinrx_doa_testbench(autocorrelate_params, array_params, target_params);
+	% create doa_testbench object
+	doa_obj = doa_testbench(autocorrelate_params, array_params, target_params);
 
 	if strcmpi(operation_to_test, 'autocorrelate_test_input_gen')
 		[S_xx, xx] = doa_obj.autocorrelate();

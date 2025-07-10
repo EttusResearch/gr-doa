@@ -1,5 +1,5 @@
 function [S_x, varargout] = music_test_input_gen(doa_obj, varargin)
-% music_test_input_gen is a method belonging to wpi_twinrx_doa_testbench 
+% music_test_input_gen is a method belonging to doa_testbench 
 % class that generates simulated data to be provided as input to 
 % MUSIC algorithm for DoA estimation.
 % 
