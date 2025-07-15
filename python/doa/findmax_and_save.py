@@ -50,15 +50,14 @@ class findmax_and_save(gr.sync_block):
         file = open(self.config_filename, 'w')
         for i in range(self.num_inputs):
             # Find max. of samples
-            max = numpy.amax(input_items[i][:self.samples_to_findmax])
+            max_val = numpy.amax(input_items[i][:self.samples_to_findmax])
             # print max
             # Write to config
-            if file.write(str(max)+"\n") != None:
-                sys.stderr.write("Writing file failed\n")
-                print(sys.stderr)
-                sys.exit(1)
+            file.write(str(max_val)+"\n")
+            print(f"Writing value {max_val} for input {i}")
 
         file.close()
+        print(f"Wrote {self.num_inputs} values to {self.config_filename}")
         # Stop flowgraph
         return -1
 

@@ -21,12 +21,12 @@ def gen_sig_io(num_elements,sig_type):
 
 class phase_offset_est(gr.hier_block2):
     """
-    This block estimates the repeatable phase offset at the output of a USRP X310 equipped with two TwinRXs. The output is a value in [0, 2*pi).
+    This block estimates the repeatable phase offset at the output of a USRP. The output is a value in [0, 2*pi).
     """
     def __init__(self, num_ports=2, n_skip_ahead=8192):
         gr.hier_block2.__init__(
             self, "phase_offset_est",
-             gr.io_signaturev(num_ports, num_ports, gen_sig_io(num_ports,gr.sizeof_gr_complex)),
+            gr.io_signaturev(num_ports, num_ports, gen_sig_io(num_ports,gr.sizeof_gr_complex)),
             gr.io_signaturev(num_ports-1, num_ports-1, gen_sig_io(num_ports-1,gr.sizeof_float)),
         ) 
 

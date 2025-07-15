@@ -13,19 +13,20 @@ function [varargout] = doa_testbench_create(operation_to_test, varargin)
 % 
 % Optional: 
 % --------
-% len_ss             -  length of each snapshot
-% overlap_size       -  length of overlap between successive snapshots
-% num_inputs         -  number of input streams
-% FB                 -  apply Forward-Backward averaging?
-% geometry           -  'linear'
-% num_ant_ele        -  number of antenna elements
-% norm_spacing       -  normalized spacing
-% PERTURB            -  simulate array perturbation?
-% target_doas        -  simulated directions-of-arrival of targets
+% len_ss             -  length of each snapshot												optargs{1}
+% overlap_size       -  length of overlap between successive snapshots						optargs{2}
+% num_inputs         -  number of input streams												optargs{3}	
+% FB                 -  apply Forward-Backward averaging?									optargs{4}
+% geometry           -  'linear'															optargs{5}
+% num_ant_ele        -  number of antenna elements											optargs{6}
+% norm_spacing       -  normalized spacing, e.g. distance between antennas λ * 0.5			optargs{7}	
+% PERTURB            -  simulate array perturbation?										optargs{8}
+% target_doas        -  simulated directions-of-arrival of targets							optargs{9}
 % 
 % Authors:              Srikanth Pagadarai <srikanth.pagadarai@gmail.com>
 %                       Travis F. Collins <travisfcollins@gmail.com>
 
+	% checking if the parameters are valid
 	narginchk(1, 10); 
 	numvarargs = length(varargin);   
 
@@ -43,6 +44,7 @@ function [varargout] = doa_testbench_create(operation_to_test, varargin)
 	%  ..., target_doas}
 	optargs = {2048, 512, 4, false, 'linear', 4, 0.4, true, 143};
 	optargs(1:numvarargs) = varargin;
+
 	% default value of num_ant_ele is num_inputs
 	if numvarargs < 5
 		optargs{6} = optargs{3};
@@ -76,7 +78,7 @@ function [varargout] = doa_testbench_create(operation_to_test, varargin)
 		error('The selected normalized spacing leads to aliasing!');
 	end
 
-	% autocorrelate_params structure 
+	% autocorrelate_params structure, sets the number of snapshots
 	if ( strcmpi(operation_to_test, 'autocorrelate_test_input_gen') || strcmpi(operation_to_test, 'music_test_input_gen') )
         	autocorrelate_params.num_ss = 1500; 
 	elseif ( strcmpi(operation_to_test, 'estimate_doa_music') || strcmpi(operation_to_test, 'estimate_doa_rootmusic') )

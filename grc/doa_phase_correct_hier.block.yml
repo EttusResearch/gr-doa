@@ -3,7 +3,7 @@ label: phase_correct_hier
 category: '[doa]'
 
 templates:
-  imports: import doa
+  imports: import gnuradio.doa as doa
   make: doa.phase_correct_hier(num_ports=${num_ports}, config_filename=${config_filename})
 
 parameters:
