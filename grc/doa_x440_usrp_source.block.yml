@@ -1,0 +1,65 @@
+id: doa_x440_usrp_source
+label: X440 USRP Source
+category: '[doa]'
+flags: throttle
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.x440_usrp_source(samp_rate=${samp_rate}, center_freq=${center_freq}, gain=${gain}, sources=${sources}, addresses=${addresses}, device_args=${device_args})
+
+  callbacks:
+    - set_samp_rate($samp_rate)
+    - set_center_freq($center_freq)
+    - set_gain($gain)
+    - set_sources($sources)
+
+parameters:
+- id: samp_rate
+  label: Samp Rate
+  dtype: float
+  default: 1000000
+- id: center_freq
+  label: Center Freq (Hz)
+  dtype: float
+  default: 462e6
+- id: gain
+  label: Gain Value
+  dtype: float
+  default: 40
+- id: sources
+  label: Num Channels
+  dtype: int
+  default: 4
+- id: addresses
+  label: Device Address
+  dtype: string
+  default: "addr=192.168.40.2"
+- id: device_args
+  label: Device Args
+  dtype: string
+  default: "master_clock_rate=200e6"
+
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+  vlen: 1
+  multiplicity: ${sources}
+
+asserts:
+- ${sources > 1}
+- ${sources <= 8}
+
+documentation: |-
+  This block is a wrapper to the USRP source block when using an X440.
+  
+  Args:
+  samp_rate: Sample rate
+  center_freq: Center frequency
+  gain: Gain to be applied
+  sources: Number of input streams 
+  addresses: Device address
+  device_args: Additional device arguments
+
+file_format: 1

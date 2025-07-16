@@ -17,4 +17,5 @@ install(FILES
     doa_phase_correct_hier.block.yml
     doa_average_and_save.block.yml
     doa_phase_offset_est.block.yml
-    doa_findmax_and_save.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_findmax_and_save.block.yml
+    doa_x440_usrp_source.block.yml DESTINATION share/gnuradio/grc/blocks)

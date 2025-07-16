@@ -24,7 +24,8 @@ gr_python_install(FILES __init__.py
     phase_correct_hier.py
     average_and_save.py
     phase_offset_est.py
-    findmax_and_save.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/doa)
+    findmax_and_save.py
+    x440_usrp_source.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/doa)
 
 ########################################################################
 # Handle the unit tests
