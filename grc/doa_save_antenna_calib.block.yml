@@ -1,5 +1,5 @@
 id: doa_save_antenna_calib
-label: save_antenna_calib
+label: Save Antenna Calib
 category: '[doa]'
 
 templates:
@@ -31,8 +31,8 @@ inputs:
 documentation: |-
   This block saves the antenna gain and phase values estimated by an antenna calibration block in a config-file. The values stored are averaged over a certain number of samples.
   Args:
-  num_inputs: Number of inputs to the block.
-  config_filename: Config file which stores the result. 
-  samples_to_average: Number of samples used from each stream to compute the average value.
+    num_inputs: Number of inputs to the block.
+    config_filename: Config file which stores the result. 
+    samples_to_average: Number of samples used from each stream to compute the average value.
 
 file_format: 1

@@ -1,5 +1,5 @@
 id: doa_phase_correct_hier
-label: phase_correct_hier
+label: Phase Correct Hier
 category: '[doa]'
 
 templates:
@@ -33,8 +33,8 @@ documentation: |-
   in a specified configuration file.
   
   Args:
-  num_ports: Number of inputs to the block.
-  config_filename: Config file which stores the result.
+    num_ports: Number of inputs to the block.
+    config_filename: Config file which stores the result.
 
 file_format: 1
 

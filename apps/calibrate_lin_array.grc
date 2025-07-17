@@ -1,0 +1,243 @@
+options:
+  parameters:
+    alias: ''
+    author: jreitmei
+    catch_exceptions: 'True'
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_linking: dynamic
+    generate_options: no_gui
+    generator_class_name: PythonNoGuiGenerator
+    generator_module: gnuradio.grc.workflows.python_nogui
+    hier_block_src_path: '.:'
+    id: calibrate_lin_array
+    max_nouts: '0'
+    output_language: python
+    realtime_scheduling: ''
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    thread_safe_setters: ''
+    title: calibrate_lin_array
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: antenna_calibration_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.AntennaCalibration)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 24.0]
+    rotation: 0
+    state: enabled
+- name: input_variables
+  id: variable_struct
+  parameters:
+    comment: "input_variables: \nContains all the user-defined variables."
+    field0: ToneFreq
+    field1: SampleRate
+    field10: DirectoryConfigFiles
+    field11: RelativePhaseOffsets
+    field12: AntennaCalibration
+    field13: Samples2Avg
+    field14: ''
+    field15: ''
+    field16: ''
+    field17: ''
+    field18: ''
+    field19: ''
+    field2: CenterFreq
+    field3: RxAddr
+    field4: Gain
+    field5: NumArrayElements
+    field6: NormSpacing
+    field7: SnapshotSize
+    field8: OverlapSize
+    field9: PilotAngle
+    value0: 10e3
+    value1: 1e6
+    value10: '"/tmp"'
+    value11: '"measure_relative_phase_offsets_446.cfg"'
+    value12: '"calibration_lin_array_446.cfg"'
+    value13: 2**11
+    value14: '0'
+    value15: '0'
+    value16: '0'
+    value17: '0'
+    value18: '0'
+    value19: '0'
+    value2: 462e6
+    value3: '"addr=10.88.136.14"'
+    value4: '60'
+    value5: '4'
+    value6: '0.5'
+    value7: 2**11
+    value8: 2**9
+    value9: '45.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 120.0]
+    rotation: 0
+    state: enabled
+- name: rel_phase_offsets_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.RelativePhaseOffsets)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 24.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_magphase_0
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 328.0]
+    rotation: 180
+    state: enabled
+- name: doa_autocorrelate_0
+  id: doa_autocorrelate
+  parameters:
+    affinity: ''
+    alias: ''
+    avg_method: Forward
+    comment: ''
+    inputs: input_variables.NumArrayElements
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    overlap_size: input_variables.OverlapSize
+    snapshot_size: input_variables.SnapshotSize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 168.0]
+    rotation: 0
+    state: enabled
+- name: doa_calibrate_lin_array_0
+  id: doa_calibrate_lin_array
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    norm_spacing: input_variables.NormSpacing
+    num_ant_ele: input_variables.NumArrayElements
+    pilot_angle: input_variables.PilotAngle
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 192.0]
+    rotation: 0
+    state: enabled
+- name: doa_phase_correct_hier_0
+  id: doa_phase_correct_hier
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: rel_phase_offsets_file_name
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 168.0]
+    rotation: 0
+    state: enabled
+- name: doa_save_antenna_calib_0
+  id: doa_save_antenna_calib
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: antenna_calibration_file_name
+    num_inputs: input_variables.NumArrayElements
+    samples_to_average: input_variables.Samples2Avg
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 320.0]
+    rotation: 180
+    state: enabled
+- name: doa_x440_usrp_source_0
+  id: doa_x440_usrp_source
+  parameters:
+    addresses: input_variables.RxAddr
+    affinity: ''
+    alias: ''
+    center_freq: input_variables.CenterFreq
+    comment: ''
+    device_args: master_clock_rate=200e6
+    gain: input_variables.Gain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: input_variables.SampleRate
+    sources: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 168.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import os
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 8.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_complex_to_magphase_0, '0', doa_save_antenna_calib_0, '0']
+- [blocks_complex_to_magphase_0, '1', doa_save_antenna_calib_0, '1']
+- [doa_autocorrelate_0, '0', doa_calibrate_lin_array_0, '0']
+- [doa_calibrate_lin_array_0, '0', blocks_complex_to_magphase_0, '0']
+- [doa_phase_correct_hier_0, '0', doa_autocorrelate_0, '0']
+- [doa_phase_correct_hier_0, '1', doa_autocorrelate_0, '1']
+- [doa_phase_correct_hier_0, '2', doa_autocorrelate_0, '2']
+- [doa_phase_correct_hier_0, '3', doa_autocorrelate_0, '3']
+- [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0, '0']
+- [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
+- [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']
+- [doa_x440_usrp_source_0, '3', doa_phase_correct_hier_0, '3']
+
+metadata:
+  file_format: 1
+  grc_version: v3.11.0.0git-979-g1055cd27

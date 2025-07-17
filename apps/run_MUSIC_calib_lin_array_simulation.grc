@@ -1,0 +1,706 @@
+options:
+  parameters:
+    alias: ''
+    author: jreitmei
+    catch_exceptions: 'True'
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_linking: dynamic
+    generate_options: qt_gui
+    generator_class_name: PythonQtGuiGenerator
+    generator_module: gnuradio.grc.workflows.python_qt_gui
+    hier_block_src_path: '.:'
+    id: run_MUSIC_calib_lin_array_simulation
+    max_nouts: '0'
+    output_language: python
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    thread_safe_setters: ''
+    title: Not titled yet
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: amv0
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.multiply(ant_coeffs, amv0_true)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 136.0]
+    rotation: 0
+    state: enabled
+- name: amv0_true
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.exp(-1j*ant_locs*2*numpy.pi*numpy.cos(theta0))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 64.0]
+    rotation: 0
+    state: enabled
+- name: amv1
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.multiply(ant_coeffs, amv1_true)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 136.0]
+    rotation: 0
+    state: enabled
+- name: amv1_true
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.exp(-1j*ant_locs*2*numpy.pi*numpy.cos(theta1))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 64.0]
+    rotation: 0
+    state: enabled
+- name: ant_coeffs
+  id: variable
+  parameters:
+    comment: "These simulated antenna coefficients need \nto be the same as those\
+      \ used in \napps/run_calib_lin_array_simulation.grc"
+    value: input_variables.AntGains*numpy.exp(1j*input_variables.AntPhases)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 136.0]
+    rotation: 0
+    state: enabled
+- name: ant_locs
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.dot(0.5, numpy.arange(input_variables.NumArrayElements/2, -input_variables.NumArrayElements/2,
+      -1) if (input_variables.NumArrayElements%2==1) else numpy.arange(input_variables.NumArrayElements/2-0.5,
+      -input_variables.NumArrayElements/2-0.5, -1))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 208.0]
+    rotation: 0
+    state: enabled
+- name: antenna_calibration_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.AntennaCalibration)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 240.0]
+    rotation: 0
+    state: enabled
+- name: array_manifold_matrix
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.array([amv0, amv1]).transpose()
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 208.0]
+    rotation: 0
+    state: enabled
+- name: input_variables
+  id: variable_struct
+  parameters:
+    comment: "input_variables: \nContains all the user-defined variables."
+    field0: SampleRate
+    field1: ToneFreq1
+    field10: AntPhases
+    field11: DirectoryConfigFiles
+    field12: AntennaCalibration
+    field13: ''
+    field14: ''
+    field15: ''
+    field16: ''
+    field17: ''
+    field18: ''
+    field19: ''
+    field2: ToneFreq2
+    field3: NormSpacing
+    field4: NumTargets
+    field5: NumArrayElements
+    field6: PSpectrumLength
+    field7: SnapshotSize
+    field8: OverlapSize
+    field9: AntGains
+    value0: '320000'
+    value1: '10000'
+    value10: numpy.array([ 0.28647672,  5.27248071,  2.71271102,  1.36970886])
+    value11: '"/tmp"'
+    value12: '"calibration_lin_array_simulated.cfg"'
+    value13: '0'
+    value14: '0'
+    value15: '0'
+    value16: '0'
+    value17: '0'
+    value18: '0'
+    value19: '0'
+    value2: '20000'
+    value3: '0.5'
+    value4: '2'
+    value5: '4'
+    value6: 2**10
+    value7: 2**11
+    value8: 2**9
+    value9: numpy.array([ 0.94984789,  0.4544107 ,  0.34649469,  0.25083929])
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 128.0]
+    rotation: 0
+    state: enabled
+- name: theta0
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.pi*theta0_deg/180
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 200.0]
+    rotation: 0
+    state: enabled
+- name: theta0_deg
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: AoA
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '180'
+    value: '30'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 56.0]
+    rotation: 0
+    state: enabled
+- name: theta1
+  id: variable
+  parameters:
+    comment: ''
+    value: numpy.pi*theta1_deg/180
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 200.0]
+    rotation: 0
+    state: enabled
+- name: theta1_deg
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: AoA
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '180'
+    value: '123'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 56.0]
+    rotation: 0
+    state: enabled
+- name: analog_noise_source_x_0_0
+  id: analog_noise_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '0.0005'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    seed: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 536.0]
+    rotation: 0
+    state: enabled
+- name: analog_noise_source_x_0_0_0
+  id: analog_noise_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '0.5'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    seed: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 760.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: input_variables.ToneFreq1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: input_variables.SampleRate
+    showports: 'False'
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 416.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: input_variables.ToneFreq2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: input_variables.SampleRate
+    showports: 'False'
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 632.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 456.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 680.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_matrix_xx_0
+  id: blocks_multiply_matrix_xx
+  parameters:
+    A: array_manifold_matrix
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag_propagation_policy: gr.TPP_ALL_TO_ALL
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [392, 368.0]
+    rotation: 0
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: input_variables.NumTargets
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [736, 656.0]
+    rotation: 180
+    state: enabled
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: input_variables.SampleRate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296.0, 536]
+    rotation: 90
+    state: enabled
+- name: blocks_vector_to_streams_0_0
+  id: blocks_vector_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: input_variables.NumTargets
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 712.0]
+    rotation: 180
+    state: enabled
+- name: doa_MUSIC_lin_array_0
+  id: doa_MUSIC_lin_array
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    inputs: input_variables.NumArrayElements
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    norm_spacing: input_variables.NormSpacing
+    num_targets: input_variables.NumTargets
+    pspectrum_len: input_variables.PSpectrumLength
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 536.0]
+    rotation: 180
+    state: enabled
+- name: doa_antenna_correction_0
+  id: doa_antenna_correction
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: /tmp/antennencalibration.cfg
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ant_ele: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [584, 368.0]
+    rotation: 0
+    state: enabled
+- name: doa_autocorrelate_0
+  id: doa_autocorrelate
+  parameters:
+    affinity: ''
+    alias: ''
+    avg_method: Forward
+    comment: ''
+    inputs: input_variables.NumArrayElements
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    overlap_size: input_variables.OverlapSize
+    snapshot_size: input_variables.SnapshotSize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 368.0]
+    rotation: 0
+    state: enabled
+- name: doa_find_local_max_0
+  id: doa_find_local_max
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_max_vals: input_variables.NumTargets
+    vector_len: input_variables.PSpectrumLength
+    x_max: '180.0'
+    x_min: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 680.0]
+    rotation: 180
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 64.0]
+    rotation: 0
+    state: enabled
+- name: import_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import os
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 176.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '180'
+    min: '0'
+    name: '""'
+    nconnections: '2'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 696.0]
+    rotation: 180
+    state: enabled
+- name: qtgui_vector_sink_f_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'True'
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: '0.05'
+    vlen: input_variables.PSpectrumLength
+    width1: '2'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"angle (in degrees)"'
+    x_start: '0'
+    x_step: 180.0/input_variables.PSpectrumLength
+    x_units: '""'
+    y_axis_label: '"Pseudo-Spectrum (dB)"'
+    y_units: '""'
+    ymax: '0'
+    ymin: '-50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 520.0]
+    rotation: 180
+    state: enabled
+
+connections:
+- [analog_noise_source_x_0_0, '0', blocks_add_xx_0, '1']
+- [analog_noise_source_x_0_0_0, '0', blocks_add_xx_0_0, '1']
+- [analog_sig_source_x_0, '0', blocks_add_xx_0, '0']
+- [analog_sig_source_x_0_0, '0', blocks_add_xx_0_0, '0']
+- [blocks_add_xx_0, '0', blocks_multiply_matrix_xx_0, '0']
+- [blocks_add_xx_0_0, '0', blocks_throttle2_0, '0']
+- [blocks_multiply_matrix_xx_0, '0', doa_antenna_correction_0, '0']
+- [blocks_multiply_matrix_xx_0, '1', doa_antenna_correction_0, '1']
+- [blocks_multiply_matrix_xx_0, '2', doa_antenna_correction_0, '2']
+- [blocks_multiply_matrix_xx_0, '3', doa_antenna_correction_0, '3']
+- [blocks_throttle2_0, '0', blocks_multiply_matrix_xx_0, '1']
+- [blocks_vector_to_streams_0_0, '0', qtgui_number_sink_1, '0']
+- [blocks_vector_to_streams_0_0, '1', qtgui_number_sink_1, '1']
+- [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']
+- [doa_MUSIC_lin_array_0, '0', qtgui_vector_sink_f_0, '0']
+- [doa_antenna_correction_0, '0', doa_autocorrelate_0, '0']
+- [doa_antenna_correction_0, '1', doa_autocorrelate_0, '1']
+- [doa_antenna_correction_0, '2', doa_autocorrelate_0, '2']
+- [doa_antenna_correction_0, '3', doa_autocorrelate_0, '3']
+- [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
+- [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
+- [doa_find_local_max_0, '1', blocks_vector_to_streams_0_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: v3.11.0.0git-979-g1055cd27

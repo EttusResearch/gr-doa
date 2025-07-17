@@ -27,8 +27,8 @@ documentation: |-
   This block uses a certain number of samples from each input stream and stores the maximum among those samples in a config file.
   
   Args:
-  num_inputs: Number of inputs to the block.
-  samples_to_findmax: Number of samples used from each stream to compute the maximum value.
-  config_filename: Config file which stores the result.
+    num_inputs: Number of inputs to the block.
+    samples_to_findmax: Number of samples used from each stream to compute the maximum value.
+    config_filename: Config file which stores the result.
 
 file_format: 1

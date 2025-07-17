@@ -1,5 +1,5 @@
 id: doa_find_local_max
-label: find_local_max
+label: Find Local Max
 category: '[doa]'
 
 templates:

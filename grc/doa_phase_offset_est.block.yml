@@ -1,5 +1,5 @@
 id: doa_phase_offset_est
-label: phase_offset_est
+label: Phase Offset Est
 category: '[doa]'
 
 templates:

@@ -4,7 +4,7 @@ category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
-  make: doa.serial_connection(${port}, ${baudrate}, ${data_format}, ${debug}, ${num_inputs})
+  make: doa.serial_connection(${port}, ${baudrate}, "${data_format}", ${debug}, ${num_max})
 
 parameters:
   - id: port
@@ -26,8 +26,8 @@ parameters:
     option_labels: ["CSV Format"]
     default: "csv"
     hide: none
-  - id: num_inputs
-    label: Number of Inputs
+  - id: num_max
+    label: Num of Targets (maxima)
     dtype: int
     default: 1
     hide: none
@@ -43,7 +43,7 @@ inputs:
 - label: in
   domain: stream
   dtype: float
-  multiplicity: ${num_inputs}
+  vlen: ${num_max}
 
 documentation: |-
   Serial Connection Block for Servo Motor Control out of the GNU Radio DOA Module

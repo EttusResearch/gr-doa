@@ -1,5 +1,5 @@
 id: doa_calibrate_lin_array
-label: calibrate_lin_array
+label: Calibrate Lin Array
 category: '[doa]'
 
 templates:
@@ -40,9 +40,9 @@ documentation: |-
   This block calibrates a uniform linear antenna array. The input stream to this block is the sample correlation matrix generated using the signals received across the array elements.
   
   Args:
-  norm_spacing: Normalized spacing between antenna elements. That is, the shortest distance between antenna elements divided by wavelength of the carrier signal.
-  num_ant_ele: Number of antenna array elements.
-  pilot_angle: The known angle at which a pilot transmitter is located.
+    norm_spacing: Normalized spacing between antenna elements. That is, the shortest distance between antenna elements divided by wavelength of the carrier signal.
+    num_ant_ele: Number of antenna array elements.
+    pilot_angle: The known angle at which a pilot transmitter is located.
 
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.

@@ -8,10 +8,10 @@ templates:
   make: doa.x440_usrp_source(samp_rate=${samp_rate}, center_freq=${center_freq}, gain=${gain}, sources=${sources}, addresses=${addresses}, device_args=${device_args})
 
   callbacks:
-    - set_samp_rate($samp_rate)
-    - set_center_freq($center_freq)
-    - set_gain($gain)
-    - set_sources($sources)
+    - set_samp_rate(${samp_rate})
+    - set_center_freq(${center_freq})
+    - set_gain(${gain})
+    - set_sources(${sources})
 
 parameters:
 - id: samp_rate
@@ -38,7 +38,6 @@ parameters:
   label: Device Args
   dtype: string
   default: "master_clock_rate=200e6"
-
 
 outputs:
 - label: out

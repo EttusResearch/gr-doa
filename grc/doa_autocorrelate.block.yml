@@ -1,5 +1,5 @@
 id: doa_autocorrelate
-label: autocorrelate
+label: Autocorrelate
 category: '[doa]'
 
 templates:
@@ -47,9 +47,9 @@ asserts:
 documentation: |-
   This block generates a sample correlation matrix for the input vector comprised of values drawn from the receive channels. 
   Args:
-  inputs: Number of inputs to the block
-  snapshot_size: Determines num. of samples used to compute the sample correlation matrix
-  overlap_size: Overlap size between snapshots
-  avg_method: Use either standard forward-averaging method or a forward-backward averaging method to compute the sample correlation matrix.
+    inputs: Number of inputs to the block
+    snapshot_size: Determines num. of samples used to compute the sample correlation matrix
+    overlap_size: Overlap size between snapshots
+    avg_method: Use either standard forward-averaging method or a forward-backward averaging method to compute the sample correlation matrix.
 
 file_format: 1

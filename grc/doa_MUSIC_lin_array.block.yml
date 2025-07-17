@@ -1,5 +1,5 @@
 id: doa_MUSIC_lin_array
-label: MUSIC_lin_array
+label: MUSIC Lin Array
 category: '[doa]'
 
 templates:
@@ -48,9 +48,9 @@ documentation: |-
   - Normalized spacing should be less than or equal to 0.5 (half wavelength)
   
   Args:
-  norm_spacing: Normalized spacing between antennas elements. That is, distance between antenna elements divided by wavelength of the carrier signal. For example, suppose that you have an antenna array whose elements are spaced roughly, d = 6.25 cm apart (equal to half-wavelength of a 2.4 GHz carrier signal). When using such an array to receive a signal over a carrier frequency of 950 MHz, whose wavelength is lambda = 31.58 cm, set norm_spacing = d/lambda = 6.25/31.58 = 0.1979. 
-  num_targets: Num. of targets to estimate
-  inputs: Num. of elements in the antenna array
-  pspectrum_len: Pseudo-spectrum length
+    norm_spacing: Normalized spacing between antennas elements. That is, distance between antenna elements divided by wavelength of the carrier signal. For example, suppose that you have an antenna array whose elements are spaced roughly, d = 6.25 cm apart (equal to half-wavelength of a 2.4 GHz carrier signal). When using such an array to receive a signal over a carrier frequency of 950 MHz, whose wavelength is lambda = 31.58 cm, set norm_spacing = d/lambda = 6.25/31.58 = 0.1979. 
+    num_targets: Num. of targets to estimate
+    inputs: Num. of elements in the antenna array
+    pspectrum_len: Pseudo-spectrum length
 
 file_format: 1

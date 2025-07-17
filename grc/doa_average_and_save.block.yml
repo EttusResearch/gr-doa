@@ -1,5 +1,5 @@
 id: doa_average_and_save
-label: average_and_save
+label: Average and Save
 category: '[doa]'
 
 templates:
@@ -28,9 +28,9 @@ documentation: |-
   This block averages a certain number of samples from each input stream and stores the result in a config file. 
   
   Args:
-  samples_to_average: Number of samples used from each stream to compute the average value.
-  num_inputs: Number of inputs to the block.
-  config_filename: Config file which stores the result.
+    samples_to_average: Number of samples used from each stream to compute the average value.
+    num_inputs: Number of inputs to the block.
+    config_filename: Config file which stores the result.
 
 file_format: 1
 

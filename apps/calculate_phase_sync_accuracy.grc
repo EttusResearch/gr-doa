@@ -1,0 +1,218 @@
+options:
+  parameters:
+    alias: ''
+    author: jreitmei
+    catch_exceptions: 'True'
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_linking: dynamic
+    generate_options: no_gui
+    generator_class_name: PythonNoGuiGenerator
+    generator_module: gnuradio.grc.workflows.python_nogui
+    hier_block_src_path: '.:'
+    id: calculate_phase_sync_accuracy
+    max_nouts: '0'
+    output_language: python
+    realtime_scheduling: ''
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    thread_safe_setters: ''
+    title: calculate_phase_sync_accuracy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: corrected_phase_offsets_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.CorrectedPhaseOffsets)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 208.0]
+    rotation: 0
+    state: enabled
+- name: input_variables
+  id: variable_struct
+  parameters:
+    comment: "input_variables: \nContains all the user-defined variables."
+    field0: SampleRate
+    field1: ToneFreq
+    field10: Samples2FindMax
+    field11: ''
+    field12: ''
+    field13: ''
+    field14: ''
+    field15: ''
+    field16: ''
+    field17: ''
+    field18: ''
+    field19: ''
+    field2: CenterFreq
+    field3: NumArrayElements
+    field4: Gain
+    field5: RxAddr
+    field6: DirectoryConfigFiles
+    field7: RelativePhaseOffsets
+    field8: CorrectedPhaseOffsets
+    field9: SkipAhead
+    value0: 1e6
+    value1: 10e3
+    value10: 2**11
+    value11: '0'
+    value12: '0'
+    value13: '0'
+    value14: '0'
+    value15: '0'
+    value16: '0'
+    value17: '0'
+    value18: '0'
+    value19: '0'
+    value2: 462e6
+    value3: '4'
+    value4: '60'
+    value5: '"addr=10.88.136.14"'
+    value6: '"/tmp"'
+    value7: '"measure_relative_phase_offsets_446.cfg"'
+    value8: '"measure_corrected_phase_offsets_446.cfg"'
+    value9: 2**13
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 124.0]
+    rotation: 0
+    state: enabled
+- name: rel_phase_offsets_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.RelativePhaseOffsets)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 128.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12]
+    rotation: 0
+    state: enabled
+- name: doa_findmax_and_save_0
+  id: doa_findmax_and_save
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: corrected_phase_offsets_file_name
+    num_inputs: input_variables.NumArrayElements-1
+    samples_to_findmax: input_variables.Samples2FindMax
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 440.0]
+    rotation: 0
+    state: enabled
+- name: doa_phase_correct_hier_0
+  id: doa_phase_correct_hier
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: rel_phase_offsets_file_name
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 424.0]
+    rotation: 0
+    state: enabled
+- name: doa_phase_offset_est_0
+  id: doa_phase_offset_est
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n_skip_ahead: input_variables.SkipAhead
+    num_inputs: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 424.0]
+    rotation: 0
+    state: enabled
+- name: doa_x440_usrp_source_0
+  id: doa_x440_usrp_source
+  parameters:
+    addresses: input_variables.RxAddr
+    affinity: ''
+    alias: ''
+    center_freq: input_variables.CenterFreq
+    comment: ''
+    device_args: master_clock_rate=200e6
+    gain: input_variables.Gain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: input_variables.SampleRate
+    sources: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 424.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import os
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 128.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [doa_phase_correct_hier_0, '0', doa_phase_offset_est_0, '0']
+- [doa_phase_correct_hier_0, '1', doa_phase_offset_est_0, '1']
+- [doa_phase_correct_hier_0, '2', doa_phase_offset_est_0, '2']
+- [doa_phase_correct_hier_0, '3', doa_phase_offset_est_0, '3']
+- [doa_phase_offset_est_0, '0', doa_findmax_and_save_0, '0']
+- [doa_phase_offset_est_0, '1', doa_findmax_and_save_0, '1']
+- [doa_phase_offset_est_0, '2', doa_findmax_and_save_0, '2']
+- [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0, '0']
+- [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
+- [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']
+- [doa_x440_usrp_source_0, '3', doa_phase_correct_hier_0, '3']
+
+metadata:
+  file_format: 1
+  grc_version: v3.11.0.0git-979-g1055cd27
