@@ -1,0 +1,65 @@
+id: doa_serial_connection
+label: Serial Connection
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.serial_connection(${port}, ${baudrate}, ${data_format}, ${debug}, ${num_inputs})
+
+parameters:
+  - id: port
+    label: Serial Port
+    dtype: string
+    default: "/dev/ttyUSB0"
+    hide: none
+  - id: baudrate
+    label: Baud Rate
+    dtype: int
+    default: 115200
+    options: [9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600]
+    option_labels: ["9600", "19200", "38400", "57600", "115200", "230400", "460800", "921600"]
+    hide: none
+  - id: data_format
+    label: Data Format
+    dtype: enum
+    options: ["csv"]
+    option_labels: ["CSV Format"]
+    default: "csv"
+    hide: none
+  - id: num_inputs
+    label: Number of Inputs
+    dtype: int
+    default: 1
+    hide: none
+  - id: debug
+    label: Debug Output
+    dtype: bool
+    default: false
+    options: [true, false]
+    option_labels: ["Yes", "No"]
+    hide: none
+
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+  multiplicity: ${num_inputs}
+
+documentation: |-
+  Serial Connection Block for Servo Motor Control out of the GNU Radio DOA Module
+  
+  This block establishes a serial communication interface for controlling servo motors
+  connected to microcontrollers. It converts GNU Radio float data
+  into servo control commands suitable for Arduino servo libraries.
+  
+  Parameters:
+    port: Serial port device path (e.g., /dev/ttyUSB0 on Linux, COM1 on Windows)
+    baudrate: Communication speed in bits per second (e.g., 115200)
+    data_format: Format for servo control data:
+      - CSV Format: Sends values as comma-separated text
+    debug: Enable debug output to console for troubleshooting
+  
+  The block accepts floating-point input data and transmits it according to the 
+  specified format and serial port configuration.
+
+file_format: 1
