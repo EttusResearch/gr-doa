@@ -77,7 +77,7 @@ class estimate_constant_phase_offsets_and_save(gr.top_block, Qt.QWidget):
 
             'NumArrayElements': 4,
 
-            'RxAddr': "addr=10.88.136.14",
+            'RxAddr': "addr=10.88.136.40",
 
             'DirectoryConfigFiles': "/tmp",
 
@@ -163,17 +163,17 @@ class estimate_constant_phase_offsets_and_save(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.doa_phase_offset_est_0, 0), (self.doa_findmax_and_save_0, 0))
         self.connect((self.doa_phase_offset_est_0, 1), (self.doa_findmax_and_save_0, 1))
         self.connect((self.doa_phase_offset_est_0, 2), (self.doa_findmax_and_save_0, 2))
+        self.connect((self.doa_phase_offset_est_0, 0), (self.doa_findmax_and_save_0, 0))
         self.connect((self.doa_x440_usrp_source_0, 0), (self.doa_phase_offset_est_0, 0))
+        self.connect((self.doa_x440_usrp_source_0, 1), (self.doa_phase_offset_est_0, 1))
         self.connect((self.doa_x440_usrp_source_0, 2), (self.doa_phase_offset_est_0, 2))
         self.connect((self.doa_x440_usrp_source_0, 3), (self.doa_phase_offset_est_0, 3))
-        self.connect((self.doa_x440_usrp_source_0, 1), (self.doa_phase_offset_est_0, 1))
         self.connect((self.doa_x440_usrp_source_0, 3), (self.qtgui_time_sink_x_0, 3))
-        self.connect((self.doa_x440_usrp_source_0, 1), (self.qtgui_time_sink_x_0, 1))
-        self.connect((self.doa_x440_usrp_source_0, 2), (self.qtgui_time_sink_x_0, 2))
         self.connect((self.doa_x440_usrp_source_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.doa_x440_usrp_source_0, 2), (self.qtgui_time_sink_x_0, 2))
+        self.connect((self.doa_x440_usrp_source_0, 1), (self.qtgui_time_sink_x_0, 1))
 
 
     def closeEvent(self, event):

@@ -77,7 +77,7 @@ class view_op_with_corrected_phase_offsets(gr.top_block, Qt.QWidget):
 
             'NumArrayElements': 4,
 
-            'RxAddr': "addr=10.88.136.14",
+            'RxAddr': "addr=10.88.136.40",
 
             'DirectoryConfigFiles': "/tmp",
 
@@ -102,7 +102,7 @@ class view_op_with_corrected_phase_offsets(gr.top_block, Qt.QWidget):
         ##################################################
 
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
-            1024 , #size
+            256, #size
             input_variables.SampleRate, #samp_rate
             "", #name
             4, #number of inputs
@@ -114,7 +114,7 @@ class view_op_with_corrected_phase_offsets(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
 
         self.qtgui_time_sink_x_0.enable_tags(True)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_AUTO, qtgui.TRIG_SLOPE_POS, 0.1, 0, 0, "")
         self.qtgui_time_sink_x_0.enable_autoscale(False)
         self.qtgui_time_sink_x_0.enable_grid(False)
         self.qtgui_time_sink_x_0.enable_axis_labels(True)
@@ -159,10 +159,10 @@ class view_op_with_corrected_phase_offsets(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
+        self.connect((self.doa_phase_correct_hier_0, 2), (self.qtgui_time_sink_x_0, 2))
         self.connect((self.doa_phase_correct_hier_0, 3), (self.qtgui_time_sink_x_0, 3))
         self.connect((self.doa_phase_correct_hier_0, 1), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.doa_phase_correct_hier_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.doa_phase_correct_hier_0, 2), (self.qtgui_time_sink_x_0, 2))
         self.connect((self.doa_x440_usrp_source_0, 0), (self.doa_phase_correct_hier_0, 0))
         self.connect((self.doa_x440_usrp_source_0, 1), (self.doa_phase_correct_hier_0, 1))
         self.connect((self.doa_x440_usrp_source_0, 3), (self.doa_phase_correct_hier_0, 3))

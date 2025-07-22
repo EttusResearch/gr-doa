@@ -68,7 +68,7 @@ blocks:
     value2: 462e6
     value3: '60'
     value4: '4'
-    value5: '"addr=10.88.136.14"'
+    value5: '"addr=10.88.136.40"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_446.cfg"'
     value8: 2**13
@@ -198,7 +198,7 @@ blocks:
     marker9: '-1'
     name: '""'
     nconnections: '4'
-    size: '1024 '
+    size: '256'
     srate: input_variables.SampleRate
     stemplot: 'False'
     style1: '1'
@@ -213,8 +213,8 @@ blocks:
     style9: '1'
     tr_chan: '0'
     tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_level: '0.1'
+    tr_mode: qtgui.TRIG_MODE_AUTO
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: complex

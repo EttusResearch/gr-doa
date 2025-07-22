@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0
 #
 # GNU Radio Python Flow Graph
-# Title: Not titled yet
+# Title: calculate_phase_sync_accuracy
 # Author: jreitmei
 # GNU Radio version: v3.11.0.0git-979-g1055cd27
 
@@ -29,7 +29,7 @@ from gnuradio import eng_notation
 class calculate_phase_sync_accuracy(gr.top_block):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Not titled yet", catch_exceptions=True)
+        gr.top_block.__init__(self, "calculate_phase_sync_accuracy", catch_exceptions=True)
 
         ##################################################
         # Variables
@@ -46,7 +46,7 @@ class calculate_phase_sync_accuracy(gr.top_block):
 
             'Gain': 60,
 
-            'RxAddr': "addr=10.88.136.34",
+            'RxAddr': "addr=10.88.136.40",
 
             'DirectoryConfigFiles': "/tmp",
 
@@ -84,17 +84,17 @@ class calculate_phase_sync_accuracy(gr.top_block):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.doa_phase_correct_hier_0, 0), (self.doa_phase_offset_est_0, 0))
-        self.connect((self.doa_phase_correct_hier_0, 3), (self.doa_phase_offset_est_0, 3))
-        self.connect((self.doa_phase_correct_hier_0, 2), (self.doa_phase_offset_est_0, 2))
         self.connect((self.doa_phase_correct_hier_0, 1), (self.doa_phase_offset_est_0, 1))
+        self.connect((self.doa_phase_correct_hier_0, 3), (self.doa_phase_offset_est_0, 3))
+        self.connect((self.doa_phase_correct_hier_0, 0), (self.doa_phase_offset_est_0, 0))
+        self.connect((self.doa_phase_correct_hier_0, 2), (self.doa_phase_offset_est_0, 2))
+        self.connect((self.doa_phase_offset_est_0, 0), (self.doa_findmax_and_save_0, 0))
         self.connect((self.doa_phase_offset_est_0, 2), (self.doa_findmax_and_save_0, 2))
         self.connect((self.doa_phase_offset_est_0, 1), (self.doa_findmax_and_save_0, 1))
-        self.connect((self.doa_phase_offset_est_0, 0), (self.doa_findmax_and_save_0, 0))
-        self.connect((self.doa_x440_usrp_source_0, 1), (self.doa_phase_correct_hier_0, 1))
-        self.connect((self.doa_x440_usrp_source_0, 3), (self.doa_phase_correct_hier_0, 3))
         self.connect((self.doa_x440_usrp_source_0, 0), (self.doa_phase_correct_hier_0, 0))
+        self.connect((self.doa_x440_usrp_source_0, 3), (self.doa_phase_correct_hier_0, 3))
         self.connect((self.doa_x440_usrp_source_0, 2), (self.doa_phase_correct_hier_0, 2))
+        self.connect((self.doa_x440_usrp_source_0, 1), (self.doa_phase_correct_hier_0, 1))
 
 
     def get_input_variables(self):
