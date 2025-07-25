@@ -104,8 +104,8 @@ blocks:
     field7: SnapshotSize
     field8: OverlapSize
     field9: NumTargets
-    value0: 10e3
-    value1: 1e6
+    value0: 5e3
+    value1: 200e3
     value10: 2**10
     value11: '"/tmp"'
     value12: '"measure_relative_phase_offsets_446.cfg"'
@@ -116,12 +116,12 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: 462e6
-    value3: '"addr=10.88.136.14"'
+    value2: '446031250'
+    value3: '"addr=10.94.17.29"'
     value4: '60'
     value5: '4'
-    value6: '0.5'
-    value7: 2**11
+    value6: '0.250'
+    value7: 2**13
     value8: 2**9
     value9: '1'
   states:
@@ -256,7 +256,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    avg_method: Forward
+    avg_method: Forward-Backward
     comment: ''
     inputs: input_variables.NumArrayElements
     maxoutbuf: '0'
@@ -469,7 +469,7 @@ blocks:
     y_axis_label: '"Pseudo-Spectrum (dB)"'
     y_units: '""'
     ymax: '0'
-    ymin: '-50'
+    ymin: '-15'
   states:
     bus_sink: false
     bus_source: false
@@ -496,4 +496,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-979-g1055cd27
+  grc_version: v3.11.0.0git-988-g6cadd695

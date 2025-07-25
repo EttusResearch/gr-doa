@@ -55,16 +55,24 @@ class serial_connection(gr.sync_block):
                     servo_angles = [int(max(0.0, min(180.0, val))) for val in all_values]
                     
                     if self.debug:
-                        print(f"Sending CSV data: original_values={all_values}, servo_angles={servo_angles}")
+                        print(f"Sending servo angles: {servo_angles}")
                     
-                    # Real CSV format: num_servo,value1,value2,...,angle1,angle2,...
-                    num_servo = "num_servo" + str(len(all_values))
-                    # Values as floats
-                    values_str = ','.join([f"{val:.3f}" for val in all_values])
+                    # Map number of servos to letters: A=1, B=2, C=3 (max 3 servos)
+                    num_servo = len(servo_angles)
+                    servo_letter_map = {1: 'A', 2: 'B', 3: 'C'}
+                    
+                    if num_servo > 3:
+                        if self.debug:
+                            print(f"Warning: Too many servos ({num_servo}), limiting to 3")
+                        servo_angles = servo_angles[:3]  # Limit to first 3 servos
+                        num_servo = 3
+                    
+                    servo_letter = servo_letter_map.get(num_servo, 'A')  # Default to 'A' if invalid
+                    
                     # Angles as integers
                     angles_str = ','.join([str(angle) for angle in servo_angles])
-                    # CSV format
-                    csv_data = f"{num_servo},{values_str},{angles_str}\n"
+                    # CSV format: servo letter followed by angles in degrees
+                    csv_data = f"{servo_letter},{angles_str}\n"
                     # Send the CSV data to the serial port
                     self.serial.write(csv_data.encode('utf-8'))
                     

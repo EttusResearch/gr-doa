@@ -104,7 +104,7 @@ blocks:
     field7: SnapshotSize
     field8: OverlapSize
     field9: ''
-    value0: '320000'
+    value0: 200e3
     value1: '10000'
     value10: '''0'''
     value11: '''0'''
@@ -521,7 +521,104 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 544.0]
+    coordinate: [608, 504.0]
+    rotation: 180
+    state: enabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"Degree over time"'
+    nconnections: '2'
+    size: '1024'
+    srate: input_variables.SampleRate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Degree
+    ymax: '180'
+    ymin: '0'
+    yunit: "\"\xB0\""
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 616.0]
     rotation: 180
     state: enabled
 - name: qtgui_vector_sink_f_0
@@ -612,7 +709,9 @@ connections:
 - [blocks_multiply_matrix_xx_0, '3', doa_autocorrelate_0, '3']
 - [blocks_throttle2_0, '0', blocks_multiply_matrix_xx_0, '1']
 - [blocks_vector_to_streams_0, '0', qtgui_number_sink_1, '0']
+- [blocks_vector_to_streams_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_vector_to_streams_0, '1', qtgui_number_sink_1, '1']
+- [blocks_vector_to_streams_0, '1', qtgui_time_sink_x_0, '1']
 - [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']
 - [doa_MUSIC_lin_array_0, '0', qtgui_vector_sink_f_0, '0']
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
@@ -621,4 +720,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-979-g1055cd27
+  grc_version: v3.11.0.0git-988-g6cadd695
