@@ -31,19 +31,13 @@ calibrate_lin_array::make(float norm_spacing, int num_ant_ele, float pilot_angle
 /*
  * The private constructor
  */
-calibrate_lin_array_impl::calibrate_lin_array_impl(float norm_spacing,
-                                                   int num_ant_ele,
-                                                   float pilot_angle)
+calibrate_lin_array_impl::calibrate_lin_array_impl(float norm_spacing, int num_ant_ele, float pilot_angle)
     : gr::sync_block("calibrate_lin_array",
-                     gr::io_signature::make(
-                         1 /* min inputs */, 1 /* max inputs */, 
-                         num_ant_ele * num_ant_ele * sizeof(input_type)),
-                     gr::io_signature::make(
-                         1 /* min outputs */, 1 /*max outputs */, 
-                         num_ant_ele * sizeof(output_type))),
-      d_norm_spacing(norm_spacing),
-      d_num_ant_ele(num_ant_ele),
-      d_pilot_angle(pilot_angle)
+        gr::io_signature::make(1 , 1 , num_ant_ele * num_ant_ele * sizeof(input_type)),
+        gr::io_signature::make(1 ,1 , num_ant_ele * sizeof(output_type))),
+        d_norm_spacing(norm_spacing),
+        d_num_ant_ele(num_ant_ele),
+        d_pilot_angle(pilot_angle)
 {
     // Form antenna array locations centered around zero and normalize
     d_array_loc = fcolvec(d_num_ant_ele, fill::zeros);

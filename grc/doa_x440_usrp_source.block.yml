@@ -10,7 +10,6 @@ templates:
   callbacks:
     - set_samp_rate(${samp_rate})
     - set_center_freq(${center_freq})
-    - set_gain(${gain})
     - set_sources(${sources})
 
 parameters:
@@ -21,11 +20,7 @@ parameters:
 - id: center_freq
   label: Center Freq (Hz)
   dtype: float
-  default: 462e6
-- id: gain
-  label: Gain Value
-  dtype: float
-  default: 40
+  default: 446031250 
 - id: sources
   label: Num Channels
   dtype: int
@@ -37,7 +32,7 @@ parameters:
 - id: device_args
   label: Device Args
   dtype: string
-  default: "master_clock_rate=200e6"
+  default: "master_clock_rate=250e6"
 
 outputs:
 - label: out

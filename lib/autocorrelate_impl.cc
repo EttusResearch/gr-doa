@@ -59,7 +59,9 @@ namespace gr {
             d_input_matrix = arma::cx_fmat(snapshot_size,inputs);
 
             // initialize the reflection matrix
+            // creates an identity matrix 
             d_J.eye(d_num_inputs, d_num_inputs);
+            // flips the matrix into a reflection matrix
             d_J = fliplr(d_J);
         }
 
@@ -69,11 +71,13 @@ namespace gr {
         autocorrelate_impl::~autocorrelate_impl() 
         {
         }
-
+        
+        // This function is called to forecast the number of input items required
         void autocorrelate_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
         {
-            for (size_t i=0; i < ninput_items_required.size(); i++)
+            for (size_t i=0; i < ninput_items_required.size(); i++){
                 ninput_items_required[i] = d_nonoverlap_size*noutput_items;
+            }
         }
 
         int autocorrelate_impl::general_work(int output_matrices,
@@ -81,9 +85,6 @@ namespace gr {
                                             gr_vector_const_void_star &input_items,
                                             gr_vector_void_star &output_items)
         {
-            //auto in = static_cast<const input_type*>(input_items[0]);
-            //auto out = static_cast<output_type*>(output_items[0]);
-
             // Cast pointer
             gr_complex *out = (gr_complex *) output_items[0];
 

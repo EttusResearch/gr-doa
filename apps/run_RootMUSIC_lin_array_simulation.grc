@@ -371,7 +371,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1192, 488.0]
+    coordinate: [960, 488.0]
     rotation: 180
     state: enabled
 - name: doa_autocorrelate_0
@@ -484,7 +484,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 424.0]
+    coordinate: [704, 424.0]
     rotation: 180
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -581,7 +581,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 528.0]
+    coordinate: [688, 528.0]
     rotation: 180
     state: enabled
 

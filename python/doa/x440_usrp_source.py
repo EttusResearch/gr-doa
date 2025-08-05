@@ -25,18 +25,17 @@ class x440_usrp_source(gr.hier_block2):
     USRP X440 Source Block
     
     This block provides a source interface for the USRP X440 device.
-    It configures multiple channels for synchronized reception and handles
+    It configures multiple channels (up to 8) for synchronized reception and handles
     proper frequency tuning and LO distribution.
     
     Parameters:
         samp_rate (float): Sample rate in samples per second
         center_freq (float): Center frequency in Hz
-        gain (float): RX gain in dB
-        sources (int): Number of source channels to enable
+        sources (int): Number of source channels to enable (1-8)
         addresses (str): Device address (e.g., "addr=192.168.10.2")
         device_args (str): Additional device arguments
     """
-    def __init__(self, samp_rate, center_freq, gain, sources, addresses, device_args):
+    def __init__(self, samp_rate, center_freq, sources, addresses, device_args):
         gr.hier_block2.__init__(self,
             "x440_usrp_source",
             gr.io_signature(0, 0, 0),
@@ -49,7 +48,6 @@ class x440_usrp_source(gr.hier_block2):
         ##################################################
         self.samp_rate = samp_rate
         self.center_freq = center_freq
-        self.gain = gain
         self.sources = sources
         self.addresses = addresses
         self.device_args = device_args
@@ -69,7 +67,7 @@ class x440_usrp_source(gr.hier_block2):
         self.uhd_usrp_source_0.set_time_source('internal', 0)
 
 
-        # Subdevice-Spezifikation für 8 Kanäle (2 Boards à 4 Kanäle)
+        # Subdevice-Spezifikation für 8 Kanäle (2 Daughterboards à 4 Kanäle)
         subdevs = 'A:0 A:1 A:2 A:3 B:0 B:1 B:2 B:3'.split(' ')
         self.uhd_usrp_source_0.set_subdev_spec(' '.join(subdevs[:sources]), 0)
 
@@ -81,7 +79,6 @@ class x440_usrp_source(gr.hier_block2):
 
         # Konfiguration der Kanäle
         for chan in range(sources):
-            self.uhd_usrp_source_0.set_gain(gain, chan)
             # change the interface here if you want to use a different antenna
             self.uhd_usrp_source_0.set_antenna("TX/RX", chan)
 
@@ -115,12 +112,6 @@ class x440_usrp_source(gr.hier_block2):
 
     def get_center_freq(self):
         return self.center_freq
-
-    def get_gain(self):
-        return self.gain
-
-    def set_gain(self, gain):
-        self.gain = gain
 
     def get_sources(self):
         return self.sources

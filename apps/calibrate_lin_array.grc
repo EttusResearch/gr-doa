@@ -65,10 +65,10 @@ blocks:
     field8: OverlapSize
     field9: PilotAngle
     value0: 5e3
-    value1: 5e4
+    value1: 2e5
     value10: '"/tmp"'
-    value11: '"measure_relative_phase_offsets_446.cfg"'
-    value12: '"calibration_lin_array_446.cfg"'
+    value11: '"measure_relative_phase_offsets_2495MHz.cfg"'
+    value12: '"calibration_lin_array_2495MHz.cfg"'
     value13: 2**11
     value14: '0'
     value15: '0'
@@ -76,14 +76,14 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250'
-    value3: '"addr=10.94.17.29"'
-    value4: '60'
+    value2: '2495000000'
+    value3: '"addr=10.94.17.19"'
+    value4: '0'
     value5: '4'
-    value6: '0.250'
+    value6: '0.5'
     value7: 2**11
-    value8: 2**9
-    value9: ' 90'
+    value8: 2**10
+    value9: ' 120'
   states:
     bus_sink: false
     bus_source: false
@@ -124,7 +124,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    avg_method: Forward
+    avg_method: Forward-Backward
     comment: ''
     inputs: input_variables.NumArrayElements
     maxoutbuf: '0'
@@ -197,7 +197,7 @@ blocks:
     alias: ''
     center_freq: input_variables.CenterFreq
     comment: ''
-    device_args: master_clock_rate=200e6
+    device_args: master_clock_rate=250e6
     gain: input_variables.Gain
     maxoutbuf: '0'
     minoutbuf: '0'

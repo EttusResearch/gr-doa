@@ -149,7 +149,7 @@ blocks:
     field3: NormSpacing
     field4: NumTargets
     field5: NumArrayElements
-    field6: PSpectrumLength
+    field6: ''
     field7: SnapshotSize
     field8: OverlapSize
     field9: AntGains
@@ -165,13 +165,13 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '20000'
+    value2: '2495000000'
     value3: '0.44'
     value4: '2'
     value5: '4'
     value6: 2**10
-    value7: 2**11
-    value8: 2**9
+    value7: 2**12
+    value8: 2**11
     value9: numpy.array([ 0.94984789,  0.4544107 ,  0.34649469,  0.25083929])
   states:
     bus_sink: false
@@ -437,7 +437,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [600, 368.0]
+    coordinate: [608, 368.0]
     rotation: 0
     state: enabled
 - name: doa_autocorrelate_0
@@ -624,4 +624,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-979-g1055cd27
+  grc_version: v3.11.0.0git-988-g6cadd695

@@ -54,7 +54,7 @@ blocks:
     field8: ''
     field9: ''
     value0: 1e6
-    value1: 10e3
+    value1: 5e3
     value10: '0'
     value11: '0'
     value12: '0'
@@ -65,12 +65,12 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: 446e6
+    value2: '2495000000'
     value3: '60'
     value4: '4'
-    value5: '"addr=10.88.136.8"'
+    value5: '"addr=10.94.17.19"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_446.cfg"'
+    value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13
     value9: 2**11
   states:
@@ -106,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 264.0]
+    coordinate: [576, 264.0]
     rotation: 0
     state: enabled
 - name: doa_x440_usrp_source_0

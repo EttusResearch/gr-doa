@@ -116,13 +116,13 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250'
-    value3: '"addr=10.94.17.29"'
-    value4: '60'
+    value2: '2495000000'
+    value3: '"addr=10.94.17.19"'
+    value4: '0'
     value5: '4'
-    value6: '0.250'
-    value7: 2**13
-    value8: 2**9
+    value6: '0.5'
+    value7: 2**15
+    value8: 2**14
     value9: '1'
   states:
     bus_sink: false
