@@ -54,7 +54,7 @@ blocks:
     field8: SkipAhead
     field9: Samples2FindMax
     value0: 1e6
-    value1: 12.5e3
+    value1: 5e3
     value10: '0'
     value11: '0'
     value12: '0'
@@ -65,10 +65,10 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: 446e6
-    value3: '60'
+    value2: '446031250'
+    value3: '0'
     value4: '4'
-    value5: '"addr=10.88.136.8"'
+    value5: '"addr=10.94.17.19"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_446.cfg"'
     value8: 2**13
@@ -78,18 +78,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [8, 124.0]
-    rotation: 0
-    state: enabled
-- name: multConst
-  id: variable
-  parameters:
-    comment: ''
-    value: '2'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [576, 8.0]
     rotation: 0
     state: enabled
 - name: rel_phase_offsets_file_name

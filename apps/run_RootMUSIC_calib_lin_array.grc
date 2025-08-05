@@ -11,7 +11,7 @@ options:
     generator_class_name: PythonQtGuiGenerator
     generator_module: gnuradio.grc.workflows.python_qt_gui
     hier_block_src_path: '.:'
-    id: default
+    id: run_RootMUSIC_calib_lin_array
     max_nouts: '0'
     output_language: python
     qt_qss_theme: ''
@@ -19,7 +19,7 @@ options:
     run: 'True'
     run_command: '{python} -u {filename}'
     thread_safe_setters: ''
-    title: run Root calib lin array
+    title: Not titled yet
   states:
     bus_sink: false
     bus_source: false
@@ -38,7 +38,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 24.0]
+    coordinate: [392, 8.0]
     rotation: 0
     state: enabled
 - name: input_variables
@@ -66,7 +66,7 @@ blocks:
     field8: OverlapSize
     field9: NumTargets
     value0: 5e3
-    value1: 200e3
+    value1: 1e6
     value10: 2**10
     value11: '"/tmp"'
     value12: '"measure_relative_phase_offsets_446.cfg"'
@@ -78,18 +78,18 @@ blocks:
     value18: '0'
     value19: '0'
     value2: '446031250'
-    value3: '"addr=10.94.17.29"'
+    value3: '"addr=10.94.17.19"'
     value4: '60'
     value5: '4'
-    value6: '0.250'
+    value6: '0.5'
     value7: 2**11
-    value8: 2**9
+    value8: 2**10
     value9: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 128.0]
+    coordinate: [8, 124.0]
     rotation: 0
     state: enabled
 - name: rel_phase_offsets_file_name
@@ -101,19 +101,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 24.0]
-    rotation: 0
-    state: enabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: '32000'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [200, 12]
+    coordinate: [232, 8.0]
     rotation: 0
     state: enabled
 - name: doa_antenna_correction_0
@@ -130,7 +118,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 144.0]
+    coordinate: [688, 128.0]
     rotation: 0
     state: enabled
 - name: doa_autocorrelate_0
@@ -138,7 +126,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    avg_method: Forward
+    avg_method: Forward-Backward
     comment: ''
     inputs: input_variables.NumArrayElements
     maxoutbuf: '0'
@@ -149,10 +137,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 144.0]
+    coordinate: [936, 128.0]
     rotation: 0
     state: enabled
-- name: doa_phase_correct_hier_0
+- name: doa_phase_correct_hier_0_0
   id: doa_phase_correct_hier
   parameters:
     affinity: ''
@@ -166,7 +154,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 144.0]
+    coordinate: [440, 128.0]
     rotation: 0
     state: enabled
 - name: doa_rootMUSIC_linear_array_0
@@ -184,7 +172,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 312.0]
+    coordinate: [992, 312.0]
     rotation: 180
     state: enabled
 - name: doa_x440_usrp_source_0
@@ -205,7 +193,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 144.0]
+    coordinate: [192, 128.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -218,9 +206,34 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 16.0]
+    coordinate: [160, 8.0]
     rotation: 0
     state: enabled
+- name: qtgui_compass_0
+  id: qtgui_compass
+  parameters:
+    affinity: ''
+    alias: ''
+    backgroundColor: default
+    comment: ''
+    fullNeedle: '1'
+    gui_hint: ''
+    min_size: '250'
+    name: ''
+    needleBodyColor: black
+    needleTipColor: red
+    position: '1'
+    scaleColor: black
+    setDebug: 'False'
+    update_time: '0.10'
+    usemsg: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1168, 544.0]
+    rotation: 180
+    state: disabled
 - name: qtgui_number_sink_1
   id: qtgui_number_sink
   parameters:
@@ -281,7 +294,167 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 304.0]
+    coordinate: [1168, 432.0]
+    rotation: 180
+    state: disabled
+- name: qtgui_number_sink_1_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '180'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 288.0]
+    rotation: 180
+    state: enabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'False'
+    grid: 'True'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"Degree over time"'
+    nconnections: '1'
+    size: 2**10
+    srate: 320e3
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.01'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Degree
+    ymax: '180'
+    ymin: '0'
+    yunit: "\"\xB0\""
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 384.0]
     rotation: 180
     state: enabled
 
@@ -291,15 +464,18 @@ connections:
 - [doa_antenna_correction_0, '2', doa_autocorrelate_0, '2']
 - [doa_antenna_correction_0, '3', doa_autocorrelate_0, '3']
 - [doa_autocorrelate_0, '0', doa_rootMUSIC_linear_array_0, '0']
-- [doa_phase_correct_hier_0, '0', doa_antenna_correction_0, '0']
-- [doa_phase_correct_hier_0, '1', doa_antenna_correction_0, '1']
-- [doa_phase_correct_hier_0, '2', doa_antenna_correction_0, '2']
-- [doa_phase_correct_hier_0, '3', doa_antenna_correction_0, '3']
+- [doa_phase_correct_hier_0_0, '0', doa_antenna_correction_0, '0']
+- [doa_phase_correct_hier_0_0, '1', doa_antenna_correction_0, '1']
+- [doa_phase_correct_hier_0_0, '2', doa_antenna_correction_0, '2']
+- [doa_phase_correct_hier_0_0, '3', doa_antenna_correction_0, '3']
+- [doa_rootMUSIC_linear_array_0, '0', qtgui_compass_0, '0']
 - [doa_rootMUSIC_linear_array_0, '0', qtgui_number_sink_1, '0']
-- [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0, '0']
-- [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
-- [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']
-- [doa_x440_usrp_source_0, '3', doa_phase_correct_hier_0, '3']
+- [doa_rootMUSIC_linear_array_0, '0', qtgui_number_sink_1_0, '0']
+- [doa_rootMUSIC_linear_array_0, '0', qtgui_time_sink_x_0, '0']
+- [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0_0, '0']
+- [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0_0, '1']
+- [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0_0, '2']
+- [doa_x440_usrp_source_0, '3', doa_phase_correct_hier_0_0, '3']
 
 metadata:
   file_format: 1

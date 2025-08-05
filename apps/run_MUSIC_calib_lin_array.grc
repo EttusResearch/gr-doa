@@ -38,7 +38,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 16.0]
+    coordinate: [392, 16.0]
     rotation: 0
     state: enabled
 - name: input_variables
@@ -66,7 +66,7 @@ blocks:
     field8: OverlapSize
     field9: NumTargets
     value0: 5e3
-    value1: 1e6
+    value1: 2e5
     value10: 2**10
     value11: '"/tmp"'
     value12: '"measure_relative_phase_offsets_446.cfg"'
@@ -78,12 +78,12 @@ blocks:
     value18: '0'
     value19: '0'
     value2: '446031250'
-    value3: '"addr=10.94.17.29"'
-    value4: '60'
+    value3: '"addr=10.94.17.19"'
+    value4: '0'
     value5: '4'
-    value6: '0.250'
+    value6: '0.5'
     value7: 2**11
-    value8: 2**9
+    value8: 2**10
     value9: '1'
   states:
     bus_sink: false
@@ -101,19 +101,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 16.0]
-    rotation: 0
-    state: enabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: '32000'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [200, 12]
+    coordinate: [232, 16.0]
     rotation: 0
     state: enabled
 - name: blocks_null_sink_0
@@ -130,7 +118,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 352.0]
+    coordinate: [248, 432.0]
     rotation: 180
     state: enabled
 - name: doa_MUSIC_lin_array_0
@@ -149,7 +137,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 336.0]
+    coordinate: [648, 416.0]
     rotation: 180
     state: enabled
 - name: doa_antenna_correction_0
@@ -166,7 +154,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 184.0]
+    coordinate: [600, 264.0]
     rotation: 0
     state: enabled
 - name: doa_autocorrelate_0
@@ -174,7 +162,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    avg_method: Forward
+    avg_method: Forward-Backward
     comment: ''
     inputs: input_variables.NumArrayElements
     maxoutbuf: '0'
@@ -185,7 +173,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 184.0]
+    coordinate: [848, 264.0]
     rotation: 0
     state: enabled
 - name: doa_find_local_max_0
@@ -204,8 +192,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 336.0]
+    coordinate: [408, 416.0]
     rotation: 180
+    state: enabled
+- name: doa_phase_correct_hier_0_0
+  id: doa_phase_correct_hier
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: /tmp/measure_relative_phase_offsets_446.cfg
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 264.0]
+    rotation: 0
     state: enabled
 - name: doa_x440_usrp_source_0
   id: doa_x440_usrp_source
@@ -225,7 +230,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 184.0]
+    coordinate: [176, 104.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -238,7 +243,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 32.0]
+    coordinate: [160, 16.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1
@@ -301,7 +306,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 400.0]
+    coordinate: [184, 480.0]
     rotation: 180
     state: enabled
 - name: qtgui_vector_sink_f_0
@@ -375,8 +380,112 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 440.0]
+    coordinate: [392, 520.0]
     rotation: 180
+    state: enabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 96.0]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 192.0]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 128.0]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0_0_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 160.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 256.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 288.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 320.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0_0_1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: chn_3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 352.0]
+    rotation: 0
     state: enabled
 
 connections:
@@ -389,10 +498,18 @@ connections:
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
 - [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
 - [doa_find_local_max_0, '1', qtgui_number_sink_1, '0']
-- [doa_x440_usrp_source_0, '0', doa_antenna_correction_0, '0']
-- [doa_x440_usrp_source_0, '1', doa_antenna_correction_0, '1']
-- [doa_x440_usrp_source_0, '2', doa_antenna_correction_0, '2']
-- [doa_x440_usrp_source_0, '3', doa_antenna_correction_0, '3']
+- [doa_phase_correct_hier_0_0, '0', doa_antenna_correction_0, '0']
+- [doa_phase_correct_hier_0_0, '1', doa_antenna_correction_0, '1']
+- [doa_phase_correct_hier_0_0, '2', doa_antenna_correction_0, '2']
+- [doa_phase_correct_hier_0_0, '3', doa_antenna_correction_0, '3']
+- [doa_x440_usrp_source_0, '0', virtual_sink_0, '0']
+- [doa_x440_usrp_source_0, '1', virtual_sink_0_0_0, '0']
+- [doa_x440_usrp_source_0, '2', virtual_sink_0_0_1, '0']
+- [doa_x440_usrp_source_0, '3', virtual_sink_0_0, '0']
+- [virtual_source_0, '0', doa_phase_correct_hier_0_0, '0']
+- [virtual_source_0_0, '0', doa_phase_correct_hier_0_0, '1']
+- [virtual_source_0_0_0, '0', doa_phase_correct_hier_0_0, '2']
+- [virtual_source_0_0_1, '0', doa_phase_correct_hier_0_0, '3']
 
 metadata:
   file_format: 1

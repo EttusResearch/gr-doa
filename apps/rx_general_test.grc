@@ -54,7 +54,7 @@ blocks:
     field8: ''
     field9: ''
     value0: 5e3
-    value1: 0.1e6
+    value1: 1e6
     value10: '0'
     value11: '0'
     value12: '0'
@@ -67,7 +67,7 @@ blocks:
     value19: '0'
     value2: 446.1e6
     value3: '"addr=192.168.40.2"'
-    value4: '30'
+    value4: '0'
     value5: '4'
     value6: '0'
     value7: '0'

@@ -54,7 +54,7 @@ blocks:
     field8: OverlapSize
     field9: NumTargets
     value0: 5e3
-    value1: 1e6
+    value1: 2e5
     value10: 2**10
     value11: '0'
     value12: '0'
@@ -66,12 +66,12 @@ blocks:
     value18: '0'
     value19: '0'
     value2: '446031250'
-    value3: '"addr=10.88.136.8"'
+    value3: '"addr=10.94.17.19"'
     value4: '60'
     value5: '4'
-    value6: '0.250'
+    value6: '0.5'
     value7: 2**11
-    value8: 2**9
+    value8: 2**10
     value9: '1'
   states:
     bus_sink: false
@@ -85,7 +85,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    avg_method: Forward
+    avg_method: Forward-Backward
     comment: ''
     inputs: input_variables.NumArrayElements
     maxoutbuf: '0'
@@ -96,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [760, 248.0]
+    coordinate: [752, 248.0]
     rotation: 0
     state: enabled
 - name: doa_phase_correct_hier_0
@@ -131,7 +131,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 272.0]
+    coordinate: [1016, 272.0]
     rotation: 0
     state: enabled
 - name: doa_serial_connection_0
@@ -149,7 +149,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1184, 376.0]
+    coordinate: [1216, 376.0]
     rotation: 0
     state: disabled
 - name: doa_x440_usrp_source_0
@@ -196,7 +196,7 @@ blocks:
     fullNeedle: '1'
     gui_hint: ''
     min_size: '250'
-    name: ''
+    name: Direction
     needleBodyColor: black
     needleTipColor: red
     position: '1'
@@ -208,7 +208,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1184, 152.0]
+    coordinate: [1232, 128.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1
@@ -271,7 +271,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1184, 264.0]
+    coordinate: [1232, 264.0]
     rotation: 0
     state: enabled
 

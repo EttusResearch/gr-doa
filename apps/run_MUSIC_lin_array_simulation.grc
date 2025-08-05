@@ -448,6 +448,45 @@ blocks:
     coordinate: [1096, 496.0]
     rotation: 180
     state: enabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nimport matplotlib.pyplot as plt\nfrom gnuradio\
+      \ import gr\nimport time\n\nclass plot_over_5min(gr.sync_block):\n    def __init__(self):\n\
+      \        gr.sync_block.__init__(\n            self,\n            name=\"Plot\
+      \ Over 5 Minutes\",\n            in_sig=[np.float32],\n            out_sig=[]\n\
+      \        )\n        self.start_time = time.time()\n        self.last_plot_time\
+      \ = self.start_time\n        self.timestamps = []\n        self.values = []\n\
+      \n        # Initialisiere den Plot\n        plt.ion()\n        self.fig, self.ax\
+      \ = plt.subplots()\n        self.line, = self.ax.plot([], [], 'ro-')\n     \
+      \   self.ax.set_title(\"Live-Plot alle 20 Sekunden \xFCber 5 Minuten\")\n  \
+      \      self.ax.set_xlabel(\"Zeit (s)\")\n        self.ax.set_ylabel(\"Wert\"\
+      )\n        self.ax.grid(True)\n\n    def work(self, input_items, output_items):\n\
+      \        current_time = time.time()\n        elapsed_time = current_time - self.start_time\n\
+      \n        if elapsed_time > 300:  # 5 Minuten = 300 Sekunden\n            return\
+      \ len(input_items[0])  # Beende Plotten nach 5 Minuten\n\n        if len(input_items[0])\
+      \ > 0:\n            latest_value = input_items[0][-1]\n            if current_time\
+      \ - self.last_plot_time >= 20:\n                self.timestamps.append(current_time\
+      \ - self.start_time)\n                self.values.append(latest_value)\n\n \
+      \               # Update Plot\n                self.line.set_xdata(self.timestamps)\n\
+      \                self.line.set_ydata(self.values)\n                self.ax.relim()\n\
+      \                self.ax.autoscale_view()\n                self.fig.canvas.draw()\n\
+      \                self.fig.canvas.flush_events()\n\n                self.last_plot_time\
+      \ = current_time\n\n        return len(input_items[0])\n\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Plot Over 5 Minutes', 'plot_over_5min', [], [('0', 'float', 1)],
+      [], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 744.0]
+    rotation: 180
+    state: disabled
 - name: import_0
   id: import
   parameters:
@@ -710,6 +749,7 @@ connections:
 - [blocks_throttle2_0, '0', blocks_multiply_matrix_xx_0, '1']
 - [blocks_vector_to_streams_0, '0', qtgui_number_sink_1, '0']
 - [blocks_vector_to_streams_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_vector_to_streams_0, '1', epy_block_0, '0']
 - [blocks_vector_to_streams_0, '1', qtgui_number_sink_1, '1']
 - [blocks_vector_to_streams_0, '1', qtgui_time_sink_x_0, '1']
 - [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']

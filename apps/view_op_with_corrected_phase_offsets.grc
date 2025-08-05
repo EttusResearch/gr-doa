@@ -68,7 +68,7 @@ blocks:
     value2: 446e6
     value3: '60'
     value4: '4'
-    value5: '"addr=10.88.136.8"'
+    value5: '"addr=10.94.17.19"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_446.cfg"'
     value8: 2**13
