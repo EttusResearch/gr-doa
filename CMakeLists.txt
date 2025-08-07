@@ -66,7 +66,7 @@ include(GrCompilerSettings)
 ########################################################################
 include(GrVersion)
 
-include(GrPlatform) #define LIB_SUFFIX
+include(GNUInstallDirs) #define LIB_SUFFIX
 
 if(NOT CMAKE_MODULES_DIR)
     set(CMAKE_MODULES_DIR lib${LIB_SUFFIX}/cmake)

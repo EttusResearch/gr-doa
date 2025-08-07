@@ -29,7 +29,7 @@ public:
      *
      * \param norm_spacing    Normalized spacing between antenna elements
      * \param num_targets     Known number of targets 
-     * \param num_ant_ele     Number of antenna elements
+     * \param inputs          Number of input streams (antenna elements)
      * \param pspectrum_len   Length of the Pseudo-Spectrum length
      */
     static sptr make(float norm_spacing, int num_targets, int inputs, int pspectrum_len);

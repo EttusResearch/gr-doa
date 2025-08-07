@@ -9,7 +9,7 @@
 ########################################################################
 # Setup library
 ########################################################################
-include(GrPlatform) #define LIB_SUFFIX
+include(GNUInstallDirs) #define LIB_SUFFIX
 
 list(APPEND doa_sources
     calibrate_lin_array_impl.cc

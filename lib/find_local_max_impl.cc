@@ -108,7 +108,7 @@ namespace gr {
             uvec all_pks_sorted_indx = sort_index(all_pks, "descend");
             unsigned num_valid_peaks = all_pks_sorted_indx.size();
             // Output only peaks we need
-            if (num_valid_peaks>=d_num_max_vals){
+            if (num_valid_peaks>=static_cast<unsigned>(d_num_max_vals)){
                 pk_indxs = all_pk_indxs(all_pks_sorted_indx.rows(0, d_num_max_vals-1));
             }
             else // Not enough found
@@ -121,7 +121,7 @@ namespace gr {
                 else
                     max_peak_ind = all_pks_sorted_indx(0);
                 // Assign indexes
-                while(ind<d_num_max_vals)
+                while(ind<static_cast<unsigned>(d_num_max_vals))
                 {
                     // Use what we have first
                     if (ind<num_valid_peaks){
