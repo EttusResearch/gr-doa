@@ -32,14 +32,14 @@ import PyQt4.Qwt5 as Qwt
 class compass(gr.sync_block, Qwt.QwtPlot):
     __pyqtSignals__ = ("updatePlot(int)")
 
-    def __init__(self, label="", min_val=-90, max_val=90, step=10, arc_bias=0, *args):
-        gr.sync_block.__init__(self,name="QT Compass",in_sig=[numpy.float32],out_sig=[])
+    def __init__(self, label="", min_val=-90, max_val=90, step=10, arc_bias=0, needle_N=1, *args):
+        gr.sync_block.__init__(self,name="QT Compass",in_sig=[numpy.float32]*needle_N,out_sig=[])
         Qwt.QwtPlot.__init__(self, *args)
 
         # Set parameters
         self.update_period = 0.1
         self.last = time.time()
-        self.next_angle = 0
+        self.next_angles = []
 
         ### QT STUFF
 
@@ -47,28 +47,63 @@ class compass(gr.sync_block, Qwt.QwtPlot):
         self.this_layout = Qt.QVBoxLayout()
         self.compass_layout = Qt.QGridLayout()
 
-        # Setup Dial
-        self.dial = Qwt.QwtDial(self)
-        self.dial.setOrigin(180+arc_bias) # Orient dial so 0 is at 9 o'clock
-        self.dial.setScaleArc(min_val,max_val)
-        self.dial.setRange(min_val, max_val, step)
-        self.dial.setScale(min_val ,max_val, step)
-        self.dial.setScaleTicks(1,20,30)
+        # Setup Dials
+        self.dial_list = []
+        for i in range(needle_N):
+            dial = Qwt.QwtDial(self)
+            dial_palette = dial.palette()
+            transparent_color = QtGui.QBrush(QtGui.QColor(255, 255, 255, 0))
+            dial_palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, transparent_color)
+            dial_palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, transparent_color)
+            dial_palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, transparent_color)
+            dial_palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, transparent_color)
+            dial_palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, transparent_color)
+            dial_palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, transparent_color)
+            dial.setPalette(dial_palette)
+            dial.setOrigin(180+arc_bias) # Orient dial so 0 is at 9 o'clock
+            dial.setScaleArc(min_val,max_val)
+            dial.setRange(min_val, max_val, step)
+            dial.setScale(min_val, max_val, step)
+            dial.setScaleTicks(1,20,30)
 
-        # Add needle
-        self.dial.setNeedle(Qwt.QwtDialSimpleNeedle(
-            Qwt.QwtDialSimpleNeedle.Arrow,
-            True,
-            QtGui.QColor(QtCore.Qt.red),
-            QtGui.QColor(QtCore.Qt.gray).light(130)))
-        self.dial.setValue(0)
+            # Add needle
+            color_index = int(str(i)[len(str(i))-1:len(str(i)):]) # get last digit of i
+            if color_index == 0:
+                needleColor = QtGui.QColor(255, 0, 0) # red
+            elif color_index == 1:
+                needleColor = QtGui.QColor(255, 125, 0) # orange
+            elif color_index == 2:
+                needleColor = QtGui.QColor(255, 255, 0) # yellow
+            elif color_index == 3:
+                needleColor = QtGui.QColor(0, 255, 0) # green
+            elif color_index == 4:
+                needleColor = QtGui.QColor(0, 255, 255) # light blue
+            elif color_index == 5:
+                needleColor = QtGui.QColor(0, 0, 255) # blue
+            elif color_index == 6:
+                needleColor = QtGui.QColor(255, 0, 255) # light purple
+            elif color_index == 7:
+                needleColor = QtGui.QColor(150, 0, 255) # purple
+            elif color_index == 8:
+                needleColor = QtGui.QColor(150, 100, 0) # brown
+            else:
+                needleColor = QtGui.QColor(0, 0, 0) # black
+            dial.setNeedle(Qwt.QwtDialSimpleNeedle(
+                Qwt.QwtDialSimpleNeedle.Arrow,
+                True,
+                needleColor,
+                QtGui.QColor(QtCore.Qt.gray).light(130)))
+            dial.setValue(0)
 
-        # Set sizing
-        self.dial.setMinimumSize(250,250)
-        self.dial.setSizePolicy(Qt.QSizePolicy.Expanding, Qt.QSizePolicy.Expanding)
+            # Set sizing
+            dial.setMinimumSize(250,250)
+            dial.setSizePolicy(Qt.QSizePolicy.Expanding, Qt.QSizePolicy.Expanding)
+            self.dial_list.append(dial)
+            self.next_angles.append(0)
 
         # Add to overall layout
-        self.compass_layout.addWidget(self.dial,0,0)
+        for i in self.dial_list:
+            self.compass_layout.addWidget(i,0,0)
 
         # Add label
         self.label = Qt.QLabel(label)
@@ -80,38 +115,6 @@ class compass(gr.sync_block, Qwt.QwtPlot):
         self.this_layout.addWidget(self.label)
         self.this_layout.addLayout(self.compass_layout)
 
-        # Setup LCD
-        lcd_layout = Qt.QGridLayout()
-
-        self.lcd = QtGui.QLCDNumber(self)
-        sizePolicy = Qt.QSizePolicy(Qt.QSizePolicy.Preferred, Qt.QSizePolicy.Preferred)
-        sizePolicy.setHeightForWidth(True)
-        self.lcd.setSizePolicy(sizePolicy)
-        self.lcd.setLineWidth(0)
-
-        # Set sizing
-        self.lcd.setMinimumHeight(self.dial.minimumHeight()/2)
-        self.lcd.setMinimumWidth(self.dial.minimumWidth()/2)
-
-        self.lcd.raise_() # Bring to front
-        self.lcd.setDigitCount(3) # Max digits displayed
-        self.lcd.setSmallDecimalPoint(True)
-        self.lcd.display(123.4)
-        self.compass_layout.addLayout(lcd_layout,0,0)
-        lcd_layout.addWidget(self.lcd,1,1,1,1)
-
-        # Add spacers to center LCD
-        spacerTop = QtGui.QSpacerItem(1,300,Qt.QSizePolicy.Maximum,Qt.QSizePolicy.Expanding)
-        spacerSides = QtGui.QSpacerItem(220,1,Qt.QSizePolicy.Maximum,Qt.QSizePolicy.Expanding)
-        spacerBottom = QtGui.QSpacerItem(1,150,Qt.QSizePolicy.Maximum,Qt.QSizePolicy.Expanding)
-        # Top Spacers
-        lcd_layout.addItem(spacerTop,0,1,1,1)
-        # Side Spacers
-        lcd_layout.addItem(spacerSides,1,0,1,1)
-        lcd_layout.addItem(spacerSides,1,2,1,1)
-        # Bottom Spacers
-        lcd_layout.addItem(spacerBottom,2,1,1,1)
-
         self.label.raise_()
 
         # connect the plot callback signal
@@ -119,21 +122,19 @@ class compass(gr.sync_block, Qwt.QwtPlot):
                        QtCore.SIGNAL("updatePlot(int)"),
                        self.do_plot)
 
-    def change_angle(self,angle):
-        self.dial.setValue(float(angle))
-
     def trigger_update(self):
         self.emit(QtCore.SIGNAL("updatePlot(int)"), 0)
 
     def do_plot(self, a):
         # Update qt plots
-        self.change_angle(self.next_angle)
-        self.lcd.display(self.next_angle)
-        self.replot()
+        for i in range(len(self.dial_list)):
+            self.dial_list[i].setValue(self.next_angles[i])
+            self.replot()
 
     def work(self, input_items, output_items):
         # Average inputs
-        self.next_angle = numpy.mean(input_items[0])
+        for i in range(len(self.next_angles)):
+            self.next_angles[i] = numpy.mean(input_items[i])
 
         if (time.time() - self.last)>self.update_period:
             self.last = time.time()
