@@ -44,8 +44,9 @@ class qa_find_local_max (gr_unittest.TestCase):
 		# generate vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.dirname(__file__))	
-		data, expected_pks, expected_t_pks = oc.test001_findpeaks(self.num_max_vals, self.vector_len)
+		data, expected_pks, expected_t_pks = oc.test001_findpeaks(self.num_max_vals, self.vector_len, nout=3)
 		data = data.flatten().tolist()
+		expected_pks = expected_pks.flatten().tolist()
 
 		##################################################
 		# Blocks
@@ -80,8 +81,9 @@ class qa_find_local_max (gr_unittest.TestCase):
 		# generate vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.dirname(__file__))
-		data, expected_pks, expected_t_pks = oc.test002_findpeaks(self.num_max_vals, self.vector_len)
+		data, expected_pks, expected_t_pks = oc.test002_findpeaks(self.num_max_vals, self.vector_len, nout=3)
 		data = data.flatten().tolist()
+		expected_pks = expected_pks.flatten().tolist()
 
 		##################################################
 		# Blocks

@@ -51,11 +51,11 @@ class qa_autocorrelate (gr_unittest.TestCase):
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples'))		
 		print oc
-		[expected_S_x, data] = oc.doa_testbench_create('autocorrelate_test_input_gen', len_ss, overlap_size, num_inputs, FB)
+		expected_S_x, data = oc.doa_testbench_create('autocorrelate_test_input_gen', len_ss, overlap_size, num_inputs, FB, nout=2)
 		expected_S_x = tuple(expected_S_x)
 		expected_S_x = list(itertools.chain.from_iterable(expected_S_x))
 		# num of snapshots
-		n_ss = len(expected_S_x)/(num_inputs*num_inputs)
+		n_ss = len(expected_S_x)//(num_inputs*num_inputs)
 
 		##################################################
 		# Blocks & Connections
@@ -97,11 +97,11 @@ class qa_autocorrelate (gr_unittest.TestCase):
 		# Generate auto-correlation vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples'))		
-		[expected_S_x, data] = oc.doa_testbench_create('autocorrelate_test_input_gen', len_ss, overlap_size, num_inputs, FB)
+		expected_S_x, data = oc.doa_testbench_create('autocorrelate_test_input_gen', len_ss, overlap_size, num_inputs, FB, nout=2)
 		expected_S_x = tuple(expected_S_x)
 		expected_S_x = list(itertools.chain.from_iterable(expected_S_x))
 		# num of snapshots
-		n_ss = len(expected_S_x)/(num_inputs*num_inputs)
+		n_ss = len(expected_S_x)//(num_inputs*num_inputs)
 
 		##################################################
 		# Blocks & Connections
@@ -143,11 +143,11 @@ class qa_autocorrelate (gr_unittest.TestCase):
 		# Generate auto-correlation vector from octave
 		oc = oct2py.Oct2Py()
 		oc.addpath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples'))		
-		[expected_S_x, data] = oc.doa_testbench_create('autocorrelate_test_input_gen', len_ss, overlap_size, num_inputs, FB)
+		expected_S_x, data = oc.doa_testbench_create('autocorrelate_test_input_gen', len_ss, overlap_size, num_inputs, FB, nout=2)
 		expected_S_x = tuple(expected_S_x)
 		expected_S_x = list(itertools.chain.from_iterable(expected_S_x))
 		# num of snapshots
-		n_ss = len(expected_S_x)/(num_inputs*num_inputs)
+		n_ss = len(expected_S_x)//(num_inputs*num_inputs)
 
 		##################################################
 		# Blocks & Connections
