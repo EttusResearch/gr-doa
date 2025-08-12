@@ -17,10 +17,13 @@ class serial_connection(gr.sync_block):
     """
     docstring for block serial_connection
     """
-    def __init__(self, port="/dev/ttyUSB0", baudrate=115200, data_format="csv", debug=False, num_max=1):
+    def __init__(self, port="/dev/ttyACM0", baudrate=115200, debug=False, dimensions=1, enable_video=False):
+        # Create input signature with separate channels for each servo
+        in_sig = [numpy.float32] * dimensions  # dimensions separate float32 input channels
+        
         gr.sync_block.__init__(self,
             name="serial_connection",
-            in_sig=[(numpy.float32, num_max)],
+            in_sig=in_sig,
             out_sig=None)
 
         # Check file
@@ -30,66 +33,62 @@ class serial_connection(gr.sync_block):
             sys.stderr.write(f"Serial port configuration error: {e}\n")
             sys.exit(1)
 
-        self.data_format = data_format
         self.debug = debug
+        self.dimensions = dimensions  # Number of servos (1 dimension = 1 servo)
 
         if self.debug:
             print(f"Serial connection established on {port} at {baudrate} baud.")
-
-        
+            print(f"Configured for {dimensions} servo(s)")
 
     def work(self, input_items, output_items):
-        # Convert input data to the specified format for servo control
-        # Process all samples (each sample is a vector of num_max elements)
-        num_samples = len(input_items[0])
+        # input_items is now a list with one array per input channel
+        # input_items[0] = samples from channel 0 (servo A)
+        # input_items[1] = samples from channel 1 (servo B) if dimensions >= 2
+        # input_items[2] = samples from channel 2 (servo C) if dimensions >= 3
+        
+        num_samples = len(input_items[0])  # All channels have the same number of samples
         
         for sample_idx in range(num_samples):
-            # Transfer via CSV
-            if self.data_format == "csv":
-                try:
-                    # Get the vector for this sample (contains num_max values)
-                    vector_values = input_items[0][sample_idx]  # This is a numpy array of length num_max
-                    all_values = [float(val) for val in vector_values]
+            try:
+                # Map servo indices to letters: 0=A, 1=B, 2=C
+                servo_letters = ['A', 'B', 'C']
+                
+                # Process each input channel (servo)
+                for servo_idx in range(self.dimensions):
+                    if servo_idx >= len(servo_letters):
+                        break  # Skip if more than 3 servos
                     
-                    # Convert all values to servo angles
-                    servo_angles = [int(max(0.0, min(180.0, val))) for val in all_values]
+                    # Get the value from the corresponding input channel
+                    value = input_items[servo_idx][sample_idx]
                     
+                    # Convert to servo angle (0-180 degrees)
+                    servo_angle = int(max(0.0, min(180.0, float(value))))
+                        
+                    servo_letter = servo_letters[servo_idx]
+                        
+                    # Format: A_90, B_120, C_150
+                    data = f"{servo_letter}_{servo_angle}\n"
+                        
+                    # Send to serial port
+                    self.serial.write(data.encode('utf-8'))
+                        
                     if self.debug:
-                        print(f"Sending servo angles: {servo_angles}")
-                    
-                    # Map number of servos to letters: A=1, B=2, C=3 (max 3 servos)
-                    num_servo = len(servo_angles)
-                    servo_letter_map = {1: 'A', 2: 'B', 3: 'C'}
-                    
-                    if num_servo > 3:
-                        if self.debug:
-                            print(f"Warning: Too many servos ({num_servo}), limiting to 3")
-                        servo_angles = servo_angles[:3]  # Limit to first 3 servos
-                        num_servo = 3
-                    
-                    servo_letter = servo_letter_map.get(num_servo, 'A')  # Default to 'A' if invalid
-                    
-                    # Angles as integers
-                    angles_str = ','.join([str(angle) for angle in servo_angles])
-                    # CSV format: servo letter followed by angles in degrees
-                    csv_data = f"{servo_letter},{angles_str}\n"
-                    # Send the CSV data to the serial port
-                    self.serial.write(csv_data.encode('utf-8'))
-                    
-                except (ValueError, TypeError) as e:
-                    if self.debug:
-                        print(f"Error converting values at sample {sample_idx}: {e}")
-                    continue
-                    
-            else:
-                sys.stderr.write(f"Unsupported data format: {self.data_format}\n")
-                sys.exit(1)
+                        print(f"Sent: {data.strip()}")
+                        
+                    # Small delay between servo commands to avoid overwhelming micro:bit
+                    time.sleep(0.01)
+                        
+            except (ValueError, TypeError) as e:
+                if self.debug:
+                    print(f"Error converting values at sample {sample_idx}: {e}")
+                continue
 
         return num_samples
     
     def __del__(self):
         """Clean up serial connection when block is destroyed"""
+        # Close serial connection
         if hasattr(self, 'serial') and self.serial.is_open:
             self.serial.close()
-            if self.debug:
+            if hasattr(self, 'debug') and self.debug:
                 print("Serial connection closed.")

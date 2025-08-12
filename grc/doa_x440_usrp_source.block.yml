@@ -5,7 +5,7 @@ flags: throttle
 
 templates:
   imports: from gnuradio import doa
-  make: doa.x440_usrp_source(samp_rate=${samp_rate}, center_freq=${center_freq}, gain=${gain}, sources=${sources}, addresses=${addresses}, device_args=${device_args})
+  make: doa.x440_usrp_source(samp_rate=${samp_rate}, center_freq=${center_freq}, sources=${sources}, addresses=${addresses}, device_args=${device_args})
 
   callbacks:
     - set_samp_rate(${samp_rate})
@@ -16,7 +16,7 @@ parameters:
 - id: samp_rate
   label: Samp Rate
   dtype: float
-  default: 1000000
+  default: 200e3
 - id: center_freq
   label: Center Freq (Hz)
   dtype: float
@@ -51,7 +51,6 @@ documentation: |-
   Args:
   samp_rate: Sample rate
   center_freq: Center frequency
-  gain: Gain to be applied
   sources: Number of input streams 
   addresses: Device address
   device_args: Additional device arguments

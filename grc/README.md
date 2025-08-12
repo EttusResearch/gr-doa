@@ -4,7 +4,21 @@ This document provides comprehensive documentation for all blocks in the GNU Rad
 
 ## Table of Contents
 - [Source Blocks](#source-blocks)
-- [Calibration Blocks](#calibration-blocks)
+- [Calibration Block- **Baud Rate** (`baudrate`): Communication speed in bits per second
+  - Type: Integer
+  - Default: 115200
+  - Options: 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
+  
+- **Num of Targets** (`num_max`): Expected number of targets
+  - Type: Integer
+  - Default: 1
+  
+- **Debug Output** (`debug`): Enable console debugging
+  - Type: Boolean
+  - Default: False
+  - Options: True (enable debug), False (silent operation)
+
+**Note:** The block now uses a fixed underscore format (e.g., `A_90`, `B_120`, `C_150`) for servo communication, which is compatible with standard microcontroller servo libraries.on-blocks)
 - [DOA Algorithm Blocks](#doa-algorithm-blocks)
 - [Utility Blocks](#utility-blocks)
 - [Output Blocks](#output-blocks)
@@ -184,9 +198,9 @@ Converts DOA results into serial commands that microcontrollers can use to point
   
 - **Baud Rate** (`baudrate`): Communication speed with the external device. Must match the receiver's settings.
   
-- **Data Format** (`data_format`): How to format the angle data for transmission.
-  
 - **Num of Targets** (`num_max`): How many target directions to send simultaneously.
+  
+- **Debug Output** (`debug`): Enable console debugging to monitor transmitted data.
   
 - **Debug Output** (`debug`): Shows transmitted data on screen for troubleshooting.
 
