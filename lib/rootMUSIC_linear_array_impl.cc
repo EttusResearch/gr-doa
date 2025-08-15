@@ -110,20 +110,28 @@ namespace gr {
 
                 // of the remaining, find the roots that are closest to the unit circle
                 fvec aoa_vec(d_num_targets);
-                for (int ii = 0; ii < d_num_targets; ii++) 
-                {
-                    min_dist_index = index_min(dist_inside);
+                
+                // Check if we have sufficient roots inside the unit circle
+                if (dist_inside.n_elem < d_num_targets) {
+                    // Not enough roots found inside unit circle, fill with zeros
+                    aoa_vec.zeros();
+                } else {
+                    for (int ii = 0; ii < d_num_targets; ii++) 
+                    {
+                        min_dist_index = index_min(dist_inside);
 
-                    // locate the root and convert it to correct form
-                    aoa_vec(ii) = 180.0*acos(arg(eigval_roots_inside[min_dist_index])/(2*datum::pi*d_norm_spacing))/datum::pi;
+                        // locate the root and convert it to correct form
+                        aoa_vec(ii) = 180.0*acos(arg(eigval_roots_inside[min_dist_index])/(2*datum::pi*d_norm_spacing))/datum::pi;
 
-                    // discard this minimum to find the next minimum
-                    dist_inside(min_dist_index) = datum::inf;
-                    eigval_roots_inside(min_dist_index) = gr_complex(datum::inf, 0.0);
+                        // discard this minimum to find the next minimum
+                        dist_inside(min_dist_index) = datum::inf;
+                        eigval_roots_inside(min_dist_index) = gr_complex(datum::inf, 0.0);
+                    }
+                    
+                    // sort the AoA vector only if we have valid values
+                    // useful for display purposes
+                    aoa_vec = sort(aoa_vec);
                 }
-                // sort the AoA vector
-                // useful for display purposes
-                aoa_vec = sort(aoa_vec);
                 memcpy((char *)&(out[item*d_num_targets]), (const char *)aoa_vec.colptr(0), d_num_targets*sizeof(float));
             }
 
