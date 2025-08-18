@@ -4,7 +4,7 @@ category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
-  make: doa.serial_connection(${port}, ${baudrate}, ${debug}, ${dimensions}, ${enable_video})
+  make: doa.serial_connection(${port}, ${baudrate}, ${debug}, ${dimensions}, ${hysteresis})
 
 parameters:
   - id: port
@@ -31,12 +31,11 @@ parameters:
     dtype: int
     default: 1
     hide: none
-  - id: enable_video
-    label: Enable Video Overlay
-    dtype: bool
-    default: false
-    options: [true, false]
-    option_labels: ["Yes", "No"]
+  - id: hysteresis
+    label: Hysteresis (degrees)
+    dtype: float
+    default: 3.0
+    hide: none
   
 inputs:
 - label: in
@@ -56,6 +55,12 @@ documentation: |-
     port: Serial port device path (e.g., /dev/ttyUSB0 on Linux, COM1 on Windows)
     baudrate: Communication speed in bits per second (e.g., 115200)
     debug: Enable debug output to console for troubleshooting
+    dimensions: Number of servo motors to control (1-3)
+    hysteresis: Minimum angle change (in degrees) required before sending new servo command
+  
+  The hysteresis feature prevents servo jitter by only sending new commands when the
+  angle change exceeds the specified threshold. This reduces unnecessary serial traffic
+  and prevents servo oscillation around a target position.
   
   The block accepts floating-point input data and transmits it according to the 
   specified format and serial port configuration.
