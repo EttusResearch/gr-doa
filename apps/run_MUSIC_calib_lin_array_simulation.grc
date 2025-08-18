@@ -513,6 +513,24 @@ blocks:
     coordinate: [928, 680.0]
     rotation: 180
     state: enabled
+- name: doa_serial_connection_0
+  id: doa_serial_connection
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '115200'
+    comment: ''
+    debug: 'False'
+    dimensions: '1'
+    enable_video: 'True'
+    port: /dev/ttyACM0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 792.0]
+    rotation: 0
+    state: enabled
 - name: import_0
   id: import
   parameters:
@@ -690,6 +708,7 @@ connections:
 - [blocks_multiply_matrix_xx_0, '3', doa_antenna_correction_0, '3']
 - [blocks_throttle2_0, '0', blocks_multiply_matrix_xx_0, '1']
 - [blocks_vector_to_streams_0_0, '0', qtgui_number_sink_1, '0']
+- [blocks_vector_to_streams_0_0, '1', doa_serial_connection_0, '0']
 - [blocks_vector_to_streams_0_0, '1', qtgui_number_sink_1, '1']
 - [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']
 - [doa_MUSIC_lin_array_0, '0', qtgui_vector_sink_f_0, '0']
@@ -703,4 +722,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-979-g1055cd27
+  grc_version: v3.11.0.0git-988-gd3090973

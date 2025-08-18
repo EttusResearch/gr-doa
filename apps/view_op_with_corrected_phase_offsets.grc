@@ -46,7 +46,7 @@ blocks:
     field18: ''
     field19: ''
     field2: CenterFreq
-    field3: Gain
+    field3: ''
     field4: NumArrayElements
     field5: RxAddr
     field6: DirectoryConfigFiles
@@ -65,10 +65,10 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '2495000000'
+    value2: 2.495e9
     value3: '60'
     value4: '4'
-    value5: '"addr=10.94.17.19"'
+    value5: '"addr=10.94.17.48"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13
@@ -89,7 +89,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 24.0]
+    coordinate: [240, 16.0]
     rotation: 0
     state: enabled
 - name: doa_phase_correct_hier_0
@@ -106,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [576, 264.0]
+    coordinate: [488, 136.0]
     rotation: 0
     state: enabled
 - name: doa_x440_usrp_source_0
@@ -117,8 +117,7 @@ blocks:
     alias: ''
     center_freq: input_variables.CenterFreq
     comment: ''
-    device_args: master_clock_rate=200e6
-    gain: input_variables.Gain
+    device_args: master_clock_rate=250e6
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: input_variables.SampleRate
@@ -127,7 +126,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 264.0]
+    coordinate: [200, 136.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -140,7 +139,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 48.0]
+    coordinate: [168, 16.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -237,7 +236,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 264.0]
+    coordinate: [776, 136.0]
     rotation: 0
     state: enabled
 
@@ -253,4 +252,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-g6cadd695
+  grc_version: v3.11.0.0git-988-gd3090973

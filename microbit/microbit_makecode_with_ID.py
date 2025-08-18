@@ -1,4 +1,7 @@
 # You have to add the Servo library for the PCA9685 Servo Driver to run this program.
+# You find the library at https://github.com/waveshare/pxt-Servo.
+# This program has to be run in the makecode environment.
+
 angle = ""
 serial.set_baud_rate(BaudRate.BAUD_RATE115200)
 Servo.servo(0, 90)

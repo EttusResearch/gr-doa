@@ -41,5 +41,5 @@ gr-doa is a demonstration on the phase synchronization capability of Ettus Resea
 
 ## Documentation
 
-    For a concise description of the steps involved: https://github.com/Jreitmei/gr-doa/wiki
+    For a concise description of the steps involved: https://github.com/EttusResearch/gr-doa/wiki
     For detailed description: gr-doa/docs/whitepaper/doa_whitepaper.pdf

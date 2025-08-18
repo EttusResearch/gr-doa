@@ -46,7 +46,7 @@ blocks:
     field18: ''
     field19: ''
     field2: CenterFreq
-    field3: Gain
+    field3: ''
     field4: NumArrayElements
     field5: RxAddr
     field6: DirectoryConfigFiles
@@ -65,10 +65,10 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '2495000000'
+    value2: 2.495e9
     value3: '0'
     value4: '4'
-    value5: '"addr=10.94.17.19"'
+    value5: '"addr=10.94.17.48"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13
@@ -133,8 +133,7 @@ blocks:
     alias: ''
     center_freq: input_variables.CenterFreq
     comment: ''
-    device_args: master_clock_rate=200e6
-    gain: input_variables.Gain
+    device_args: master_clock_rate=250e6
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: input_variables.SampleRate
@@ -159,195 +158,6 @@ blocks:
     coordinate: [312, 24.0]
     rotation: 0
     state: enabled
-- name: qtgui_number_sink_0
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'True'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
-    label1: ''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '1'
-    min: '-1'
-    name: '""'
-    nconnections: '1'
-    type: float
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1168, 32.0]
-    rotation: 0
-    state: disabled
-- name: qtgui_number_sink_1
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'True'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
-    label1: ''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '1'
-    min: '-1'
-    name: '""'
-    nconnections: '1'
-    type: float
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1192, 128.0]
-    rotation: 0
-    state: disabled
-- name: qtgui_number_sink_2
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'True'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
-    label1: ''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '1'
-    min: '-1'
-    name: '""'
-    nconnections: '1'
-    type: float
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1176, 224.0]
-    rotation: 0
-    state: disabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -448,11 +258,8 @@ blocks:
 
 connections:
 - [doa_phase_offset_est_0, '0', doa_findmax_and_save_0, '0']
-- [doa_phase_offset_est_0, '0', qtgui_number_sink_0, '0']
 - [doa_phase_offset_est_0, '1', doa_findmax_and_save_0, '1']
-- [doa_phase_offset_est_0, '1', qtgui_number_sink_1, '0']
 - [doa_phase_offset_est_0, '2', doa_findmax_and_save_0, '2']
-- [doa_phase_offset_est_0, '2', qtgui_number_sink_2, '0']
 - [doa_x440_usrp_source_0, '0', doa_phase_offset_est_0, '0']
 - [doa_x440_usrp_source_0, '0', qtgui_time_sink_x_0, '0']
 - [doa_x440_usrp_source_0, '1', doa_phase_offset_est_0, '1']
@@ -464,4 +271,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-g6cadd695
+  grc_version: v3.11.0.0git-988-gd3090973

@@ -37,7 +37,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 208.0]
+    coordinate: [488, 128.0]
     rotation: 0
     state: enabled
 - name: input_variables
@@ -76,13 +76,13 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: 446e6
+    value2: 446.03125e6
     value3: '4'
     value4: '60'
     value5: '"addr=10.94.17.19"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_446.cfg"'
-    value8: '"measure_corrected_phase_offsets_446.cfg"'
+    value7: '"measure_relative_phase_offsets_446MHz.cfg"'
+    value8: '"measure_corrected_phase_offsets_446MHz.cfg"'
     value9: 2**13
   states:
     bus_sink: false
@@ -174,7 +174,6 @@ blocks:
     center_freq: input_variables.CenterFreq
     comment: ''
     device_args: master_clock_rate=200e6
-    gain: input_variables.Gain
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: input_variables.SampleRate
@@ -215,4 +214,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-g6cadd695
+  grc_version: v3.11.0.0git-988-gd3090973

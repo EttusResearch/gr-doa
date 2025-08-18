@@ -29,30 +29,6 @@ options:
     state: enabled
 
 blocks:
-- name: amv0
-  id: variable
-  parameters:
-    comment: ''
-    value: numpy.exp(-1j*ant_locs*2*numpy.pi*numpy.cos(theta0))
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [456, 48.0]
-    rotation: 0
-    state: enabled
-- name: amv1
-  id: variable
-  parameters:
-    comment: ''
-    value: numpy.exp(-1j*ant_locs*2*numpy.pi*numpy.cos(theta1))
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [456, 120.0]
-    rotation: 0
-    state: enabled
 - name: ant_locs
   id: variable
   parameters:
@@ -65,19 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 48.0]
-    rotation: 0
-    state: enabled
-- name: array_manifold_matrix
-  id: variable
-  parameters:
-    comment: ''
-    value: numpy.array([amv0, amv1]).transpose()
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [456, 192.0]
+    coordinate: [320, 8.0]
     rotation: 0
     state: enabled
 - name: input_variables
@@ -98,17 +62,17 @@ blocks:
     field19: ''
     field2: CenterFreq
     field3: RxAddr
-    field4: Gain
+    field4: ''
     field5: NumArrayElements
     field6: NormSpacing
     field7: SnapshotSize
     field8: OverlapSize
     field9: NumTargets
     value0: 5e3
-    value1: 200e3
+    value1: 1e6
     value10: 2**10
     value11: '"/tmp"'
-    value12: '"measure_relative_phase_offsets_446.cfg"'
+    value12: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value13: '0'
     value14: '0'
     value15: '0'
@@ -116,8 +80,8 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '2495000000'
-    value3: '"addr=10.94.17.19"'
+    value2: 2.495e9
+    value3: '"addr=10.94.17.48"'
     value4: '0'
     value5: '4'
     value6: '0.5'
@@ -131,72 +95,38 @@ blocks:
     coordinate: [8, 136.0]
     rotation: 0
     state: enabled
-- name: theta0
+- name: rel_phase_offsets_file_name
   id: variable
   parameters:
     comment: ''
-    value: numpy.pi*theta0_deg/180
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.RelativePhaseOffsets)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 192.0]
+    coordinate: [152, 8.0]
     rotation: 0
     state: enabled
-- name: theta0_deg
-  id: variable_qtgui_range
+- name: blocks_moving_average_xx_0
+  id: blocks_moving_average_xx
   parameters:
+    affinity: ''
+    alias: ''
     comment: ''
-    gui_hint: ''
-    label: AoA
-    min_len: '200'
-    orient: QtCore.Qt.Horizontal
-    rangeType: float
-    start: '0'
-    step: '1'
-    stop: '180'
-    value: '30'
-    widget: counter_slider
+    length: '5'
+    max_iter: '1000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: 1/5
+    type: float
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 48.0]
+    coordinate: [888, 624.0]
     rotation: 0
-    state: enabled
-- name: theta1
-  id: variable
-  parameters:
-    comment: ''
-    value: numpy.pi*theta1_deg/180
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [320, 192.0]
-    rotation: 0
-    state: enabled
-- name: theta1_deg
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: AoA
-    min_len: '200'
-    orient: QtCore.Qt.Horizontal
-    rangeType: float
-    start: '0'
-    step: '1'
-    stop: '180'
-    value: '123'
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [312, 48.0]
-    rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -295,7 +225,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    config_filename: /tmp/measure_relative_phase_offsets_446.cfg
+    config_filename: rel_phase_offsets_file_name
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: input_variables.NumArrayElements
@@ -306,6 +236,24 @@ blocks:
     coordinate: [448, 336.0]
     rotation: 0
     state: enabled
+- name: doa_serial_connection_0
+  id: doa_serial_connection
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '115200'
+    comment: ''
+    debug: 'False'
+    dimensions: '1'
+    enable_video: 'False'
+    port: /dev/ttyACM0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 616.0]
+    rotation: 0
+    state: disabled
 - name: doa_x440_usrp_source_0
   id: doa_x440_usrp_source
   parameters:
@@ -314,8 +262,7 @@ blocks:
     alias: ''
     center_freq: input_variables.CenterFreq
     comment: ''
-    device_args: master_clock_rate=200e6
-    gain: input_variables.Gain
+    device_args: master_clock_rate=250e6
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: input_variables.SampleRate
@@ -325,6 +272,56 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [200, 336.0]
+    rotation: 0
+    state: enabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\nfrom datetime import\
+      \ datetime\nimport os\n\nclass blk(gr.sync_block):\n    \"\"\"Triggered Float\
+      \ Recorder with Sample Skipping\"\"\"\n\n    def __init__(self, skip_interval=20):\n\
+      \        gr.sync_block.__init__(\n            self,\n            name='Triggered\
+      \ Float Recorder with Skipping',\n            in_sig=[np.float32],\n       \
+      \     out_sig=[]\n        )\n\n        self.angle = 0\n        self.folder =\
+      \ \"testdata\"\n        os.makedirs(self.folder, exist_ok=True)\n\n        self.recording\
+      \ = False\n        self.skip_interval = skip_interval\n        self.samples_to_record\
+      \ = 10\n        self.skip_counter = 0\n        self.recorded_samples = []\n\n\
+      \        # Message-Port f\xFCr Trigger\n        self.message_port_register_in(gr.pmt.intern(\"\
+      in\"))\n        self.set_msg_handler(gr.pmt.intern(\"in\"), self.handle_trigger)\n\
+      \n    def handle_trigger(self, msg):\n        if not self.recording and self.angle\
+      \ <= 180:\n            print(f\"[Trigger] Aufnahme gestartet bei Winkel {self.angle}\xB0\
+      \")\n            self.recording = True\n            self.recorded_samples =\
+      \ []\n            self.skip_counter = 0\n\n    def work(self, input_items, output_items):\n\
+      \        in0 = input_items[0]\n\n        for sample in in0:\n            if\
+      \ self.recording:\n                if self.skip_counter == 0:\n            \
+      \        self.recorded_samples.append(sample)\n                    self.skip_counter\
+      \ = self.skip_interval\n                else:\n                    self.skip_counter\
+      \ -= 1\n\n                if len(self.recorded_samples) >= self.samples_to_record:\n\
+      \                    # Speichern\n                    timestamp = datetime.now().strftime(\"\
+      %Y%m%d_%H%M%S\")\n                    filename = f\"aufnahme_{self.angle}deg_{timestamp}.dat\"\
+      \n                    filepath = os.path.join(self.folder, filename)\n\n   \
+      \                 with open(filepath, \"w\") as f:\n                       \
+      \ for s in self.recorded_samples:\n                            f.write(f\"{s}\\\
+      n\")\n\n                    print(f\"[Recorder] Datei gespeichert: {filepath}\"\
+      )\n\n                    # Aufnahme zur\xFCcksetzen\n                    self.recording\
+      \ = False\n                    self.angle += 10\n\n                    if self.angle\
+      \ > 180:\n                        print(\"[Recorder] Maximale Winkelgrenze erreicht.\
+      \ Aufnahme beendet.\")\n                    break  # Aufnahme abgeschlossen\n\
+      \n        return len(in0)\n\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    skip_interval: '10'
+  states:
+    _io_cache: ('Triggered Float Recorder with Skipping', 'blk', [('skip_interval',
+      '20')], [('0', 'float', 1), ('in', 'message', 1)], [], 'Triggered Float Recorder
+      with Sample Skipping', ['skip_interval'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 776.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -337,7 +334,20 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [848, 48.0]
+    coordinate: [488, 8.0]
+    rotation: 0
+    state: enabled
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import os
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 8.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1
@@ -477,13 +487,34 @@ blocks:
     coordinate: [896, 160.0]
     rotation: 180
     state: enabled
+- name: variable_qtgui_msg_push_button_0
+  id: variable_qtgui_msg_push_button
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Trigger_values
+    msgName: pressed
+    relBackgroundColor: default
+    relFontColor: default
+    type: int
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 864.0]
+    rotation: 0
+    state: enabled
 
 connections:
+- [blocks_moving_average_xx_0, '0', doa_serial_connection_0, '0']
+- [blocks_vector_to_streams_0, '0', epy_block_0, '0']
 - [blocks_vector_to_streams_0, '0', qtgui_number_sink_1, '0']
 - [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']
 - [doa_MUSIC_lin_array_0, '0', qtgui_vector_sink_f_0, '0']
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
 - [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
+- [doa_find_local_max_0, '1', blocks_moving_average_xx_0, '0']
 - [doa_find_local_max_0, '1', blocks_vector_to_streams_0, '0']
 - [doa_phase_correct_hier_0, '0', doa_autocorrelate_0, '0']
 - [doa_phase_correct_hier_0, '1', doa_autocorrelate_0, '1']
@@ -493,7 +524,8 @@ connections:
 - [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
 - [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']
 - [doa_x440_usrp_source_0, '3', doa_phase_correct_hier_0, '3']
+- [variable_qtgui_msg_push_button_0, pressed, epy_block_0, in]
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-g6cadd695
+  grc_version: v3.11.0.0git-988-gd3090973
