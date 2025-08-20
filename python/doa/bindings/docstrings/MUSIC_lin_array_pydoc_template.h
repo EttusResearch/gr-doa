@@ -15,13 +15,10 @@
  */
 
 
-
- static const char *__doc_gr_doa_MUSIC_lin_array = R"doc()doc";
-
-
- static const char *__doc_gr_doa_MUSIC_lin_array_MUSIC_lin_array_0 = R"doc()doc";
+static const char* __doc_gr_doa_MUSIC_lin_array = R"doc()doc";
 
 
- static const char *__doc_gr_doa_MUSIC_lin_array_make = R"doc()doc";
+static const char* __doc_gr_doa_MUSIC_lin_array_MUSIC_lin_array_0 = R"doc()doc";
 
-  
+
+static const char* __doc_gr_doa_MUSIC_lin_array_make = R"doc()doc";

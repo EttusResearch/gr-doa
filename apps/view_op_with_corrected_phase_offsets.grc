@@ -34,7 +34,7 @@ blocks:
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
     field0: SampleRate
-    field1: ToneFreq
+    field1: ''
     field10: ''
     field11: ''
     field12: ''
@@ -68,7 +68,7 @@ blocks:
     value2: 2.495e9
     value3: '60'
     value4: '4'
-    value5: '"addr=10.94.17.48"'
+    value5: '"addr=10.94.17.50"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13

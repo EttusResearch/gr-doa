@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(find_local_max.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(7d5f2ca60963409656402edf9048229f)                     */
+/* BINDTOOL_HEADER_FILE_HASH(b940c6b420d2a9a81131a23d4cd50f30)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -30,30 +30,22 @@ namespace py = pybind11;
 void bind_find_local_max(py::module& m)
 {
 
-    using find_local_max    = gr::doa::find_local_max;
+    using find_local_max = ::gr::doa::find_local_max;
 
 
-    py::class_<find_local_max, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<find_local_max>>(m, "find_local_max", D(find_local_max))
+    py::class_<find_local_max,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<find_local_max>>(m, "find_local_max", D(find_local_max))
 
         .def(py::init(&find_local_max::make),
-           D(find_local_max,make)
-        )
-        
-
+             py::arg("num_max_vals"),
+             py::arg("vector_len"),
+             py::arg("x_min"),
+             py::arg("x_max"),
+             D(find_local_max, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

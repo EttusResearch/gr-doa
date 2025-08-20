@@ -89,7 +89,6 @@ blocks:
     center_freq: input_variables.CenterFreq
     comment: ''
     device_args: master_clock_rate=200e6
-    gain: input_variables.Gain
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: input_variables.SampleRate
@@ -785,4 +784,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-g6cadd695
+  grc_version: v3.11.0.0git-988-gd3090973

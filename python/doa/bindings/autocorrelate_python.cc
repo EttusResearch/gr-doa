@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(autocorrelate.h)                                           */
-/* BINDTOOL_HEADER_FILE_HASH(d2f21f0e7992e7f0b5c55b8b5f97f93a)                    */
+/* BINDTOOL_HEADER_FILE(autocorrelate.h)                                        */
+/* BINDTOOL_HEADER_FILE_HASH(09b898181f6dd981861b96e1efbac3fb)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -29,15 +29,20 @@ namespace py = pybind11;
 
 void bind_autocorrelate(py::module& m)
 {
-    using autocorrelate = gr::doa::autocorrelate;
 
-    py::class_<autocorrelate, gr::block, gr::basic_block,
-               std::shared_ptr<autocorrelate>>(m, "autocorrelate", D(autocorrelate))
+    using autocorrelate = ::gr::doa::autocorrelate;
+
+
+    py::class_<autocorrelate, gr::block, gr::basic_block, std::shared_ptr<autocorrelate>>(
+        m, "autocorrelate", D(autocorrelate))
 
         .def(py::init(&autocorrelate::make),
-             D(autocorrelate, make),
              py::arg("inputs"),
              py::arg("snapshot_size"),
              py::arg("overlap_size"),
-             py::arg("avg_method"));
+             py::arg("avg_method"),
+             D(autocorrelate, make))
+
+
+        ;
 }

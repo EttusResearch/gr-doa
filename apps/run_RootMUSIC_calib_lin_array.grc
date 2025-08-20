@@ -45,7 +45,7 @@ blocks:
   id: variable_struct
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
-    field0: ToneFreq
+    field0: ''
     field1: SampleRate
     field10: ''
     field11: DirectoryConfigFiles

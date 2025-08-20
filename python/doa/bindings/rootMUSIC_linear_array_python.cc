@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(rootMUSIC_linear_array.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(97d1c203002aaf8de94ddd01b36dbfcf)                     */
+/* BINDTOOL_HEADER_FILE(rootMUSIC_linear_array.h) */
+/* BINDTOOL_HEADER_FILE_HASH(1324e8c381bbebbfc403a839604afa1a)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -30,30 +30,22 @@ namespace py = pybind11;
 void bind_rootMUSIC_linear_array(py::module& m)
 {
 
-    using rootMUSIC_linear_array    = gr::doa::rootMUSIC_linear_array;
+    using rootMUSIC_linear_array = ::gr::doa::rootMUSIC_linear_array;
 
 
-    py::class_<rootMUSIC_linear_array, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<rootMUSIC_linear_array>>(m, "rootMUSIC_linear_array", D(rootMUSIC_linear_array))
+    py::class_<rootMUSIC_linear_array,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<rootMUSIC_linear_array>>(
+        m, "rootMUSIC_linear_array", D(rootMUSIC_linear_array))
 
         .def(py::init(&rootMUSIC_linear_array::make),
-           D(rootMUSIC_linear_array,make)
-        )
-        
-
+             py::arg("norm_spacing"),
+             py::arg("num_targets"),
+             py::arg("num_ant_ele"),
+             D(rootMUSIC_linear_array, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

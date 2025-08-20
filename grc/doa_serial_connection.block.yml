@@ -4,13 +4,13 @@ category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
-  make: doa.serial_connection(${port}, ${baudrate}, ${debug}, ${dimensions}, ${hysteresis})
+  make: doa.serial_connection(${port}, ${baudrate}, ${debug}, ${dimensions}, ${low_hysteresis}, ${high_hysteresis}, ${mirror})
 
 parameters:
   - id: port
     label: Serial Port
     dtype: string
-    default: "/dev/ttyUSB0"
+    default: "/dev/ttyACM0"
     hide: none
   - id: baudrate
     label: Baud Rate
@@ -31,12 +31,24 @@ parameters:
     dtype: int
     default: 1
     hide: none
-  - id: hysteresis
-    label: Hysteresis (degrees)
+  - id: low_hysteresis
+    label: Low Hysteresis (degrees)
     dtype: float
     default: 3.0
     hide: none
-  
+  - id: high_hysteresis
+    label: High Hysteresis (degrees)
+    dtype: float
+    default: 15.0
+    hide: none
+  - id: mirror
+    label: Mirror Input
+    dtype: bool
+    default: false
+    options: [true, false]
+    option_labels: ["Yes", "No"]
+    hide: none
+
 inputs:
 - label: in
   domain: stream
@@ -57,10 +69,15 @@ documentation: |-
     debug: Enable debug output to console for troubleshooting
     dimensions: Number of servo motors to control (1-3)
     hysteresis: Minimum angle change (in degrees) required before sending new servo command
+    mirror: Mirror input angles (180° - input angle). When enabled, 45° becomes 135°, 180° becomes 0°, etc.
   
   The hysteresis feature prevents servo jitter by only sending new commands when the
   angle change exceeds the specified threshold. This reduces unnecessary serial traffic
   and prevents servo oscillation around a target position.
+  
+  The mirror feature allows reversing the servo direction by inverting input angles.
+  This is useful when the physical servo mounting or mechanical arrangement requires
+  opposite direction movement.
   
   The block accepts floating-point input data and transmits it according to the 
   specified format and serial port configuration.

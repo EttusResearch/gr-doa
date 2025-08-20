@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(MUSIC_lin_array.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(0d0ad7b709385d8621685350e804d0c1)                     */
+/* BINDTOOL_HEADER_FILE_HASH(b64108e38d337651aecb79aff2ae3532)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -25,35 +25,27 @@ namespace py = pybind11;
 
 #include <gnuradio/doa/MUSIC_lin_array.h>
 // pydoc.h is automatically generated in the build directory
-#include "MUSIC_lin_array_pydoc.h"
+#include <MUSIC_lin_array_pydoc.h>
 
 void bind_MUSIC_lin_array(py::module& m)
 {
 
-    using MUSIC_lin_array    = gr::doa::MUSIC_lin_array;
+    using MUSIC_lin_array = ::gr::doa::MUSIC_lin_array;
 
 
-    py::class_<MUSIC_lin_array, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<MUSIC_lin_array>>(m, "MUSIC_lin_array", D(MUSIC_lin_array))
+    py::class_<MUSIC_lin_array,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<MUSIC_lin_array>>(m, "MUSIC_lin_array", D(MUSIC_lin_array))
 
         .def(py::init(&MUSIC_lin_array::make),
-           D(MUSIC_lin_array,make)
-        )
-        
-
+             py::arg("norm_spacing"),
+             py::arg("num_targets"),
+             py::arg("inputs"),
+             py::arg("pspectrum_len"),
+             D(MUSIC_lin_array, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

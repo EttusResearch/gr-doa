@@ -15,13 +15,10 @@
  */
 
 
-
- static const char *__doc_gr_doa_find_local_max = R"doc()doc";
-
-
- static const char *__doc_gr_doa_find_local_max_find_local_max_0 = R"doc()doc";
+static const char* __doc_gr_doa_find_local_max = R"doc()doc";
 
 
- static const char *__doc_gr_doa_find_local_max_make = R"doc()doc";
+static const char* __doc_gr_doa_find_local_max_find_local_max_0 = R"doc()doc";
 
-  
+
+static const char* __doc_gr_doa_find_local_max_make = R"doc()doc";

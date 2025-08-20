@@ -21,8 +21,8 @@ class blk(gr.sync_block):
         self.recording = False
         self.skip_interval = skip_interval
         self.samples_to_record = 10
-        self.skip_counter = 0
         self.recorded_samples = []
+        self.sample_counter = 0
 
         # Message-Port für Trigger
         self.message_port_register_in(gr.pmt.intern("in"))
@@ -33,18 +33,18 @@ class blk(gr.sync_block):
             print(f"[Trigger] Recording started at angle {self.angle}°")
             self.recording = True
             self.recorded_samples = []
-            self.skip_counter = 0
+            self.sample_counter = 0
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
 
         for sample in in0:
             if self.recording:
-                if self.skip_counter == 0:
+                # Only record every skip_interval-th sample using modulo
+                if self.sample_counter % self.skip_interval == 0:
                     self.recorded_samples.append(sample)
-                    self.skip_counter = self.skip_interval
-                else:
-                    self.skip_counter -= 1
+
+                self.sample_counter += 1
 
                 if len(self.recorded_samples) >= self.samples_to_record:
                     # Save

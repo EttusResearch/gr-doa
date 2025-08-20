@@ -33,7 +33,7 @@ blocks:
   id: variable_struct
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
-    field0: ToneFreq
+    field0: ''
     field1: SampleRate
     field10: DirectoryConfigFiles
     field11: RelativePhaseOffsets
@@ -155,7 +155,7 @@ blocks:
     comment: ''
     debug: 'False'
     dimensions: '1'
-    enable_video: 'False'
+    hysteresis: '3.0'
     port: /dev/ttyUSB0
   states:
     bus_sink: false

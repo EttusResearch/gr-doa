@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(antenna_correction.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(e792b1930379c988444185e77ccd4c92)                     */
+/* BINDTOOL_HEADER_FILE_HASH(5b6abcba42a14ce0f217d9e9edf2a15f)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -25,35 +25,26 @@ namespace py = pybind11;
 
 #include <gnuradio/doa/antenna_correction.h>
 // pydoc.h is automatically generated in the build directory
-#include "antenna_correction_pydoc.h"
+#include <antenna_correction_pydoc.h>
 
 void bind_antenna_correction(py::module& m)
 {
 
-    using antenna_correction    = gr::doa::antenna_correction;
+    using antenna_correction = ::gr::doa::antenna_correction;
 
 
-    py::class_<antenna_correction, gr::sync_block, gr::block, gr::basic_block,
-        std::shared_ptr<antenna_correction>>(m, "antenna_correction", D(antenna_correction))
+    py::class_<antenna_correction,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<antenna_correction>>(
+        m, "antenna_correction", D(antenna_correction))
 
         .def(py::init(&antenna_correction::make),
-           D(antenna_correction,make)
-        )
-        
-
+             py::arg("num_ant_ele"),
+             py::arg("config_filename"),
+             D(antenna_correction, make))
 
 
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-

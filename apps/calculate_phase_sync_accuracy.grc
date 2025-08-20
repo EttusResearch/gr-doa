@@ -45,7 +45,7 @@ blocks:
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
     field0: SampleRate
-    field1: ToneFreq
+    field1: ''
     field10: Samples2FindMax
     field11: ''
     field12: ''
@@ -58,7 +58,7 @@ blocks:
     field19: ''
     field2: CenterFreq
     field3: NumArrayElements
-    field4: Gain
+    field4: ''
     field5: RxAddr
     field6: DirectoryConfigFiles
     field7: RelativePhaseOffsets
@@ -76,13 +76,13 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: 446.03125e6
+    value2: 2.495e9
     value3: '4'
     value4: '60'
-    value5: '"addr=10.94.17.19"'
+    value5: '"addr=10.94.17.50"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_446MHz.cfg"'
-    value8: '"measure_corrected_phase_offsets_446MHz.cfg"'
+    value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
+    value8: '"measure_corrected_phase_offsets_2495MHz.cfg"'
     value9: 2**13
   states:
     bus_sink: false
@@ -128,7 +128,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 440.0]
+    coordinate: [904, 248.0]
     rotation: 0
     state: enabled
 - name: doa_phase_correct_hier_0
@@ -145,7 +145,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 424.0]
+    coordinate: [440, 232.0]
     rotation: 0
     state: enabled
 - name: doa_phase_offset_est_0
@@ -162,7 +162,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 424.0]
+    coordinate: [688, 232.0]
     rotation: 0
     state: enabled
 - name: doa_x440_usrp_source_0
@@ -173,7 +173,7 @@ blocks:
     alias: ''
     center_freq: input_variables.CenterFreq
     comment: ''
-    device_args: master_clock_rate=200e6
+    device_args: master_clock_rate=250e6
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: input_variables.SampleRate
@@ -182,7 +182,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [160, 424.0]
+    coordinate: [192, 232.0]
     rotation: 0
     state: enabled
 - name: import_0

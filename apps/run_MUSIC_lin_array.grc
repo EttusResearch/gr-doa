@@ -48,7 +48,7 @@ blocks:
   id: variable_struct
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
-    field0: ToneFreq
+    field0: ''
     field1: SampleRate
     field10: PSpectrumLength
     field11: DirectoryConfigFiles
@@ -81,7 +81,7 @@ blocks:
     value18: '0'
     value19: '0'
     value2: 2.495e9
-    value3: '"addr=10.94.17.48"'
+    value3: '"addr=10.94.17.50"'
     value4: '0'
     value5: '4'
     value6: '0.5'
@@ -124,8 +124,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 624.0]
-    rotation: 0
+    coordinate: [752, 488.0]
+    rotation: 180
+    state: disabled
+- name: blocks_moving_average_xx_0_0
+  id: blocks_moving_average_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length: '5'
+    max_iter: '1000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: 1/5
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 472.0]
+    rotation: 180
     state: disabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
@@ -141,7 +161,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 512.0]
+    coordinate: [792, 376.0]
     rotation: 180
     state: enabled
 - name: blocks_vector_to_streams_0
@@ -159,7 +179,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 584.0]
+    coordinate: [752, 408.0]
     rotation: 180
     state: enabled
 - name: doa_MUSIC_lin_array_0
@@ -178,7 +198,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 352.0]
+    coordinate: [952, 232.0]
     rotation: 0
     state: enabled
 - name: doa_autocorrelate_0
@@ -197,7 +217,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 336.0]
+    coordinate: [680, 216.0]
     rotation: 0
     state: enabled
 - name: doa_find_local_max_0
@@ -216,7 +236,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 512.0]
+    coordinate: [976, 360.0]
     rotation: 180
     state: enabled
 - name: doa_phase_correct_hier_0
@@ -233,7 +253,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 336.0]
+    coordinate: [456, 216.0]
     rotation: 0
     state: enabled
 - name: doa_serial_connection_0
@@ -245,15 +265,35 @@ blocks:
     comment: ''
     debug: 'False'
     dimensions: '1'
-    enable_video: 'False'
+    high_hysteresis: '15.0'
+    low_hysteresis: '3.0'
     port: /dev/ttyACM0
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 616.0]
-    rotation: 0
+    coordinate: [536, 480.0]
+    rotation: 180
     state: disabled
+- name: doa_serial_connection_0_0
+  id: doa_serial_connection
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '115200'
+    comment: ''
+    debug: 'False'
+    dimensions: '1'
+    high_hysteresis: '25.0'
+    low_hysteresis: '5'
+    port: /dev/ttyACM0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 464.0]
+    rotation: 180
+    state: enabled
 - name: doa_x440_usrp_source_0
   id: doa_x440_usrp_source
   parameters:
@@ -271,7 +311,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 336.0]
+    coordinate: [208, 216.0]
     rotation: 0
     state: enabled
 - name: epy_block_0
@@ -323,7 +363,7 @@ blocks:
     bus_structure: null
     coordinate: [792, 776.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: import_0
   id: import
   parameters:
@@ -410,7 +450,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [480, 568.0]
+    coordinate: [536, 376.0]
     rotation: 180
     state: enabled
 - name: qtgui_vector_sink_f_0
@@ -484,7 +524,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 160.0]
+    coordinate: [944, 88.0]
     rotation: 180
     state: enabled
 - name: variable_qtgui_msg_push_button_0
@@ -504,10 +544,11 @@ blocks:
     bus_structure: null
     coordinate: [288, 864.0]
     rotation: 0
-    state: enabled
+    state: disabled
 
 connections:
 - [blocks_moving_average_xx_0, '0', doa_serial_connection_0, '0']
+- [blocks_moving_average_xx_0_0, '0', doa_serial_connection_0_0, '0']
 - [blocks_vector_to_streams_0, '0', epy_block_0, '0']
 - [blocks_vector_to_streams_0, '0', qtgui_number_sink_1, '0']
 - [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']
@@ -515,7 +556,9 @@ connections:
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
 - [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
 - [doa_find_local_max_0, '1', blocks_moving_average_xx_0, '0']
+- [doa_find_local_max_0, '1', blocks_moving_average_xx_0_0, '0']
 - [doa_find_local_max_0, '1', blocks_vector_to_streams_0, '0']
+- [doa_find_local_max_0, '1', doa_serial_connection_0_0, '0']
 - [doa_phase_correct_hier_0, '0', doa_autocorrelate_0, '0']
 - [doa_phase_correct_hier_0, '1', doa_autocorrelate_0, '1']
 - [doa_phase_correct_hier_0, '2', doa_autocorrelate_0, '2']
@@ -528,4 +571,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-gd3090973
+  grc_version: v3.11.0.0git-991-g721e477c

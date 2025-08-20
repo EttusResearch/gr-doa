@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(calibrate_lin_array.h)                                     */
-/* BINDTOOL_HEADER_FILE_HASH(d2f21f0e7992e7f0b5c55b8b5f97f93a)                    */
+/* BINDTOOL_HEADER_FILE(calibrate_lin_array.h)                                        */
+/* BINDTOOL_HEADER_FILE_HASH(dd3c3cd460e2b672e458a5c8b36ac2e0)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -29,14 +29,23 @@ namespace py = pybind11;
 
 void bind_calibrate_lin_array(py::module& m)
 {
-    using calibrate_lin_array = gr::doa::calibrate_lin_array;
 
-    py::class_<calibrate_lin_array, gr::sync_block, gr::block, gr::basic_block,
-               std::shared_ptr<calibrate_lin_array>>(m, "calibrate_lin_array", D(calibrate_lin_array))
+    using calibrate_lin_array = ::gr::doa::calibrate_lin_array;
+
+
+    py::class_<calibrate_lin_array,
+               gr::sync_block,
+               gr::block,
+               gr::basic_block,
+               std::shared_ptr<calibrate_lin_array>>(
+        m, "calibrate_lin_array", D(calibrate_lin_array))
 
         .def(py::init(&calibrate_lin_array::make),
-             D(calibrate_lin_array, make),
              py::arg("norm_spacing"),
              py::arg("num_ant_ele"),
-             py::arg("pilot_angle"));
+             py::arg("pilot_angle"),
+             D(calibrate_lin_array, make))
+
+
+        ;
 }

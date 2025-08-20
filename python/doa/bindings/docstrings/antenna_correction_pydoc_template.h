@@ -15,13 +15,10 @@
  */
 
 
-
- static const char *__doc_gr_doa_antenna_correction = R"doc()doc";
-
-
- static const char *__doc_gr_doa_antenna_correction_antenna_correction_0 = R"doc()doc";
+static const char* __doc_gr_doa_antenna_correction = R"doc()doc";
 
 
- static const char *__doc_gr_doa_antenna_correction_make = R"doc()doc";
+static const char* __doc_gr_doa_antenna_correction_antenna_correction_0 = R"doc()doc";
 
-  
+
+static const char* __doc_gr_doa_antenna_correction_make = R"doc()doc";

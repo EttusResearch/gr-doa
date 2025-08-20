@@ -15,13 +15,10 @@
  */
 
 
-
- static const char *__doc_gr_doa_autocorrelate = R"doc()doc";
-
-
- static const char *__doc_gr_doa_autocorrelate_autocorrelate_0 = R"doc()doc";
+static const char* __doc_gr_doa_autocorrelate = R"doc()doc";
 
 
- static const char *__doc_gr_doa_autocorrelate_make = R"doc()doc";
+static const char* __doc_gr_doa_autocorrelate_autocorrelate_0 = R"doc()doc";
 
-  
+
+static const char* __doc_gr_doa_autocorrelate_make = R"doc()doc";

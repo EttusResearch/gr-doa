@@ -45,7 +45,7 @@ blocks:
   id: variable_struct
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
-    field0: ToneFreq
+    field0: ''
     field1: SampleRate
     field10: PSpectrumLength
     field11: DirectoryConfigFiles
@@ -78,7 +78,7 @@ blocks:
     value18: '0'
     value19: '0'
     value2: 2.495e9
-    value3: '"addr=10.94.17.48"'
+    value3: '"addr=10.94.17.50"'
     value4: '0'
     value5: '4'
     value6: '0.5'
@@ -406,6 +406,26 @@ blocks:
     coordinate: [488, 1336.0]
     rotation: 0
     state: disabled
+- name: blocks_moving_average_xx_0
+  id: blocks_moving_average_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length: '5'
+    max_iter: '1000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: 1/5
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 592.0]
+    rotation: 180
+    state: enabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -606,6 +626,24 @@ blocks:
     coordinate: [352, 264.0]
     rotation: 0
     state: enabled
+- name: doa_serial_connection_0
+  id: doa_serial_connection
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '115200'
+    comment: ''
+    debug: 'False'
+    dimensions: '1'
+    hysteresis: '3.0'
+    port: /dev/ttyACM0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 584.0]
+    rotation: 180
+    state: enabled
 - name: doa_x440_usrp_source_0
   id: doa_x440_usrp_source
   parameters:
@@ -675,7 +713,7 @@ blocks:
     bus_structure: null
     coordinate: [1016, 512.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: import_0
   id: import
   parameters:
@@ -1172,7 +1210,7 @@ blocks:
     y_axis_label: '"Pseudo-Spectrum (dB)"'
     y_units: '""'
     ymax: '0'
-    ymin: '-20'
+    ymin: '-30'
   states:
     bus_sink: false
     bus_source: false
@@ -1197,7 +1235,7 @@ blocks:
     bus_structure: null
     coordinate: [744, 528.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1484,6 +1522,7 @@ connections:
 - [blocks_divide_xx_0, '0', blocks_complex_to_arg_0_0_1, '0']
 - [blocks_divide_xx_0_0, '0', blocks_complex_to_arg_0_0_0_1, '0']
 - [blocks_divide_xx_0_0_0, '0', blocks_complex_to_arg_0_0_0_0_1, '0']
+- [blocks_moving_average_xx_0, '0', doa_serial_connection_0, '0']
 - [blocks_sub_xx_0, '0', qtgui_number_sink_0, '0']
 - [blocks_sub_xx_0, '0', qtgui_time_sink_x_0_0, '0']
 - [blocks_sub_xx_0_0, '0', qtgui_number_sink_0, '1']
@@ -1499,6 +1538,7 @@ connections:
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
 - [doa_autocorrelate_0_0, '0', doa_MUSIC_lin_array_0_0, '0']
 - [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
+- [doa_find_local_max_0, '1', blocks_moving_average_xx_0, '0']
 - [doa_find_local_max_0, '1', epy_block_0, '0']
 - [doa_find_local_max_0, '1', qtgui_number_sink_1, '0']
 - [doa_phase_correct_hier_0_0, '0', doa_antenna_correction_0, '0']
@@ -1535,4 +1575,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-gd3090973
+  grc_version: v3.11.0.0git-991-g721e477c
