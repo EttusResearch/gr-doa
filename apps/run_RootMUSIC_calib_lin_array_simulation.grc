@@ -165,7 +165,7 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '2495000000'
+    value2: '446031250 '
     value3: '0.44'
     value4: '2'
     value5: '4'
@@ -486,7 +486,9 @@ blocks:
     comment: ''
     debug: 'False'
     dimensions: '1'
-    enable_video: 'True'
+    high_hysteresis: '15.0'
+    low_hysteresis: '3.0'
+    mirror: 'False'
     port: /dev/ttyACM0
   states:
     bus_sink: false
@@ -643,4 +645,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-gd3090973
+  grc_version: v3.11.0.0git-992-ga7b5ef78

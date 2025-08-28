@@ -76,13 +76,13 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: 2.495e9
+    value2: '446031250 '
     value3: '4'
     value4: '60'
-    value5: '"addr=10.94.17.50"'
+    value5: '"addr=10.94.17.47"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
-    value8: '"measure_corrected_phase_offsets_2495MHz.cfg"'
+    value7: '"measure_relative_phase_offsets_446MHz.cfg"'
+    value8: '"measure_corrected_phase_offsets_446MHz.cfg"'
     value9: 2**13
   states:
     bus_sink: false
@@ -214,4 +214,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-gd3090973
+  grc_version: v3.11.0.0git-992-ga7b5ef78
