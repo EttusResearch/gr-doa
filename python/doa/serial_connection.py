@@ -17,7 +17,7 @@ class serial_connection(gr.sync_block):
     """
     docstring for block serial_connection
     """
-    def __init__(self, port="/dev/ttyACM0", baudrate=115200, debug=False, dimensions=1, low_hysteresis=5.0, high_hysteresis=15.0, mirror=False):
+    def __init__(self, port="/dev/ttyACM0", baudrate=115200, debug=False, dimensions=1, low_hysteresis=3.0, high_hysteresis=18.0, mirror=False, stability_window_size=20, stability_threshold=2.0, force_update_threshold=10.0):
         # Create input signature with separate channels for each servo
         in_sig = [numpy.float32] * dimensions  # dimensions separate float32 input channels
         
@@ -45,6 +45,14 @@ class serial_connection(gr.sync_block):
         self.last_actual_angles = [None] * dimensions
         # Track if this is the first value for each servo (skip first value)
         self.first_value_received = [False] * dimensions
+        
+        # Stability detection parameters
+        self.stability_window_size = stability_window_size  # Number of recent values to track
+        self.stability_threshold = 2.0   # Max variation in degrees to consider "stable"
+        self.force_update_threshold = 10.0  # Min difference to trigger forced update
+        
+        # Sliding window buffers for each servo to track recent values
+        self.value_buffers = [[] for _ in range(dimensions)]
 
         if self.debug:
             print(f"Serial connection established on {port} at {baudrate} baud.")
@@ -53,6 +61,53 @@ class serial_connection(gr.sync_block):
             print(f"Changes will only be sent if angle difference is between {low_hysteresis}° and {high_hysteresis}°")
             print(f"Mirror mode: {'enabled' if mirror else 'disabled'}")
 
+    # check stability of recent values for error correction
+    def _is_value_stable(self, servo_idx, current_value):
+        """Check if recent values are stable (low variation)"""
+        buffer = self.value_buffers[servo_idx]
+        
+        if len(buffer) < self.stability_window_size:
+            return False
+        
+        # Calculate variation in recent values
+        values = list(buffer)
+        min_val = min(values)
+        max_val = max(values)
+        variation = max_val - min_val
+        
+        return variation <= self.stability_threshold
+
+    # New method to determine if we should force update
+    def _should_force_update(self, servo_idx, current_value):
+        """Check if we should force update due to large difference from stable values"""
+        if self.last_angles[servo_idx] is None:
+            return False
+        
+        # Check if values are stable
+        if not self._is_value_stable(servo_idx, current_value):
+            return False
+        
+        # Check if there's a significant difference between stable value and last sent angle
+        stable_average = sum(self.value_buffers[servo_idx]) / len(self.value_buffers[servo_idx])
+        difference = abs(stable_average - self.last_angles[servo_idx])
+        
+        return difference >= self.force_update_threshold
+
+    def _print_debug_info(self, data, servo_idx, servo_angle, angle_to_send, force_update=False):
+        """Print debug information about servo commands"""
+        if force_update:
+            print(f"Sent: {data.strip()} (FORCED UPDATE)")
+        elif angle_to_send == servo_angle:
+            if self.last_angles[servo_idx] is not None:
+                angle_diff = abs(servo_angle - self.last_angles[servo_idx])
+                print(f"Sent: {data.strip()} (new angle, diff: {angle_diff:.1f}°)")
+            else:
+                print(f"Sent: {data.strip()} (first angle)")
+        else:
+            current_diff = abs(servo_angle - self.last_angles[servo_idx])
+            print(f"Sent: {data.strip()} (old angle - diff {current_diff:.1f}° outside {self.low_hysteresis}°-{self.high_hysteresis}° band)")
+
+    # Main processing method 
     def work(self, input_items, output_items):
         # input_items is now a list with one array per input channel
         # input_items[0] = samples from channel 0 (servo A)
@@ -88,25 +143,40 @@ class serial_connection(gr.sync_block):
                     # Convert to servo angle (0-180 degrees)
                     servo_angle = int(max(0.0, min(180.0, float(value))))
                     
+                    # Update sliding window buffer
+                    buffer = self.value_buffers[servo_idx]
+                    buffer.append(servo_angle)
+                    if len(buffer) > self.stability_window_size:
+                        buffer.pop(0)  # Remove oldest value
+                    
                     # Store the current actual angle
                     self.last_actual_angles[servo_idx] = servo_angle
                     
-                    # Implement hysteresis band logic
+                    # Implement hysteresis band logic with forced update check
                     angle_to_send = servo_angle  # Default to current angle
+                    force_update = False
                     
                     if self.last_angles[servo_idx] is None:
                         # First time - always send current angle
                         angle_to_send = servo_angle
                     else:
-                        # Calculate angle difference
-                        angle_diff = abs(servo_angle - self.last_angles[servo_idx])
-                        
-                        # Hysteresis band: only send new angle if change is between low_hysteresis and high_hysteresis
-                        if self.low_hysteresis <= angle_diff <= self.high_hysteresis:
+                        # Check if we should force update due to stable values being far from servo position
+                        if self._should_force_update(servo_idx, servo_angle):
                             angle_to_send = servo_angle
+                            force_update = True
+                            if self.debug:
+                                stable_avg = sum(self.value_buffers[servo_idx]) / len(self.value_buffers[servo_idx])
+                                print(f"Servo {servo_letters[servo_idx]}: Forcing update - stable at {stable_avg:.1f}°, servo at {self.last_angles[servo_idx]}°")
                         else:
-                            # Outside hysteresis band - send old value (last sent angle)
-                            angle_to_send = self.last_angles[servo_idx]
+                            # Normal hysteresis logic
+                            angle_diff = abs(servo_angle - self.last_angles[servo_idx])
+                            
+                            # Hysteresis band: only send new angle if change is between low_hysteresis and high_hysteresis
+                            if self.low_hysteresis <= angle_diff <= self.high_hysteresis:
+                                angle_to_send = servo_angle
+                            else:
+                                # Outside hysteresis band - send old value (last sent angle)
+                                angle_to_send = self.last_angles[servo_idx]
                     
                     # Always send something (either new or old angle)
                     servo_letter = servo_letters[servo_idx]
@@ -121,17 +191,9 @@ class serial_connection(gr.sync_block):
                     if angle_to_send == servo_angle:
                         self.last_angles[servo_idx] = servo_angle
                     
-
+                    # Debug output for the command line
                     if self.debug:
-                        if angle_to_send == servo_angle:
-                            if self.last_angles[servo_idx] is not None:
-                                angle_diff = abs(servo_angle - self.last_angles[servo_idx])
-                                print(f"Sent: {data.strip()} (new angle, diff: {angle_diff:.1f}°)")
-                            else:
-                                print(f"Sent: {data.strip()} (first angle)")
-                        else:
-                            current_diff = abs(servo_angle - self.last_angles[servo_idx])
-                            print(f"Sent: {data.strip()} (old angle - diff {current_diff:.1f}° outside {self.low_hysteresis}°-{self.high_hysteresis}° band)")
+                        self._print_debug_info(data, servo_idx, servo_angle, angle_to_send, force_update)
                     
                     # Small delay between servo commands to avoid overwhelming micro:bit
                     time.sleep(0.01)

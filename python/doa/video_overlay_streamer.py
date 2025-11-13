@@ -42,7 +42,7 @@ vc.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 vc.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
 # height and width of overlay
-w = width//4
+w = width//3 
 h = height//2
 
 # distance to top left corner
