@@ -19,7 +19,7 @@ options:
     run: 'True'
     run_command: '{python} -u {filename}'
     thread_safe_setters: ''
-    title: Not titled yet
+    title: MUSIC RootMUSIC filesave
   states:
     bus_sink: false
     bus_source: false
@@ -69,15 +69,15 @@ blocks:
     value1: 1e6
     value10: 2**10
     value11: '"/tmp"'
-    value12: '"measure_relative_phase_offsets_446MHz.cfg"'
-    value13: '"calibration_lin_array_446MHz.cfg"'
+    value12: '"measure_relative_phase_offsets_2495MHz.cfg"'
+    value13: '"calibration_lin_array_2495MHz.cfg"'
     value14: '0'
     value15: '0'
     value16: '0'
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250 '
+    value2: 2.495e9
     value3: '"addr=10.94.17.47"'
     value4: '0'
     value5: '4'
@@ -89,7 +89,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 132.0]
+    coordinate: [9, 146]
     rotation: 0
     state: enabled
 - name: rel_phase_offsets_file_name

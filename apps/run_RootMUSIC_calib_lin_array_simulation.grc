@@ -19,7 +19,7 @@ options:
     run: 'True'
     run_command: '{python} -u {filename}'
     thread_safe_setters: ''
-    title: Not titled yet
+    title: RootMUSIC calibrated linear array simulation
   states:
     bus_sink: false
     bus_source: false
@@ -165,7 +165,7 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250 '
+    value2: '5000'
     value3: '0.44'
     value4: '2'
     value5: '4'
@@ -177,7 +177,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 128.0]
+    coordinate: [6, 141]
     rotation: 0
     state: enabled
 - name: theta0
@@ -553,9 +553,9 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: ''
+    label1: Estimated angle
     label10: ''
-    label2: ''
+    label2: Estimated angle
     label3: ''
     label4: ''
     label5: ''
@@ -568,9 +568,9 @@ blocks:
     name: '""'
     nconnections: '2'
     type: float
-    unit1: ''
+    unit1: "\xB0"
     unit10: ''
-    unit2: ''
+    unit2: "\xB0"
     unit3: ''
     unit4: ''
     unit5: ''

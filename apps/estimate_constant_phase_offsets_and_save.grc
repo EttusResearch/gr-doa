@@ -19,7 +19,7 @@ options:
     run: 'True'
     run_command: '{python} -u {filename}'
     thread_safe_setters: ''
-    title: estimate_constant_phase_offsets_and_save
+    title: Estimate constant phase offset & save
   states:
     bus_sink: false
     bus_source: false
@@ -65,12 +65,12 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250 '
+    value2: 2.495e9
     value3: '0'
     value4: '4'
-    value5: '"addr=10.94.17.47"'
+    value5: '"addr=10.94.17.65"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_446MHz.cfg"'
+    value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13
     value9: 2**11
   states:
@@ -211,7 +211,7 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-    name: '""'
+    name: '"USRP time sink"'
     nconnections: '4'
     size: '1024 '
     srate: input_variables.SampleRate
@@ -252,7 +252,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 280.0]
+    coordinate: [656, 278]
     rotation: 0
     state: enabled
 

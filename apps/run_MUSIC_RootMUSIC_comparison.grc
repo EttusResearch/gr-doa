@@ -11,7 +11,7 @@ options:
     generator_class_name: PythonQtGuiGenerator
     generator_module: gnuradio.grc.workflows.python_qt_gui
     hier_block_src_path: '.:'
-    id: run_MUSIC_lin_array
+    id: run_MUSIC_RootMUSIC_comparison
     max_nouts: '0'
     output_language: python
     qt_qss_theme: ''
@@ -19,7 +19,7 @@ options:
     run: 'True'
     run_command: '{python} -u {filename}'
     thread_safe_setters: ''
-    title: MUSIC linear array
+    title: MUSIC RootMUSIC comparison
   states:
     bus_sink: false
     bus_source: false
@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 8.0]
+    coordinate: [344, 8.0]
     rotation: 0
     state: enabled
 - name: input_variables
@@ -92,7 +92,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 136.0]
+    coordinate: [0, 135]
     rotation: 0
     state: enabled
 - name: rel_phase_offsets_file_name
@@ -104,7 +104,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [152, 8.0]
+    coordinate: [168, 8.0]
     rotation: 0
     state: enabled
 - name: blocks_null_sink_0
@@ -121,8 +121,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 376.0]
-    rotation: 180
+    coordinate: [1455, 225]
+    rotation: 0
     state: enabled
 - name: blocks_vector_to_streams_0
   id: blocks_vector_to_streams
@@ -139,8 +139,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 408.0]
-    rotation: 180
+    coordinate: [1456, 280.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_streams_0_0
+  id: blocks_vector_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: input_variables.NumTargets
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 400.0]
+    rotation: 0
     state: enabled
 - name: doa_MUSIC_lin_array_0
   id: doa_MUSIC_lin_array
@@ -158,7 +176,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 232.0]
+    coordinate: [959, 232]
     rotation: 0
     state: enabled
 - name: doa_autocorrelate_0
@@ -196,8 +214,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 360.0]
-    rotation: 180
+    coordinate: [1232, 232.0]
+    rotation: 0
     state: enabled
 - name: doa_phase_correct_hier_0
   id: doa_phase_correct_hier
@@ -214,6 +232,44 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [456, 216.0]
+    rotation: 0
+    state: enabled
+- name: doa_rootMUSIC_linear_array_0
+  id: doa_rootMUSIC_linear_array
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    norm_spacing: input_variables.NormSpacing
+    num_ant_ele: input_variables.NumArrayElements
+    num_targets: input_variables.NumTargets
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 376.0]
+    rotation: 0
+    state: enabled
+- name: doa_serial_connection_0_0
+  id: doa_serial_connection
+  parameters:
+    affinity: ''
+    alias: ''
+    baudrate: '115200'
+    comment: ''
+    debug: 'True'
+    dimensions: '1'
+    high_hysteresis: '20.0'
+    low_hysteresis: '3'
+    mirror: 'False'
+    port: /dev/ttyACM0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1704, 156.0]
     rotation: 0
     state: enabled
 - name: doa_x440_usrp_source_0
@@ -262,6 +318,31 @@ blocks:
     coordinate: [576, 8.0]
     rotation: 0
     state: enabled
+- name: qtgui_compass_0
+  id: qtgui_compass
+  parameters:
+    affinity: ''
+    alias: ''
+    backgroundColor: default
+    comment: ''
+    fullNeedle: '1'
+    gui_hint: (0,7,1,3)
+    min_size: '250'
+    name: Direction
+    needleBodyColor: black
+    needleTipColor: red
+    position: '1'
+    scaleColor: black
+    setDebug: 'False'
+    update_time: '0.10'
+    usemsg: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1706, 451]
+    rotation: 0
+    state: enabled
 - name: qtgui_number_sink_1
   id: qtgui_number_sink
   parameters:
@@ -292,9 +373,9 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: Estimated angle
+    label1: Estimated angle MUSIC
     label10: ''
-    label2: ''
+    label2: Estimated angle RootMUSIC
     label3: ''
     label4: ''
     label5: ''
@@ -304,12 +385,12 @@ blocks:
     label9: ''
     max: '180'
     min: '0'
-    name: '""'
-    nconnections: input_variables.NumTargets
+    name: '"Angle Estimation"'
+    nconnections: '2'
     type: float
     unit1: "\xB0"
     unit10: ''
-    unit2: ''
+    unit2: "\xB0"
     unit3: ''
     unit4: ''
     unit5: ''
@@ -322,8 +403,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [503, 367]
-    rotation: 180
+    coordinate: [1705, 333]
+    rotation: 0
     state: enabled
 - name: qtgui_vector_sink_f_0
   id: qtgui_vector_sink_f
@@ -354,7 +435,7 @@ blocks:
     color9: '"dark green"'
     comment: ''
     grid: 'True'
-    gui_hint: ''
+    gui_hint: (0,0,1,7)
     label1: estimated angle
     label10: ''
     label2: ''
@@ -396,21 +477,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 88.0]
-    rotation: 180
+    coordinate: [1240, 40.0]
+    rotation: 0
     state: enabled
 
 connections:
+- [blocks_vector_to_streams_0, '0', doa_serial_connection_0_0, '0']
 - [blocks_vector_to_streams_0, '0', qtgui_number_sink_1, '0']
+- [blocks_vector_to_streams_0_0, '0', qtgui_compass_0, '0']
+- [blocks_vector_to_streams_0_0, '0', qtgui_number_sink_1, '1']
 - [doa_MUSIC_lin_array_0, '0', doa_find_local_max_0, '0']
 - [doa_MUSIC_lin_array_0, '0', qtgui_vector_sink_f_0, '0']
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
+- [doa_autocorrelate_0, '0', doa_rootMUSIC_linear_array_0, '0']
 - [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
 - [doa_find_local_max_0, '1', blocks_vector_to_streams_0, '0']
 - [doa_phase_correct_hier_0, '0', doa_autocorrelate_0, '0']
 - [doa_phase_correct_hier_0, '1', doa_autocorrelate_0, '1']
 - [doa_phase_correct_hier_0, '2', doa_autocorrelate_0, '2']
 - [doa_phase_correct_hier_0, '3', doa_autocorrelate_0, '3']
+- [doa_rootMUSIC_linear_array_0, '0', blocks_vector_to_streams_0_0, '0']
 - [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0, '0']
 - [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
 - [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']

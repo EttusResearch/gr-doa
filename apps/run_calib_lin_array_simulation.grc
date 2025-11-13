@@ -18,7 +18,7 @@ options:
     run_command: '{python} -u {filename}'
     run_options: prompt
     thread_safe_setters: ''
-    title: Not titled yet
+    title: calibrate linear array simulation
   states:
     bus_sink: false
     bus_source: false
@@ -388,4 +388,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-988-g6cadd695
+  grc_version: v3.11.0.0git-992-ga7b5ef78

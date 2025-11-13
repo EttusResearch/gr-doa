@@ -19,7 +19,7 @@ options:
     run: 'True'
     run_command: '{python} -u {filename}'
     thread_safe_setters: ''
-    title: view_op_with_corrected_phase_offsets
+    title: Overview after phase correction
   states:
     bus_sink: false
     bus_source: false
@@ -65,12 +65,12 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250 '
+    value2: 2.495e9
     value3: '60'
     value4: '4'
-    value5: '"addr=10.94.17.47"'
+    value5: '"addr=10.94.17.65"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_446MHz.cfg"'
+    value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13
     value9: 2**11
   states:
@@ -195,7 +195,7 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-    name: '""'
+    name: '"view signals with phase correction"'
     nconnections: '4'
     size: '256'
     srate: input_variables.SampleRate

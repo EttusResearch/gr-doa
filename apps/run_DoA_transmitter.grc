@@ -18,7 +18,7 @@ options:
     run_command: '{python} -u {filename}'
     run_options: prompt
     thread_safe_setters: ''
-    title: run_DoA_transmitter
+    title: run DoA transmitter
   states:
     bus_sink: false
     bus_source: false
@@ -52,7 +52,7 @@ blocks:
     field7: ''
     field8: ''
     field9: ''
-    value0: 10e3
+    value0: 20e3
     value1: 1e6
     value10: '0'
     value11: '0'
@@ -64,7 +64,7 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250 '
+    value2: 2.495e9
     value3: '"addr=192.168.10.2"'
     value4: '30'
     value5: '0'
@@ -76,7 +76,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 128.0]
+    coordinate: [8, 145]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -196,7 +196,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [456, 320.0]
+    coordinate: [440, 296.0]
     rotation: 0
     state: disabled
 - name: uhd_usrp_sink_0

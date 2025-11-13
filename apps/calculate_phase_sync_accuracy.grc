@@ -76,20 +76,20 @@ blocks:
     value17: '0'
     value18: '0'
     value19: '0'
-    value2: '446031250 '
+    value2: 2.495e9
     value3: '4'
     value4: '60'
     value5: '"addr=10.94.17.47"'
     value6: '"/tmp"'
-    value7: '"measure_relative_phase_offsets_446MHz.cfg"'
+    value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: '"measure_corrected_phase_offsets_446MHz.cfg"'
     value9: 2**13
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 124.0]
-    rotation: 0
+    coordinate: [7, 141]
+    rotation: 180
     state: enabled
 - name: rel_phase_offsets_file_name
   id: variable
