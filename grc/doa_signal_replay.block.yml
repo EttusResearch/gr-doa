@@ -1,0 +1,31 @@
+id: doa_signal_replay
+label: Signal Replay
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.signal_replay(${filename}, ${repeat}, ${interpolation})
+
+parameters:
+- id: filename
+  label: Signal File
+  dtype: file_open
+  default: ''
+- id: repeat
+  label: Repeat
+  dtype: bool
+  default: 'True'
+- id: interpolation
+  label: Interpolation
+  dtype: int
+  default: '1'
+
+inputs: [] 
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+  vlen: '1'
+
+file_format: 1

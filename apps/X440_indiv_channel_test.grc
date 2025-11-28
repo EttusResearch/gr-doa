@@ -77,7 +77,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 124.0]
+    coordinate: [8, 141]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_arg_0_0_0_0_1

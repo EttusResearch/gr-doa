@@ -1,0 +1,33 @@
+id: doa_power_detection
+label: Power Detection
+category: '[doa]'
+
+templates:
+  imports: from gnuradio import doa
+  make: doa.power_detection(${sample_rate}, ${threshold}, ${buffer_size})
+
+parameters:
+- id: sample_rate
+  label: Sample Rate
+  dtype: real
+  default: 'samp_rate'
+- id: threshold
+  label: Threshold
+  dtype: real
+  default: 1e-6
+- id: buffer_size
+  label: Buffer Size
+  dtype: int
+  default: 1024
+
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+
+file_format: 1

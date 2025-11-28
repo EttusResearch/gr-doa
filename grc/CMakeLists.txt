@@ -19,4 +19,6 @@ install(FILES
     doa_phase_offset_est.block.yml
     doa_findmax_and_save.block.yml
     doa_x440_usrp_source.block.yml
-    doa_serial_connection.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_serial_connection.block.yml
+    doa_signal_replay.block.yml
+    doa_power_detection.block.yml DESTINATION share/gnuradio/grc/blocks)
