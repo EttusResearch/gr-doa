@@ -71,13 +71,14 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    num_inputs: '4'
     sample_rate: samp_rate
     threshold: 1e-6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 96.0]
+    coordinate: [704, 104.0]
     rotation: 0
     state: enabled
 - name: doa_signal_replay_0
@@ -152,7 +153,7 @@ blocks:
     marker8: '-1'
     marker9: '-1'
     name: '""'
-    nconnections: '1'
+    nconnections: '4'
     size: samp_rate
     srate: samp_rate
     stemplot: 'False'
@@ -192,7 +193,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 160.0]
+    coordinate: [1040, 96.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0_0
@@ -291,12 +292,18 @@ blocks:
     bus_structure: null
     coordinate: [600, 272.0]
     rotation: 0
-    state: enabled
+    state: disabled
 
 connections:
 - [blocks_throttle2_0_0, '0', doa_power_detection_0, '0']
+- [blocks_throttle2_0_0, '0', doa_power_detection_0, '1']
+- [blocks_throttle2_0_0, '0', doa_power_detection_0, '2']
+- [blocks_throttle2_0_0, '0', doa_power_detection_0, '3']
 - [blocks_throttle2_0_0, '0', qtgui_time_sink_x_0_0, '0']
 - [doa_power_detection_0, '0', qtgui_time_sink_x_0, '0']
+- [doa_power_detection_0, '1', qtgui_time_sink_x_0, '1']
+- [doa_power_detection_0, '2', qtgui_time_sink_x_0, '2']
+- [doa_power_detection_0, '3', qtgui_time_sink_x_0, '3']
 - [doa_signal_replay_0, '0', blocks_throttle2_0_0, '0']
 
 metadata:

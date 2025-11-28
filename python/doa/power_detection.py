@@ -14,20 +14,21 @@ class power_detection(gr.basic_block):
     """
     docstring for block power_detection
     """
-    def __init__(self, sample_rate, threshold, buffer_size=1024):
+    def __init__(self, num_inputs, sample_rate, threshold, buffer_size=1024):
         gr.basic_block.__init__(self,
             name="power_detection",
-            in_sig=[numpy.complex64],
-            out_sig=[numpy.complex64])
+            in_sig=[numpy.complex64] * num_inputs,
+            out_sig=[numpy.complex64] * num_inputs)
         
+        self.num_inputs = num_inputs
         self.sample_rate = sample_rate
         self.threshold = threshold
         self.detection_state = False
         
-        # Dual ring buffer system
+        # Dual ring buffer system - For multiple channels
         self.buffer_size = buffer_size
-        self.capture_buffer = numpy.zeros(buffer_size, dtype=numpy.complex64)  # Temporary capture
-        self.playback_buffer = numpy.zeros(buffer_size, dtype=numpy.complex64)  # Stable playback
+        self.capture_buffer = numpy.zeros((num_inputs, buffer_size), dtype=numpy.complex64)
+        self.playback_buffer = numpy.zeros((num_inputs, buffer_size), dtype=numpy.complex64)
         self.capture_index = 0
         self.playback_index = 0
         
@@ -37,7 +38,6 @@ class power_detection(gr.basic_block):
         self.capturing = False
 
     def forecast(self, noutput_items, ninputs):
-        # This tells GNU Radio: "To produce N output items, I need N input items from each input port
         ninput_items_required = [noutput_items] * ninputs
         return ninput_items_required
 
@@ -46,6 +46,7 @@ class power_detection(gr.basic_block):
         noutput_items = min(len(output_items[0]), ninput_items)
         
         for i in range(noutput_items):
+            # Use first channel for power detection
             sample = input_items[0][i]
             sample_power = numpy.abs(sample)**2
             
@@ -57,39 +58,43 @@ class power_detection(gr.basic_block):
                     self.capture_index = 0
                     print(f"Signal detected! Starting buffer fill at power: {sample_power:.6f}")
                 
-                # Fill buffer
+                # Fill buffer for all channels
                 if self.capture_index < self.buffer_size:
-                    self.capture_buffer[self.capture_index] = sample
+                    for ch in range(self.num_inputs):
+                        self.capture_buffer[ch, self.capture_index] = input_items[ch][i]
                     self.capture_index += 1
                     
                     # Check if buffer is now full
                     if self.capture_index >= self.buffer_size:
                         self._validate_and_promote_buffer()
                 
-                output_items[0][i] = sample  # Pass through during detection
+                # Pass through all channels during detection
+                for ch in range(self.num_inputs):
+                    output_items[ch][i] = input_items[ch][i]
                         
             else:
                 # No signal - stop capturing and replay if available
                 if self.capturing:
                     self.capturing = False
-                    # If we have some data but buffer not full, could still validate
                     if self.capture_index > 0 and not self.buffer_fill_complete:
                         print(f"Signal ended with {self.capture_index} samples (buffer not full)")
                 
-                # Replay stored signal during silence
+                # Replay stored signal during silence for all channels
                 if self.playback_buffer_valid and self.buffer_fill_complete:
-                    output_items[0][i] = self.playback_buffer[self.playback_index]
+                    for ch in range(self.num_inputs):
+                        output_items[ch][i] = self.playback_buffer[ch, self.playback_index]
                     self.playback_index = (self.playback_index + 1) % self.buffer_size
                 else:
-                    output_items[0][i] = 0.0 + 0.0j  # No valid signal captured yet
+                    # No valid signal captured yet - output zeros on all channels
+                    for ch in range(self.num_inputs):
+                        output_items[ch][i] = 0.0 + 0.0j
                     
         self.consume_each(noutput_items)
         return noutput_items
     
     def _validate_and_promote_buffer(self):
         """Validate captured buffer and promote to playback if good quality"""
-        # Simple validation - could add more sophisticated checks here
-        self.playback_buffer[:] = self.capture_buffer[:]
+        self.playback_buffer[:, :] = self.capture_buffer[:, :]
         self.playback_buffer_valid = True
         self.buffer_fill_complete = True
         self.playback_index = 0

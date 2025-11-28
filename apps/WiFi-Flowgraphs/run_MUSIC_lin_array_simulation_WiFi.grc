@@ -286,7 +286,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 328.0]
+    coordinate: [776, 320.0]
     rotation: 0
     state: enabled
 - name: blocks_null_sink_0
@@ -303,7 +303,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 504.0]
+    coordinate: [1232, 496.0]
     rotation: 180
     state: enabled
 - name: blocks_throttle2_0
@@ -342,7 +342,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 560.0]
+    coordinate: [1192, 552.0]
     rotation: 180
     state: enabled
 - name: doa_MUSIC_lin_array_0
@@ -361,7 +361,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 344.0]
+    coordinate: [1280, 336.0]
     rotation: 0
     state: enabled
 - name: doa_autocorrelate_0
@@ -380,7 +380,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 328.0]
+    coordinate: [1008, 320.0]
     rotation: 0
     state: enabled
 - name: doa_find_local_max_0
@@ -399,8 +399,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 496.0]
+    coordinate: [1424, 488.0]
     rotation: 180
+    state: enabled
+- name: doa_power_detection_0
+  id: doa_power_detection
+  parameters:
+    affinity: ''
+    alias: ''
+    buffer_size: '12502'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    sample_rate: input_variables.SampleRate
+    threshold: 1e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 312.0]
+    rotation: 0
     state: enabled
 - name: doa_signal_replay_0
   id: doa_signal_replay
@@ -511,7 +530,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 504.0]
+    coordinate: [936, 496.0]
     rotation: 180
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -608,7 +627,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 616.0]
+    coordinate: [920, 608.0]
     rotation: 180
     state: enabled
 - name: qtgui_vector_sink_f_0
@@ -682,20 +701,20 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 152.0]
+    coordinate: [1232, 140.0]
     rotation: 180
     state: enabled
 
 connections:
 - [analog_noise_source_x_0_0, '0', blocks_add_xx_0, '1']
 - [analog_noise_source_x_0_0_0, '0', blocks_add_xx_0_0, '1']
-- [blocks_add_xx_0, '0', blocks_multiply_matrix_xx_0, '0']
+- [blocks_add_xx_0, '0', doa_power_detection_0, '0']
 - [blocks_add_xx_0_0, '0', blocks_throttle2_0, '0']
 - [blocks_multiply_matrix_xx_0, '0', doa_autocorrelate_0, '0']
 - [blocks_multiply_matrix_xx_0, '1', doa_autocorrelate_0, '1']
 - [blocks_multiply_matrix_xx_0, '2', doa_autocorrelate_0, '2']
 - [blocks_multiply_matrix_xx_0, '3', doa_autocorrelate_0, '3']
-- [blocks_throttle2_0, '0', blocks_multiply_matrix_xx_0, '1']
+- [blocks_throttle2_0, '0', doa_power_detection_0, '1']
 - [blocks_vector_to_streams_0, '0', qtgui_number_sink_1, '0']
 - [blocks_vector_to_streams_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_vector_to_streams_0, '1', qtgui_number_sink_1, '1']
@@ -705,6 +724,8 @@ connections:
 - [doa_autocorrelate_0, '0', doa_MUSIC_lin_array_0, '0']
 - [doa_find_local_max_0, '0', blocks_null_sink_0, '0']
 - [doa_find_local_max_0, '1', blocks_vector_to_streams_0, '0']
+- [doa_power_detection_0, '0', blocks_multiply_matrix_xx_0, '0']
+- [doa_power_detection_0, '1', blocks_multiply_matrix_xx_0, '1']
 - [doa_signal_replay_0, '0', blocks_add_xx_0, '0']
 - [doa_signal_replay_0_0, '0', blocks_add_xx_0_0, '0']
 

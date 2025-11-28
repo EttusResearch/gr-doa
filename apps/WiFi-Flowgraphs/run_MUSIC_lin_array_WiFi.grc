@@ -1,0 +1,299 @@
+options:
+  parameters:
+    alias: ''
+    author: jreitmei
+    catch_exceptions: 'True'
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_linking: dynamic
+    generate_options: qt_gui
+    generator_class_name: PythonQtGuiGenerator
+    generator_module: gnuradio.grc.workflows.python_qt_gui
+    hier_block_src_path: '.:'
+    id: run_MUSIC_lin_array_WiFi
+    max_nouts: '0'
+    output_language: python
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    thread_safe_setters: ''
+    title: Not titled yet
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: input_variables
+  id: variable_struct
+  parameters:
+    comment: "input_variables: \nContains all the user-defined variables."
+    field0: ''
+    field1: SampleRate
+    field10: PSpectrumLength
+    field11: DirectoryConfigFiles
+    field12: RelativePhaseOffsets
+    field13: ''
+    field14: ''
+    field15: ''
+    field16: ''
+    field17: ''
+    field18: ''
+    field19: ''
+    field2: CenterFreq
+    field3: RxAddr
+    field4: ''
+    field5: NumArrayElements
+    field6: NormSpacing
+    field7: SnapshotSize
+    field8: OverlapSize
+    field9: NumTargets
+    value0: 5e3
+    value1: 2.5e6*8*1.25
+    value10: 2**10
+    value11: '"/tmp"'
+    value12: '"measure_relative_phase_offsets_2495MHz.cfg"'
+    value13: '0'
+    value14: '0'
+    value15: '0'
+    value16: '0'
+    value17: '0'
+    value18: '0'
+    value19: '0'
+    value2: 2.495e9
+    value3: '"addr=10.94.17.68"'
+    value4: '0'
+    value5: '4'
+    value6: '0.5'
+    value7: 2**15
+    value8: 2**14
+    value9: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 164.0]
+    rotation: 0
+    state: enabled
+- name: rel_phase_offsets_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.RelativePhaseOffsets)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 16.0]
+    rotation: 0
+    state: enabled
+- name: doa_autocorrelate_0_0
+  id: doa_autocorrelate
+  parameters:
+    affinity: ''
+    alias: ''
+    avg_method: Forward
+    comment: ''
+    inputs: input_variables.NumArrayElements
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    overlap_size: input_variables.OverlapSize
+    snapshot_size: input_variables.SnapshotSize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 216.0]
+    rotation: 0
+    state: enabled
+- name: doa_phase_correct_hier_0
+  id: doa_phase_correct_hier
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: rel_phase_offsets_file_name
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 216.0]
+    rotation: 0
+    state: enabled
+- name: doa_rootMUSIC_linear_array_0_0
+  id: doa_rootMUSIC_linear_array
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    norm_spacing: input_variables.NormSpacing
+    num_ant_ele: '4'
+    num_targets: input_variables.NumTargets
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 232.0]
+    rotation: 0
+    state: enabled
+- name: doa_x440_usrp_source_0
+  id: doa_x440_usrp_source
+  parameters:
+    addresses: input_variables.RxAddr
+    affinity: ''
+    alias: ''
+    center_freq: input_variables.CenterFreq
+    comment: ''
+    device_args: master_clock_rate=250e6
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: input_variables.SampleRate
+    sources: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 216.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 16.0]
+    rotation: 0
+    state: enabled
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import os
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 16.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_compass_0
+  id: qtgui_compass
+  parameters:
+    affinity: ''
+    alias: ''
+    backgroundColor: default
+    comment: ''
+    fullNeedle: '1'
+    gui_hint: ''
+    min_size: '250'
+    name: Direction
+    needleBodyColor: black
+    needleTipColor: red
+    position: '1'
+    scaleColor: black
+    setDebug: 'False'
+    update_time: '0.10'
+    usemsg: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1184, 96.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: Estimated angle
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '180'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: "\xB0"
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 240.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [doa_autocorrelate_0_0, '0', doa_rootMUSIC_linear_array_0_0, '0']
+- [doa_phase_correct_hier_0, '0', doa_autocorrelate_0_0, '0']
+- [doa_phase_correct_hier_0, '1', doa_autocorrelate_0_0, '1']
+- [doa_phase_correct_hier_0, '2', doa_autocorrelate_0_0, '2']
+- [doa_phase_correct_hier_0, '3', doa_autocorrelate_0_0, '3']
+- [doa_rootMUSIC_linear_array_0_0, '0', qtgui_compass_0, '0']
+- [doa_rootMUSIC_linear_array_0_0, '0', qtgui_number_sink_1, '0']
+- [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0, '0']
+- [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
+- [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']
+- [doa_x440_usrp_source_0, '3', doa_phase_correct_hier_0, '3']
+
+metadata:
+  file_format: 1
+  grc_version: v3.11.0.0git-992-ga7b5ef78

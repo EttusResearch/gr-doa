@@ -4,9 +4,13 @@ category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
-  make: doa.power_detection(${sample_rate}, ${threshold}, ${buffer_size})
+  make: doa.power_detection(${num_inputs}, ${sample_rate}, ${threshold}, ${buffer_size})
 
 parameters:
+- id: num_inputs
+  label: Number of Inputs
+  dtype: int
+  default: 1
 - id: sample_rate
   label: Sample Rate
   dtype: real
@@ -24,10 +28,12 @@ inputs:
 - label: in
   domain: stream
   dtype: complex
+  multiplicity: ${num_inputs}
 
 outputs:
 - label: out
   domain: stream
   dtype: complex
+  multiplicity: ${num_inputs}
 
 file_format: 1
