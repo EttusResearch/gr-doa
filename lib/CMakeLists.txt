@@ -17,7 +17,9 @@ list(APPEND doa_sources
     MUSIC_lin_array_impl.cc
     find_local_max_impl.cc
     antenna_correction_impl.cc
-    rootMUSIC_linear_array_impl.cc)
+    rootMUSIC_linear_array_impl.cc
+    signal_replay_cpp_impl.cc
+)
 
 set(doa_sources
     "${doa_sources}"

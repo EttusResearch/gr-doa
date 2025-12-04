@@ -15,4 +15,5 @@ install(FILES api.h
     MUSIC_lin_array.h
     find_local_max.h
     antenna_correction.h
-    rootMUSIC_linear_array.h DESTINATION include/gnuradio/doa)
+    rootMUSIC_linear_array.h
+    signal_replay_cpp.h DESTINATION include/gnuradio/doa)
