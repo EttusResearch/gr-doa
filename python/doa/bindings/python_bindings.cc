@@ -28,6 +28,7 @@ namespace py = pybind11;
     void bind_antenna_correction(py::module& m);
     void bind_rootMUSIC_linear_array(py::module& m);
     void bind_signal_replay_cpp(py::module& m);
+    void bind_power_detection_cpp(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -63,5 +64,6 @@ PYBIND11_MODULE(doa_python, m)
     bind_antenna_correction(m);
     bind_rootMUSIC_linear_array(m);
     bind_signal_replay_cpp(m);
+    bind_power_detection_cpp(m);
     // ) END BINDING_FUNCTION_CALLS
 }

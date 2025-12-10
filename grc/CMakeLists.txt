@@ -22,4 +22,5 @@ install(FILES
     doa_serial_connection.block.yml
     doa_signal_replay.block.yml
     doa_power_detection.block.yml
-    doa_signal_replay_cpp.block.yml DESTINATION share/gnuradio/grc/blocks)
+    doa_signal_replay_cpp.block.yml
+    doa_power_detection_cpp.block.yml DESTINATION share/gnuradio/grc/blocks)

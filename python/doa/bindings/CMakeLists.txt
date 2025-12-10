@@ -32,7 +32,7 @@ list(APPEND doa_python_files
     antenna_correction_python.cc
     rootMUSIC_linear_array_python.cc
     signal_replay_cpp_python.cc
-    python_bindings.cc)
+    power_detection_cpp_python.cc python_bindings.cc)
 
 gr_pybind_make_oot(doa ../../.. gr::doa "${doa_python_files}")
 

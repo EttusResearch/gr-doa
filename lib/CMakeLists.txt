@@ -19,6 +19,7 @@ list(APPEND doa_sources
     antenna_correction_impl.cc
     rootMUSIC_linear_array_impl.cc
     signal_replay_cpp_impl.cc
+    power_detection_cpp_impl.cc
 )
 
 set(doa_sources
