@@ -53,7 +53,7 @@ blocks:
     field8: ''
     field9: ''
     value0: 5e3
-    value1: 2.5e6*8*1.25
+    value1: 2.5e6
     value10: '0'
     value11: '0'
     value12: '0'
@@ -79,68 +79,6 @@ blocks:
     coordinate: [7, 140]
     rotation: 0
     state: enabled
-- name: analog_sig_source_x_0
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '1'
-    comment: ''
-    freq: 10e3
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    phase: '0'
-    samp_rate: 1e3
-    showports: 'False'
-    type: complex
-    waveform: analog.GR_SIN_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [192, 244.0]
-    rotation: 0
-    state: disabled
-- name: blocks_throttle2_0
-  id: blocks_throttle2
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    ignoretag: 'True'
-    limit: auto
-    maximum: '0.1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: samp_rate
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [383, 538]
-    rotation: 0
-    state: disabled
-- name: doa_signal_replay_0
-  id: doa_signal_replay
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    filename: /home/jreitmei/workarea/gr-doa/predefined_signal/20MHz_5_4_oversampling_05msframe_45mssilent.npy
-    interpolation: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    repeat: 'True'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [148, 420]
-    rotation: 0
-    state: disabled
 - name: doa_signal_replay_cpp_0
   id: doa_signal_replay_cpp
   parameters:
@@ -272,7 +210,7 @@ blocks:
     comment: ''
     dev_addr: input_variables.RxAddr
     dev_args: ''
-    gain0: '0'
+    gain0: input_variables.Gain
     gain1: '0'
     gain10: '0'
     gain11: '0'
@@ -433,7 +371,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 376]
+    coordinate: [632, 356.0]
     rotation: 0
     state: enabled
 

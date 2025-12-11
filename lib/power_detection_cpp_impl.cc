@@ -34,7 +34,10 @@ power_detection_cpp_impl::power_detection_cpp_impl(int num_inputs,
       d_playback_index(0),
       d_capturing(false),
       d_playback_buffer_valid(false),
-      d_buffer_fill_complete(false)
+      d_buffer_fill_complete(false),
+      d_averaging_window(10),
+      d_power_buffer_index(0),
+      d_power_sum(0.0f)
 {
     // Allocate buffers for all channels
     d_capture_buffer.resize(num_inputs);
@@ -45,9 +48,13 @@ power_detection_cpp_impl::power_detection_cpp_impl(int num_inputs,
         d_playback_buffer[ch].resize(buffer_size);
     }
     
+    // Initialize power averaging buffer
+    d_power_buffer.resize(d_averaging_window, 0.0f);
+    
     GR_LOG_INFO(d_logger, "Power detection initialized: " + 
                 std::to_string(num_inputs) + " channels, threshold=" + 
-                std::to_string(threshold) + ", buffer=" + std::to_string(buffer_size));
+                std::to_string(threshold) + ", buffer=" + std::to_string(buffer_size) +
+                ", averaging_window=" + std::to_string(d_averaging_window));
 }
 
 power_detection_cpp_impl::~power_detection_cpp_impl() {}
@@ -77,17 +84,26 @@ int power_detection_cpp_impl::work(int noutput_items,
     
     // Process each sample
     for (int i = 0; i < noutput_items; i++) {
-        // Calculate power on first channel
+        // Calculate instantaneous power on first channel
         gr_complex sample = in0[i];
         float sample_power = std::norm(sample);  // |sample|^2 (faster than abs()^2)
         
-        // Threshold-based detection
-        if (sample_power > d_threshold) {
+        // Update circular buffer for averaging
+        d_power_sum -= d_power_buffer[d_power_buffer_index];
+        d_power_buffer[d_power_buffer_index] = sample_power;
+        d_power_sum += sample_power;
+        d_power_buffer_index = (d_power_buffer_index + 1) % d_averaging_window;
+        
+        // Calculate averaged power
+        float avg_power = d_power_sum / d_averaging_window;
+        
+        // Threshold-based detection using averaged power
+        if (avg_power > d_threshold) {
             // Start capturing if not already
             if (!d_capturing) {
                 d_capturing = true;
                 d_capture_index = 0;
-                GR_LOG_INFO(d_logger, "Signal detected! Power: " + std::to_string(sample_power));
+                GR_LOG_INFO(d_logger, "Signal detected! Power: " + std::to_string(avg_power));
             }
             
             // Fill capture buffer for all channels

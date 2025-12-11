@@ -21,18 +21,24 @@ private:
     double d_sample_rate;
     float d_threshold;
     int d_buffer_size;
+    int d_averaging_window;
     
     // Dual buffer system for capture and playback
     std::vector<std::vector<gr_complex>> d_capture_buffer;   // [channel][sample]
     std::vector<std::vector<gr_complex>> d_playback_buffer;  // [channel][sample]
     
+    std::vector<float> d_power_buffer;
+    
     int d_capture_index;
     int d_playback_index;
+    int d_power_buffer_index;
     
     bool d_capturing;
     bool d_playback_buffer_valid;
     bool d_buffer_fill_complete;
     
+    float d_power_sum;
+
     void validate_and_promote_buffer();
 
 public:
