@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(power_detection_cpp.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(41bf9e1d9bbfa6de5b9aa8964d4d5e99)                     */
+/* BINDTOOL_HEADER_FILE_HASH(73964bcb4ae84e7562a79e60ca0cd9c4)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -43,8 +43,8 @@ void bind_power_detection_cpp(py::module& m)
         .def(py::init(&power_detection_cpp::make),
              py::arg("num_inputs"),
              py::arg("sample_rate"),
-             py::arg("threshold"),
              py::arg("buffer_size") = 1024,
+             py::arg("threshold_multiplier") = 5.F,
              D(power_detection_cpp, make))
 
 

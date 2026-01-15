@@ -30,10 +30,10 @@ public:
      * \brief Create a power detection block
      * \param num_inputs Number of input channels
      * \param sample_rate Sample rate in Hz
-     * \param threshold Power threshold for detection
      * \param buffer_size Size of capture/playback buffer in samples
+     * \param threshold_multiplier Multiplier for power threshold detection
      */
-    static sptr make(int num_inputs, double sample_rate, float threshold, int buffer_size = 1024);
+    static sptr make(int num_inputs, double sample_rate, int buffer_size = 1024, float threshold_multiplier = 5.0f);
 };
 
 } // namespace doa

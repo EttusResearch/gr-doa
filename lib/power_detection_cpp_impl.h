@@ -19,9 +19,7 @@ class power_detection_cpp_impl : public power_detection_cpp
 private:
     int d_num_inputs;
     double d_sample_rate;
-    float d_threshold;
     int d_buffer_size;
-    int d_averaging_window;
     
     // Dual buffer system for capture and playback
     std::vector<std::vector<gr_complex>> d_capture_buffer;   // [channel][sample]
@@ -31,18 +29,24 @@ private:
     
     int d_capture_index;
     int d_playback_index;
+    int d_playback_size;
     int d_power_buffer_index;
     
     bool d_capturing;
     bool d_playback_buffer_valid;
     bool d_buffer_fill_complete;
     
+    int d_averaging_window;
+    
     float d_power_sum;
+    float d_lowest_power_sum;
+    float d_threshold;
+    float d_threshold_multiplier;
 
     void validate_and_promote_buffer();
 
 public:
-    power_detection_cpp_impl(int num_inputs, double sample_rate, float threshold, int buffer_size);
+    power_detection_cpp_impl(int num_inputs, double sample_rate, int buffer_size, float threshold_multiplier);
     ~power_detection_cpp_impl();
 
     int work(int noutput_items,

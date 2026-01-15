@@ -4,7 +4,7 @@ category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
-  make: doa.power_detection_cpp(${num_inputs}, ${sample_rate}, ${threshold}, ${buffer_size})
+  make: doa.power_detection_cpp(${num_inputs}, ${sample_rate}, ${buffer_size}, ${threshold_multiplier})
 
 parameters:
 - id: num_inputs
@@ -18,15 +18,16 @@ parameters:
   dtype: real
   default: samp_rate
 
-- id: threshold
-  label: Power Threshold
-  dtype: real
-  default: 0.01
-
 - id: buffer_size
   label: Buffer Size
   dtype: int
   default: 1024
+  hide: part
+
+- id: threshold_multiplier
+  label: Threshold Multiplier
+  dtype: real
+  default: 5.0
   hide: part
 
 inputs:
@@ -41,15 +42,17 @@ outputs:
 
 documentation: |-
   Power Detection Block (C++ optimized)
-  
-  Detects signal power on the first input channel. When power exceeds the threshold,
-  captures the signal to an internal buffer. During silence periods, replays the
-  captured signal on all channels.
+  0
+  Detects signal power on the first input channel using dynamic threshold adjustment.
+  When power exceeds the threshold, captures the signal to an internal buffer. 
+  During silence periods, replays the captured signal on all channels.
   
   Parameters:
     - Number of Inputs: Number of input/output channels
     - Sample Rate: Sample rate in Hz
-    - Power Threshold: Power level (|sample|^2) above which signal is detected
     - Buffer Size: Size of capture/playback buffer in samples
+    - Threshold Multiplier: Multiplier for dynamic threshold (default: 5.0)
+  
+  The threshold is automatically calculated as: lowest_noise_floor * threshold_multiplier
 
 file_format: 1
