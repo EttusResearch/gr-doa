@@ -28,7 +28,7 @@ gr-doa is a demonstration on the phase synchronization capability of Ettus Resea
     Ubuntu 24.04
 
 ## Installation
-
+    For a better installation guide go to the gr-doa wiki
     $ git clone https://github.com/EttusResearch/gr-doa
     $ cd gr-doa
     $ mkdir build
@@ -41,5 +41,5 @@ gr-doa is a demonstration on the phase synchronization capability of Ettus Resea
 
 ## Documentation
 
-    For a concise description of the steps involved: https://github.com/EttusResearch/gr-doa/wiki
+    For a concise description of the steps involved to set up the programm: https://github.com/EttusResearch/gr-doa/wiki
     For detailed description: gr-doa/docs/whitepaper/doa_whitepaper.pdf

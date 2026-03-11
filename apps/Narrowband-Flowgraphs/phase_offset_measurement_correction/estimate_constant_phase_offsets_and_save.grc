@@ -67,8 +67,8 @@ blocks:
     value19: '0'
     value2: 2.495e9
     value3: '0'
-    value4: '4'
-    value5: '"addr=10.94.17.65"'
+    value4: '8'
+    value5: '"addr=10.94.17.62"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
     value8: 2**13
@@ -173,7 +173,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: black
     color10: dark blue
@@ -252,7 +252,104 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 278]
+    coordinate: [656, 408.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    axislabels: 'True'
+    color1: black
+    color10: dark blue
+    color2: red
+    color3: black
+    color4: black
+    color5: black
+    color6: magenta
+    color7: black
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1 - Real
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3 - Real
+    label4: Signal 4
+    label5: Signal 5 - Real
+    label6: Signal 6
+    label7: Signal 7 - Real
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"USRP time sink"'
+    nconnections: '4'
+    size: '1024 '
+    srate: input_variables.SampleRate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '0'
+    style3: '1'
+    style4: '0'
+    style5: '1'
+    style6: '0'
+    style7: '1'
+    style8: '0'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 544.0]
     rotation: 0
     state: enabled
 
@@ -260,6 +357,10 @@ connections:
 - [doa_phase_offset_est_0, '0', doa_findmax_and_save_0, '0']
 - [doa_phase_offset_est_0, '1', doa_findmax_and_save_0, '1']
 - [doa_phase_offset_est_0, '2', doa_findmax_and_save_0, '2']
+- [doa_phase_offset_est_0, '3', doa_findmax_and_save_0, '3']
+- [doa_phase_offset_est_0, '4', doa_findmax_and_save_0, '4']
+- [doa_phase_offset_est_0, '5', doa_findmax_and_save_0, '5']
+- [doa_phase_offset_est_0, '6', doa_findmax_and_save_0, '6']
 - [doa_x440_usrp_source_0, '0', doa_phase_offset_est_0, '0']
 - [doa_x440_usrp_source_0, '0', qtgui_time_sink_x_0, '0']
 - [doa_x440_usrp_source_0, '1', doa_phase_offset_est_0, '1']
@@ -268,6 +369,14 @@ connections:
 - [doa_x440_usrp_source_0, '2', qtgui_time_sink_x_0, '2']
 - [doa_x440_usrp_source_0, '3', doa_phase_offset_est_0, '3']
 - [doa_x440_usrp_source_0, '3', qtgui_time_sink_x_0, '3']
+- [doa_x440_usrp_source_0, '4', doa_phase_offset_est_0, '4']
+- [doa_x440_usrp_source_0, '4', qtgui_time_sink_x_0_0, '0']
+- [doa_x440_usrp_source_0, '5', doa_phase_offset_est_0, '5']
+- [doa_x440_usrp_source_0, '5', qtgui_time_sink_x_0_0, '1']
+- [doa_x440_usrp_source_0, '6', doa_phase_offset_est_0, '6']
+- [doa_x440_usrp_source_0, '6', qtgui_time_sink_x_0_0, '2']
+- [doa_x440_usrp_source_0, '7', doa_phase_offset_est_0, '7']
+- [doa_x440_usrp_source_0, '7', qtgui_time_sink_x_0_0, '3']
 
 metadata:
   file_format: 1

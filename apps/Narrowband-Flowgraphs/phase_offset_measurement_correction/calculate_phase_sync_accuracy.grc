@@ -7,19 +7,18 @@ options:
     copyright: ''
     description: ''
     gen_linking: dynamic
-    generate_options: qt_gui
-    generator_class_name: PythonQtGuiGenerator
-    generator_module: gnuradio.grc.workflows.python_qt_gui
+    generate_options: no_gui
+    generator_class_name: PythonNoGuiGenerator
+    generator_module: gnuradio.grc.workflows.python_nogui
     hier_block_src_path: '.:'
-    id: view_op_with_corrected_phase_offsets
+    id: calculate_phase_sync_accuracy
     max_nouts: '0'
     output_language: python
-    qt_qss_theme: ''
     realtime_scheduling: ''
-    run: 'True'
     run_command: '{python} -u {filename}'
+    run_options: prompt
     thread_safe_setters: ''
-    title: Overview after phase correction
+    title: calculate_phase_sync_accuracy
   states:
     bus_sink: false
     bus_source: false
@@ -29,13 +28,25 @@ options:
     state: enabled
 
 blocks:
+- name: corrected_phase_offsets_file_name
+  id: variable
+  parameters:
+    comment: ''
+    value: os.path.join(input_variables.DirectoryConfigFiles, input_variables.CorrectedPhaseOffsets)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 128.0]
+    rotation: 0
+    state: enabled
 - name: input_variables
   id: variable_struct
   parameters:
     comment: "input_variables: \nContains all the user-defined variables."
     field0: SampleRate
     field1: ''
-    field10: ''
+    field10: Samples2FindMax
     field11: ''
     field12: ''
     field13: ''
@@ -46,16 +57,16 @@ blocks:
     field18: ''
     field19: ''
     field2: CenterFreq
-    field3: ''
-    field4: NumArrayElements
+    field3: NumArrayElements
+    field4: ''
     field5: RxAddr
     field6: DirectoryConfigFiles
     field7: RelativePhaseOffsets
-    field8: ''
-    field9: ''
+    field8: CorrectedPhaseOffsets
+    field9: SkipAhead
     value0: 1e6
-    value1: 5e3
-    value10: '0'
+    value1: 10e3
+    value10: 2**11
     value11: '0'
     value12: '0'
     value13: '0'
@@ -66,19 +77,19 @@ blocks:
     value18: '0'
     value19: '0'
     value2: 2.495e9
-    value3: '60'
-    value4: '4'
+    value3: '4'
+    value4: '60'
     value5: '"addr=10.94.17.65"'
     value6: '"/tmp"'
     value7: '"measure_relative_phase_offsets_2495MHz.cfg"'
-    value8: 2**13
-    value9: 2**11
+    value8: '"measure_corrected_phase_offsets_446MHz.cfg"'
+    value9: 2**13
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 124.0]
-    rotation: 0
+    coordinate: [7, 141]
+    rotation: 180
     state: enabled
 - name: rel_phase_offsets_file_name
   id: variable
@@ -89,7 +100,35 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 16.0]
+    coordinate: [312, 128.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12]
+    rotation: 0
+    state: enabled
+- name: doa_findmax_and_save_0
+  id: doa_findmax_and_save
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    config_filename: corrected_phase_offsets_file_name
+    num_inputs: input_variables.NumArrayElements-1
+    samples_to_findmax: input_variables.Samples2FindMax
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 248.0]
     rotation: 0
     state: enabled
 - name: doa_phase_correct_hier_0
@@ -106,7 +145,24 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 136.0]
+    coordinate: [440, 232.0]
+    rotation: 0
+    state: enabled
+- name: doa_phase_offset_est_0
+  id: doa_phase_offset_est
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n_skip_ahead: input_variables.SkipAhead
+    num_inputs: input_variables.NumArrayElements
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 232.0]
     rotation: 0
     state: enabled
 - name: doa_x440_usrp_source_0
@@ -126,7 +182,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 136.0]
+    coordinate: [192, 232.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -139,112 +195,18 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [168, 16.0]
-    rotation: 0
-    state: enabled
-- name: qtgui_time_sink_x_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: black
-    color10: dark blue
-    color2: red
-    color3: black
-    color4: black
-    color5: black
-    color6: magenta
-    color7: black
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1 - Real
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3 - Real
-    label4: Signal 4
-    label5: Signal 5 - Real
-    label6: Signal 6
-    label7: Signal 7 - Real
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: '"view signals with phase correction"'
-    nconnections: '4'
-    size: '256'
-    srate: input_variables.SampleRate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '0'
-    style3: '1'
-    style4: '0'
-    style5: '1'
-    style6: '0'
-    style7: '1'
-    style8: '0'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.1'
-    tr_mode: qtgui.TRIG_MODE_AUTO
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: complex
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '1'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [776, 136.0]
+    coordinate: [208, 128.0]
     rotation: 0
     state: enabled
 
 connections:
-- [doa_phase_correct_hier_0, '0', qtgui_time_sink_x_0, '0']
-- [doa_phase_correct_hier_0, '1', qtgui_time_sink_x_0, '1']
-- [doa_phase_correct_hier_0, '2', qtgui_time_sink_x_0, '2']
-- [doa_phase_correct_hier_0, '3', qtgui_time_sink_x_0, '3']
+- [doa_phase_correct_hier_0, '0', doa_phase_offset_est_0, '0']
+- [doa_phase_correct_hier_0, '1', doa_phase_offset_est_0, '1']
+- [doa_phase_correct_hier_0, '2', doa_phase_offset_est_0, '2']
+- [doa_phase_correct_hier_0, '3', doa_phase_offset_est_0, '3']
+- [doa_phase_offset_est_0, '0', doa_findmax_and_save_0, '0']
+- [doa_phase_offset_est_0, '1', doa_findmax_and_save_0, '1']
+- [doa_phase_offset_est_0, '2', doa_findmax_and_save_0, '2']
 - [doa_x440_usrp_source_0, '0', doa_phase_correct_hier_0, '0']
 - [doa_x440_usrp_source_0, '1', doa_phase_correct_hier_0, '1']
 - [doa_x440_usrp_source_0, '2', doa_phase_correct_hier_0, '2']

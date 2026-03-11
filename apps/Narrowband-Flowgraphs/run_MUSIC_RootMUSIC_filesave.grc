@@ -3,7 +3,9 @@ options:
     alias: ''
     author: jreitmei
     catch_exceptions: 'True'
-    comment: ''
+    comment: "This flowgraph measures every single configuration and saves them into\
+      \ a file. \nConfigurations used:\ne.g.\nMUSIC Uncalibrated\nRootMUSIC Uncalibrated\n\
+      MUSIC Calibrated\nRootMUSIC Calibrated"
     copyright: ''
     description: ''
     gen_linking: dynamic
@@ -89,7 +91,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [9, 146]
+    coordinate: [8, 260.0]
     rotation: 0
     state: enabled
 - name: rel_phase_offsets_file_name

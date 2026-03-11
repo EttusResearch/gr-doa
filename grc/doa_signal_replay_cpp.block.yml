@@ -1,6 +1,6 @@
 id: doa_signal_replay_cpp
 label: Signal Replay (C++)
-category: '[DoA]'
+category: '[doa]'
 
 templates:
   imports: from gnuradio import doa
