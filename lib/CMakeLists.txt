@@ -58,6 +58,11 @@ endif(APPLE)
 include(GrMiscUtils)
 gr_library_foo(gnuradio-doa)
 
+# Explicitly install the shared library to the correct location
+install(TARGETS gnuradio-doa
+    LIBRARY DESTINATION lib
+)
+
 ########################################################################
 # Print summary
 ########################################################################
