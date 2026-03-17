@@ -35,3 +35,10 @@ For the installation guide go to [gr-doa wiki](https://github.com/EttusResearch/
     For a concise description of the steps involved to set up the programm: https://github.com/EttusResearch/gr-doa/wiki
     For detailed description: gr-doa/docs/whitepaper/doa_whitepaper.pdf
 
+
+## Project Status
+This repository is considered mature and is not under active development.
+While the project remains available for use as-is, new issues, feature requests, or support inquiries may not receive timely or detailed responses. Community contributions are still welcome, but maintainers may respond on a best‑effort basis.
+
+
+
